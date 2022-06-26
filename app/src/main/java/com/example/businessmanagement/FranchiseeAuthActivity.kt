@@ -1,10 +1,9 @@
 package com.example.businessmanagement
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.transition.Visibility
 import kotlinx.android.synthetic.main.activity_franchisee_auth.*
 
 class FranchiseeAuthActivity : AppCompatActivity() {
@@ -20,7 +19,7 @@ class FranchiseeAuthActivity : AppCompatActivity() {
         // when signup switch triggered EFFECTIVELY
         tvBtn_franchisee_auth_signup.setOnClickListener {
             if (switch) {
-                switch = false;
+                switch = false
 
                 // making login switch secondary
                 tvBtn_franchisee_auth_login.background =
@@ -31,7 +30,7 @@ class FranchiseeAuthActivity : AppCompatActivity() {
                     ContextCompat.getDrawable(baseContext, R.drawable.primary_partition_bg)
 
                 // OTP field visible for phone verification
-                edt_franchisee_auth_otp.visibility = View.VISIBLE
+                ll_franchisee_auth_otp.visibility = View.VISIBLE
                 card_OTP_switch.visibility = View.VISIBLE
 
                 // name field visible
@@ -48,6 +47,7 @@ class FranchiseeAuthActivity : AppCompatActivity() {
             }
         }
 
+        // // when login switch triggered EFFECTIVELY
         tvBtn_franchisee_auth_login.setOnClickListener {
             if (!switch){
                 switch = true
@@ -70,6 +70,10 @@ class FranchiseeAuthActivity : AppCompatActivity() {
                 // adjust password field to "enter password" from "create password"
                 edt_franchisee_auth_password.tag = "login_password"
                 edt_franchisee_auth_password.hint = "Enter password"
+
+                // updating "signup" button "login" button
+                btn_franchisee_auth_login_button.tag = "login"
+                "Login".also { btn_franchisee_auth_login_button.text = it }
             }
         }
     }
