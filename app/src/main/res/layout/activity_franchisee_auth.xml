@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".FranchiseeAuthActivity">
 
     <!--Card Container-->
@@ -11,6 +12,7 @@
         android:id="@+id/card_acc_type_franchisee"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/white"
         android:layout_marginHorizontal="10dp"
         app:cardCornerRadius="10dp"
         app:cardElevation="5dp"
@@ -21,6 +23,7 @@
 
         <!--Card Container layout-->
         <RelativeLayout
+            android:background="@color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -87,6 +90,7 @@
                     android:fontFamily="@font/roboto"
                     android:hint="@string/enter_mobile_number"
                     android:inputType="phone"
+                    android:textColor="@color/Maastricht_Blue"
                     android:textColorHint="@color/Gray_Hint"
                     tools:ignore="TextContrastCheck" />
             </LinearLayout>
@@ -122,6 +126,7 @@
                     android:layout_marginEnd="5dp"
                     android:background="@color/white"
                     android:ems="10"
+                    android:textColor="@color/Maastricht_Blue"
                     android:fontFamily="@font/roboto"
                     android:hint="@string/enter_one_time_password"
                     android:importantForAutofill="no"
@@ -188,6 +193,7 @@
                     android:layout_marginEnd="5dp"
                     android:autofillHints="name"
                     android:background="@color/white"
+                    android:textColor="@color/Maastricht_Blue"
                     android:ems="10"
                     android:fontFamily="@font/roboto"
                     android:hint="@string/enter_your_name"
@@ -225,6 +231,7 @@
                     android:layout_marginEnd="5dp"
                     android:autofillHints="password"
                     android:background="@color/white"
+                    android:textColor="@color/Maastricht_Blue"
                     android:ems="10"
                     android:fontFamily="@font/roboto"
                     android:hint="@string/enter_password"

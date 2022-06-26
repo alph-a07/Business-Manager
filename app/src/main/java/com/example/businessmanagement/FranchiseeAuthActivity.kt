@@ -15,6 +15,8 @@ class FranchiseeAuthActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_franchisee_auth)
+        //to hide default toolbar
+        supportActionBar?.hide()
 
         // when signup switch triggered EFFECTIVELY
         tvBtn_franchisee_auth_signup.setOnClickListener {
@@ -44,6 +46,20 @@ class FranchiseeAuthActivity : AppCompatActivity() {
                 // updating "login" button "signup" button
                 btn_franchisee_auth_login_button.tag = "signup"
                 "Sign Up".also { btn_franchisee_auth_login_button.text = it }
+            }
+            if(!switch){
+                //In sign up get otp pressed
+                card_OTP_switch.setOnClickListener {
+                    //check number
+                    if(edt_franchisee_auth_phone.text.isEmpty()){
+                        edt_franchisee_auth_phone.error="Please enter valid number"
+                        edt_franchisee_auth_phone.requestFocus()
+                    }
+                    else{
+                        //verify number and send otp
+
+                    }
+                }
             }
         }
 

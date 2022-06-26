@@ -6,4 +6,5 @@
     android:layout_height="match_parent"
     tools:context=".FranchisorAuthActivity">
 
+
 </androidx.constraintlayout.widget.ConstraintLayout>

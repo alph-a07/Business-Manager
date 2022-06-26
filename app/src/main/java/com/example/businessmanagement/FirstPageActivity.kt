@@ -10,6 +10,9 @@ class FirstPageActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_first_page)
 
+        //to hide default toolbar
+        supportActionBar?.hide()
+
         btn_fp_getStarted.setOnClickListener {
             startActivity(Intent(this,FranchiseeAuthActivity::class.java))
         }
