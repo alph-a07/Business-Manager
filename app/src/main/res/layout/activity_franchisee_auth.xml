@@ -70,9 +70,9 @@
                 android:layout_marginStart="15dp"
                 android:background="@drawable/edt_bg"
                 android:gravity="center"
-                app:ccp_contentColor="@color/black"
                 app:ccpDialog_backgroundColor="@color/white"
                 app:ccpDialog_textColor="@color/black"
+                app:ccp_contentColor="@color/black"
                 app:ccp_countryPreference="us,in"
                 app:ccp_showArrow="false"
                 app:ccp_showNameCode="false" />
@@ -149,7 +149,7 @@
                     android:fontFamily="@font/roboto"
                     android:hint="@string/enter_one_time_password"
                     android:importantForAutofill="no"
-                    android:inputType="textWebPassword"
+
                     android:textColorHint="@color/Gray_Hint"
                     tools:ignore="TextContrastCheck" />
             </LinearLayout>
@@ -171,6 +171,7 @@
                 tools:visibility="gone">
 
                 <TextView
+                    android:id="@+id/otp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -216,7 +217,7 @@
                     android:ems="10"
                     android:fontFamily="@font/roboto"
                     android:hint="@string/enter_your_name"
-                    android:inputType="textWebPassword"
+
                     android:textColorHint="@color/Gray_Hint"
                     tools:ignore="TextContrastCheck" />
             </LinearLayout>
