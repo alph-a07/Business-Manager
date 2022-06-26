@@ -57,7 +57,22 @@
                 android:fontFamily="@font/roboto_bold"
                 android:gravity="center"
                 android:text="@string/signup"
+                android:textColor="@color/Dim_Gray"
                 android:textSize="18sp" />
+
+            <!--country code picker-->
+            <com.hbb20.CountryCodePicker
+                android:id="@+id/ccp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/ll_franchisee_auth_phone"
+                android:layout_alignBottom="@id/ll_franchisee_auth_phone"
+                android:layout_marginStart="15dp"
+                android:background="@drawable/edt_bg"
+                app:ccp_countryPreference="us,in"
+                app:ccp_showArrow="false"
+                app:ccp_showNameCode="false"
+                android:gravity="center"/>
 
             <!--Phone layout-->
             <LinearLayout
@@ -69,7 +84,8 @@
                 android:layout_marginTop="50dp"
                 android:background="@drawable/edt_bg"
                 android:orientation="horizontal"
-                android:padding="2dp">
+                android:padding="2dp"
+                android:layout_toEndOf="@id/ccp">
 
                 <ImageView
                     android:id="@+id/iv_franchisee_auth_phone_logo"

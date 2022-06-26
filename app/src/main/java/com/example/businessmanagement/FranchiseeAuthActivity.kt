@@ -26,10 +26,22 @@ class FranchiseeAuthActivity : AppCompatActivity() {
                 // making login switch secondary
                 tvBtn_franchisee_auth_login.background =
                     ContextCompat.getDrawable(baseContext, R.drawable.secondary_partition_bg)
+                tvBtn_franchisee_auth_login.setTextColor(
+                    ContextCompat.getColor(
+                        baseContext,
+                        R.color.Dim_Gray
+                    )
+                )
 
                 // making signup switch primary
                 tvBtn_franchisee_auth_signup.background =
                     ContextCompat.getDrawable(baseContext, R.drawable.primary_partition_bg)
+                tvBtn_franchisee_auth_signup.setTextColor(
+                    ContextCompat.getColor(
+                        baseContext,
+                        R.color.Maastricht_Blue
+                    )
+                )
 
                 // OTP field visible for phone verification
                 ll_franchisee_auth_otp.visibility = View.VISIBLE
@@ -47,15 +59,14 @@ class FranchiseeAuthActivity : AppCompatActivity() {
                 btn_franchisee_auth_login_button.tag = "signup"
                 "Sign Up".also { btn_franchisee_auth_login_button.text = it }
             }
-            if(!switch){
+            if (!switch) {
                 //In sign up get otp pressed
                 card_OTP_switch.setOnClickListener {
                     //check number
-                    if(edt_franchisee_auth_phone.text.isEmpty()){
-                        edt_franchisee_auth_phone.error="Please enter valid number"
+                    if (edt_franchisee_auth_phone.text.isEmpty()) {
+                        edt_franchisee_auth_phone.error = "Please enter valid number"
                         edt_franchisee_auth_phone.requestFocus()
-                    }
-                    else{
+                    } else {
                         //verify number and send otp
 
                     }
@@ -65,16 +76,28 @@ class FranchiseeAuthActivity : AppCompatActivity() {
 
         // // when login switch triggered EFFECTIVELY
         tvBtn_franchisee_auth_login.setOnClickListener {
-            if (!switch){
+            if (!switch) {
                 switch = true
 
                 // making signup switch secondary
                 tvBtn_franchisee_auth_signup.background =
                     ContextCompat.getDrawable(baseContext, R.drawable.secondary_partition_bg)
+                tvBtn_franchisee_auth_signup.setTextColor(
+                    ContextCompat.getColor(
+                        baseContext,
+                        R.color.Dim_Gray
+                    )
+                )
 
                 // making login switch primary
                 tvBtn_franchisee_auth_login.background =
                     ContextCompat.getDrawable(baseContext, R.drawable.primary_partition_bg)
+                tvBtn_franchisee_auth_login.setTextColor(
+                    ContextCompat.getColor(
+                        baseContext,
+                        R.color.Maastricht_Blue
+                    )
+                )
 
                 // OTP field gone
                 ll_franchisee_auth_otp.visibility = View.GONE
@@ -92,5 +115,12 @@ class FranchiseeAuthActivity : AppCompatActivity() {
                 "Login".also { btn_franchisee_auth_login_button.text = it }
             }
         }
+
+        ccp.registerCarrierNumberEditText(edt_franchisee_auth_phone)
+
+        if (ccp.isValidFullNumber){
+            var phone = ccp.fullNumberWithPlus
+        }
+
     }
 }
