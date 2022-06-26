@@ -5,6 +5,7 @@
       <map>
         <entry key="..\:/Apps/BusinessManagement/app/src/main/res/drawable/edt_bg.xml" value="0.2265" />
         <entry key="..\:/Apps/BusinessManagement/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1955" />
+        <entry key="..\:/Apps/BusinessManagement/app/src/main/res/drawable/otp_logo.xml" value="0.243" />
         <entry key="..\:/Apps/BusinessManagement/app/src/main/res/drawable/phone_logo.xml" value="0.2265" />
         <entry key="..\:/Apps/BusinessManagement/app/src/main/res/drawable/primary_button_bg.xml" value="0.2265" />
         <entry key="..\:/Apps/BusinessManagement/app/src/main/res/drawable/primary_partition_bg.xml" value="0.2265" />
@@ -12,9 +13,7 @@
         <entry key="..\:/Apps/BusinessManagement/app/src/main/res/drawable/secondary_partition_bg.xml" value="0.2265" />
         <entry key="..\:/Apps/BusinessManagement/app/src/main/res/layout/activity_first_page.xml" value="0.2604166666666667" />
         <entry key="..\:/Apps/BusinessManagement/app/src/main/res/layout/activity_franchisee_auth.xml" value="0.27447916666666666" />
-        <entry key="..\:/Business-Manager/app/src/main/res/layout/activity_first_page.xml" value="0.264" />
-        <entry key="..\:/Business-Manager/app/src/main/res/layout/activity_franchisee_auth.xml" value="0.27447916666666666" />
-        <entry key="..\:/Business-Manager/app/src/main/res/layout/activity_franchisor_auth.xml" value="0.27447916666666666" />
+        <entry key="..\:/Apps/BusinessManagement/app/src/main/res/layout/activity_franchisor_auth.xml" value="0.27447916666666666" />
       </map>
     </option>
   </component>

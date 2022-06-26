@@ -1,5 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Business Management</string>
     <string name="login">LOGIN</string>
     <string name="signup">SIGNUP</string>
     <string name="phone_logo">phone logo</string>
@@ -7,10 +7,8 @@
     <string name="password_logo">password_logo</string>
     <string name="enter_password">Enter password</string>
     <string name="login_sentence_case">Login</string>
-    <string name="forgot_password">Forgot password?</string>
     <string name="google_logo">google logo</string>
     <string name="continue_using_google">Continue using Google</string>
-    <string name="otp_logo">otp logo</string>
     <string name="enter_one_time_password">Enter one time password</string>
     <string name="get_otp">Get OTP</string>
     <string name="user_logo">user logo</string>
