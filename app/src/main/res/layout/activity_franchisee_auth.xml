@@ -57,8 +57,8 @@
                 android:fontFamily="@font/roboto_bold"
                 android:gravity="center"
                 android:text="@string/signup"
-                android:textColor="@color/Dim_Gray"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:textColor="@color/Dim_Gray"/>
 
             <!--country code picker-->
             <com.hbb20.CountryCodePicker
@@ -69,10 +69,13 @@
                 android:layout_alignBottom="@id/ll_franchisee_auth_phone"
                 android:layout_marginStart="15dp"
                 android:background="@drawable/edt_bg"
+                android:gravity="center"
+                app:ccp_contentColor="@color/black"
+                app:ccpDialog_backgroundColor="@color/white"
+                app:ccpDialog_textColor="@color/black"
                 app:ccp_countryPreference="us,in"
                 app:ccp_showArrow="false"
-                app:ccp_showNameCode="false"
-                android:gravity="center"/>
+                app:ccp_showNameCode="false" />
 
             <!--Phone layout-->
             <LinearLayout
@@ -288,6 +291,7 @@
 
             <!--Google switch-->
             <androidx.cardview.widget.CardView
+                android:id="@+id/cv_google"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/btn_franchisee_auth_login_button"
@@ -297,6 +301,7 @@
                 app:cardCornerRadius="10dp">
 
                 <LinearLayout
+                    android:id="@+id/ll_franchisee_google"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/Tart_Orange"
@@ -323,7 +328,21 @@
                         android:textColor="@color/white"
                         android:textSize="16sp" />
                 </LinearLayout>
+
+
             </androidx.cardview.widget.CardView>
+
+            <ProgressBar
+                android:id="@+id/progress_enter"
+                android:layout_below="@id/cv_google"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="10dp"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            </ProgressBar>
+
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 

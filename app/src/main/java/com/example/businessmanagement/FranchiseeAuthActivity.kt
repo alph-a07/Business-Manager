@@ -1,9 +1,22 @@
 package com.example.businessmanagement
 
+import android.content.ContentValues.TAG
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
+import com.example.businessmanagement.model.User
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_franchisee_auth.*
 
 class FranchiseeAuthActivity : AppCompatActivity() {
@@ -11,12 +24,33 @@ class FranchiseeAuthActivity : AppCompatActivity() {
     // true = login
     // false = signup
     private var switch = true
+    private val auth: FirebaseAuth = FirebaseAuth.getInstance()
+    val db=Firebase.database
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_franchisee_auth)
+
         //to hide default toolbar
         supportActionBar?.hide()
+
+        // helps open email access popup
+        val gso =
+            GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id)) // displays app's name and logo in popup
+                .requestEmail()
+                .build()
+
+        ll_franchisee_google.setOnClickListener {
+            //progress bar visible
+            progress_enter.isVisible=true
+
+            // Configure Google Sign In
+            val googleSignInClient = GoogleSignIn.getClient(this, gso)
+            googleSignInClient.signOut() // clears cookies about last login and provides all email options each time
+            startActivityForResult(googleSignInClient.signInIntent, 1)
+
+        }
 
         // when signup switch triggered EFFECTIVELY
         tvBtn_franchisee_auth_signup.setOnClickListener {
@@ -26,22 +60,10 @@ class FranchiseeAuthActivity : AppCompatActivity() {
                 // making login switch secondary
                 tvBtn_franchisee_auth_login.background =
                     ContextCompat.getDrawable(baseContext, R.drawable.secondary_partition_bg)
-                tvBtn_franchisee_auth_login.setTextColor(
-                    ContextCompat.getColor(
-                        baseContext,
-                        R.color.Dim_Gray
-                    )
-                )
 
                 // making signup switch primary
                 tvBtn_franchisee_auth_signup.background =
                     ContextCompat.getDrawable(baseContext, R.drawable.primary_partition_bg)
-                tvBtn_franchisee_auth_signup.setTextColor(
-                    ContextCompat.getColor(
-                        baseContext,
-                        R.color.Maastricht_Blue
-                    )
-                )
 
                 // OTP field visible for phone verification
                 ll_franchisee_auth_otp.visibility = View.VISIBLE
@@ -59,14 +81,15 @@ class FranchiseeAuthActivity : AppCompatActivity() {
                 btn_franchisee_auth_login_button.tag = "signup"
                 "Sign Up".also { btn_franchisee_auth_login_button.text = it }
             }
-            if (!switch) {
+            if(!switch){
                 //In sign up get otp pressed
                 card_OTP_switch.setOnClickListener {
                     //check number
-                    if (edt_franchisee_auth_phone.text.isEmpty()) {
-                        edt_franchisee_auth_phone.error = "Please enter valid number"
+                    if(edt_franchisee_auth_phone.text.isEmpty()){
+                        edt_franchisee_auth_phone.error="Please enter valid number"
                         edt_franchisee_auth_phone.requestFocus()
-                    } else {
+                    }
+                    else{
                         //verify number and send otp
 
                     }
@@ -76,28 +99,16 @@ class FranchiseeAuthActivity : AppCompatActivity() {
 
         // // when login switch triggered EFFECTIVELY
         tvBtn_franchisee_auth_login.setOnClickListener {
-            if (!switch) {
+            if (!switch){
                 switch = true
 
                 // making signup switch secondary
                 tvBtn_franchisee_auth_signup.background =
                     ContextCompat.getDrawable(baseContext, R.drawable.secondary_partition_bg)
-                tvBtn_franchisee_auth_signup.setTextColor(
-                    ContextCompat.getColor(
-                        baseContext,
-                        R.color.Dim_Gray
-                    )
-                )
 
                 // making login switch primary
                 tvBtn_franchisee_auth_login.background =
                     ContextCompat.getDrawable(baseContext, R.drawable.primary_partition_bg)
-                tvBtn_franchisee_auth_login.setTextColor(
-                    ContextCompat.getColor(
-                        baseContext,
-                        R.color.Maastricht_Blue
-                    )
-                )
 
                 // OTP field gone
                 ll_franchisee_auth_otp.visibility = View.GONE
@@ -115,12 +126,70 @@ class FranchiseeAuthActivity : AppCompatActivity() {
                 "Login".also { btn_franchisee_auth_login_button.text = it }
             }
         }
+    }
 
-        ccp.registerCarrierNumberEditText(edt_franchisee_auth_phone)
 
-        if (ccp.isValidFullNumber){
-            var phone = ccp.fullNumberWithPlus
+    // must override to capture results from googleSignInClient
+    @Deprecated("Deprecated in Java")
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == 1) {
+            // task = account info
+            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+            try {
+                val account = task.getResult(ApiException::class.java)!!
+
+                firebaseAuthWithGoogle(account.idToken!!)
+            }
+            catch (e: ApiException) {
+                progress_enter.isVisible=false
+                Toast.makeText(this, "SignIn failed,try again", Toast.LENGTH_SHORT).show()
+            }
         }
+    }
 
+    private fun firebaseAuthWithGoogle(idToken: String) {
+
+        // user credentials
+        val credential = GoogleAuthProvider.getCredential(idToken, null)
+
+        auth.signInWithCredential(credential)
+            .addOnCompleteListener(this) { task ->
+                progress_enter.isVisible=false
+                // Google signIn successful
+                if (task.isSuccessful) {
+                    val user = auth.currentUser
+                    val model = User()
+                    model.email = user?.email.toString()
+                    model.userName = user?.displayName.toString()
+                    model.uid = user?.uid.toString()
+                    db.getReference("GoogleUsers").child(auth.uid.toString())
+                        .setValue(model)
+
+                    updateUI()
+                }
+                // Google signIn failed
+                else {
+                    Toast.makeText(this, "Sign in failed.", Toast.LENGTH_SHORT).show()
+                }
+            }
+    }
+
+    private fun updateUI() {
+        Toast.makeText(this, "Sign in successfully", Toast.LENGTH_SHORT).show()
+        //startActivity(Intent(this, MainActivity::class.java))
+    }
+
+
+    public override fun onStart() {
+        super.onStart()
+        // Check if user is signed in (non-null) and update UI accordingly.
+        val currentUser = auth.currentUser
+        if (currentUser != null) {
+            //reload();
+            //startActivity(Intent(this, MainActivity::class.java))
+        }
     }
 }
