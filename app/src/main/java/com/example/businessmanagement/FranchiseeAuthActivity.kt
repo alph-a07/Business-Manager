@@ -53,17 +53,18 @@ class FranchiseeAuthActivity : AppCompatActivity() {
 
         //login process
         if(switch){
+            progress_enter.visibility = View.GONE
             val edtPhone = findViewById<EditText>(R.id.edt_franchisee_auth_phone)
             val psswd=findViewById<EditText>(R.id.edt_franchisee_auth_password)
 
             btn_franchisee_auth_login_button.setOnClickListener {
                 //check number
-                if(edtPhone.text.isEmpty()){
+                if(switch&&edtPhone.text.isEmpty()){
                     edtPhone.error="Please enter valid number"
                     edtPhone.requestFocus()
                     return@setOnClickListener
                 }
-                if(psswd.text.toString().isEmpty()){
+                if(switch&&psswd.text.toString().isEmpty()){
                     psswd.error="Please enter password"
                     psswd.requestFocus()
                     return@setOnClickListener
@@ -88,7 +89,7 @@ class FranchiseeAuthActivity : AppCompatActivity() {
                                     for (snap in snapshot.children) {
                                         val model = snap.getValue(User::class.java)
                                         if (model?.phone == ccp.fullNumberWithPlus) {
-                                            if(psswd.text.equals(model?.password)){
+                                            if(psswd.text.toString() == model?.password){
                                                 Toast.makeText(this@FranchiseeAuthActivity,
                                                     "Log in successful",
                                                     Toast.LENGTH_SHORT
@@ -144,6 +145,7 @@ class FranchiseeAuthActivity : AppCompatActivity() {
             signUpPage()
 
             if(!switch){
+                progress_enter.visibility = View.GONE
                 val edtPhone = findViewById<EditText>(R.id.edt_franchisee_auth_phone)
                 val edtOTP = findViewById<EditText>(R.id.edt_franchisee_auth_otp)
                 val ccp = findViewById<CountryCodePicker>(R.id.ccp)
@@ -153,7 +155,7 @@ class FranchiseeAuthActivity : AppCompatActivity() {
                 //In sign up get otp pressed
                 card_OTP_switch.setOnClickListener {
                     //check number
-                    if(edt_franchisee_auth_phone.text.isEmpty()){
+                    if(!switch && edt_franchisee_auth_phone.text.isEmpty()){
                         edt_franchisee_auth_phone.error="Please enter valid number"
                         edt_franchisee_auth_phone.requestFocus()
                     }
@@ -230,23 +232,8 @@ class FranchiseeAuthActivity : AppCompatActivity() {
                                             "Number already exists, Please login with password",
                                             Toast.LENGTH_SHORT
                                         ).show()
+                                        //move to login page
                                         loginPage()
-
-                                        /*
-                                        val options = PhoneAuthOptions.newBuilder(auth)
-                                            .setPhoneNumber(ccp.fullNumberWithPlus)       // Phone number to verify
-                                            .setTimeout(60L, TimeUnit.SECONDS) // Timeout and unit
-                                            .setActivity(this@FranchiseeAuthActivity)                 // Activity (for callback binding)
-                                            .setCallbacks(callbacks)          // OnVerificationStateChangedCallbacks
-                                            .build()
-                                        PhoneAuthProvider.verifyPhoneNumber(options)
-                                        for (snap in snapshot.children) {
-                                            val model = snap.getValue(User::class.java)
-                                            if (model?.phone == ccp.fullNumberWithPlus) {
-                                                name.setText(model?.userName)
-                                                //signUp2.text = "Login"
-                                            }
-                                        }*/
                                     }
 
                                     // new number login
@@ -275,6 +262,7 @@ class FranchiseeAuthActivity : AppCompatActivity() {
 
                                 override fun onCancelled(error: DatabaseError) {
                                     Log.w(TAG, "Failed to read value.", error.toException())
+                                    progress_enter.visibility = View.GONE
                                 }
                             })
 
@@ -287,23 +275,23 @@ class FranchiseeAuthActivity : AppCompatActivity() {
                     progress_enter.visibility = View.VISIBLE
                     val otp = edtOTP.text.trim().toString()
 
-                    if(name.text.toString().isEmpty()){
+                    if(!switch && name.text.toString().isEmpty()){
                         name.error="Please enter your name"
                         name.requestFocus()
                         return@setOnClickListener
                     }
-                    if(psswd.text.toString().isEmpty()){
+                    if(!switch && psswd.text.toString().isEmpty()){
                         psswd.error="Please create password"
                         psswd.requestFocus()
                         return@setOnClickListener
                     }
 
-                    if (otp.isNotEmpty()) {
+                    if (!switch && otp.isNotEmpty()) {
                         val credential: PhoneAuthCredential =
                             PhoneAuthProvider.getCredential(storedVerificationId, otp)
                         auth.signInWithCredential(credential)
                             .addOnCompleteListener(this) { task ->
-                                progress_enter.isVisible=false
+                                progress_enter.visibility = View.GONE
                                 if (task.isSuccessful) {
                                     // Sign in success, update UI with the signed-in user's information
                                     Log.d(TAG, "signInWithCredential:success")
@@ -332,7 +320,7 @@ class FranchiseeAuthActivity : AppCompatActivity() {
                     }
                     else {
                         Toast.makeText(this, "Invalid OTP!", Toast.LENGTH_SHORT).show()
-
+                        progress_enter.visibility = View.GONE
                     }
                 }
             }
@@ -347,6 +335,7 @@ class FranchiseeAuthActivity : AppCompatActivity() {
 
     fun loginPage(){
         if (!switch){
+            
             switch = true
 
             // making signup switch secondary
@@ -433,6 +422,7 @@ class FranchiseeAuthActivity : AppCompatActivity() {
         auth.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
                 progress_enter.isVisible=false
+
                 // Google signIn successful
                 if (task.isSuccessful) {
                     val user = auth.currentUser
