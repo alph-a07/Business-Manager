@@ -74,11 +74,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_choose_account_type"
-            android:layout_margin="5dp"
+            android:layout_margin="20dp"
+            android:layout_marginBottom="15dp"
             app:cardCornerRadius="10dp"
-            app:cardElevation="5dp">
+            app:cardElevation="5dp"
+            android:outlineAmbientShadowColor="@color/Dim_Gray"
+            android:outlineSpotShadowColor="@color/Dim_Gray"
+            tools:targetApi="p">
 
             <LinearLayout
+                android:id="@+id/ll_acc_type_franchisee"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -108,19 +113,23 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/card_acc_type_franchisor"
+            android:id="@+id/card_acc_type_franchiser"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_choose_account_type"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="5dp"
-            android:layout_marginBottom="5dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="15dp"
             android:layout_toEndOf="@id/card_acc_type_franchisee"
             app:cardCornerRadius="10dp"
-            app:cardElevation="5dp">
+            app:cardElevation="5dp"
+            android:outlineSpotShadowColor="@color/Dim_Gray"
+            android:outlineAmbientShadowColor="@color/Dim_Gray"
+            tools:targetApi="p">
 
             <LinearLayout
+                android:id="@+id/ll_acc_type_franchiser"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -143,7 +152,7 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="20dp"
                     android:fontFamily="@font/roboto_bold"
-                    android:text="Franchisor"
+                    android:text="Franchiser"
                     android:textColor="@color/Maastricht_Blue"
                     android:textSize="15sp" />
             </LinearLayout>

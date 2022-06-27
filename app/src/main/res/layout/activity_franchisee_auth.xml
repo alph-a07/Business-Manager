@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".FranchiseeAuthActivity">
+    tools:context=".FranchiseeAuthActivity"
+    android:animateLayoutChanges="true">
 
     <!--Card Container-->
     <androidx.cardview.widget.CardView
@@ -19,13 +20,15 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:animateLayoutChanges="true">
 
         <!--Card Container layout-->
         <RelativeLayout
             android:background="@color/white"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:animateLayoutChanges="true">
 
             <!--Login switch-->
             <TextView
@@ -38,7 +41,8 @@
                 android:gravity="center"
                 android:text="@string/login"
                 android:textColor="@color/Maastricht_Blue"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                />
 
             <!--Hidden view-->
             <View
@@ -85,15 +89,15 @@
                 android:layout_below="@id/tvBtn_franchisee_auth_login"
                 android:layout_marginHorizontal="15dp"
                 android:layout_marginTop="50dp"
+                android:layout_toEndOf="@id/ccp"
                 android:background="@drawable/edt_bg"
                 android:orientation="horizontal"
-                android:padding="2dp"
-                android:layout_toEndOf="@id/ccp">
+                android:padding="2dp">
 
                 <ImageView
                     android:id="@+id/iv_franchisee_auth_phone_logo"
                     android:layout_width="56dp"
-                    android:layout_height="50dp"
+                    android:layout_height="48dp"
                     android:contentDescription="@string/phone_logo"
                     android:padding="13dp"
                     app:srcCompat="@drawable/phone_logo" />
@@ -101,7 +105,7 @@
                 <EditText
                     android:id="@+id/edt_franchisee_auth_phone"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="48dp"
                     android:layout_marginEnd="5dp"
                     android:autofillHints="phone"
                     android:background="@color/white"
@@ -132,7 +136,7 @@
                 <ImageView
                     android:id="@+id/iv_franchisee_auth_otp_logo"
                     android:layout_width="56dp"
-                    android:layout_height="50dp"
+                    android:layout_height="48dp"
                     android:contentDescription="@string/otp_logo"
                     android:padding="13dp"
                     app:srcCompat="@drawable/otp_logo"
@@ -141,14 +145,14 @@
                 <EditText
                     android:id="@+id/edt_franchisee_auth_otp"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="48dp"
                     android:layout_marginEnd="5dp"
                     android:background="@color/white"
                     android:ems="10"
-                    android:textColor="@color/Maastricht_Blue"
                     android:fontFamily="@font/roboto"
                     android:hint="@string/enter_one_time_password"
                     android:importantForAutofill="no"
+                    android:textColor="@color/Maastricht_Blue"
 
                     android:textColorHint="@color/Gray_Hint"
                     tools:ignore="TextContrastCheck" />
@@ -167,21 +171,24 @@
                 android:layout_marginEnd="15dp"
                 android:elevation="@dimen/cardview_compat_inset_shadow"
                 android:visibility="gone"
+                app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="10dp"
                 tools:visibility="gone">
 
                 <TextView
                     android:id="@+id/otp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="10dp"
                     android:layout_marginBottom="10dp"
+                    android:background="@color/white"
                     android:fontFamily="@font/roboto_bold"
                     android:letterSpacing="0.01"
-                    android:text="@string/get_otp" />
+                    android:text="@string/get_otp"
+                    android:textColor="@color/Dim_Gray" />
             </androidx.cardview.widget.CardView>
 
             <!--Name layout-->
@@ -201,7 +208,7 @@
                 <ImageView
                     android:id="@+id/iv_franchisee_auth_name_logo"
                     android:layout_width="56dp"
-                    android:layout_height="50dp"
+                    android:layout_height="48dp"
                     android:contentDescription="@string/user_logo"
                     android:padding="13dp"
                     app:srcCompat="@drawable/user_logo" />
@@ -209,14 +216,14 @@
                 <EditText
                     android:id="@+id/edt_franchisee_auth_name"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="48dp"
                     android:layout_marginEnd="5dp"
                     android:autofillHints="name"
                     android:background="@color/white"
-                    android:textColor="@color/Maastricht_Blue"
                     android:ems="10"
                     android:fontFamily="@font/roboto"
                     android:hint="@string/enter_your_name"
+                    android:textColor="@color/Maastricht_Blue"
 
                     android:textColorHint="@color/Gray_Hint"
                     tools:ignore="TextContrastCheck" />
@@ -239,7 +246,7 @@
                 <ImageView
                     android:id="@+id/iv_franchisee_auth_password_logo"
                     android:layout_width="56dp"
-                    android:layout_height="50dp"
+                    android:layout_height="48dp"
                     android:contentDescription="@string/password_logo"
                     android:padding="15dp"
                     app:srcCompat="@drawable/password_logo" />
@@ -247,16 +254,16 @@
                 <EditText
                     android:id="@+id/edt_franchisee_auth_password"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="48dp"
                     android:layout_marginEnd="5dp"
                     android:autofillHints="password"
                     android:background="@color/white"
-                    android:textColor="@color/Maastricht_Blue"
                     android:ems="10"
                     android:fontFamily="@font/roboto"
                     android:hint="@string/enter_password"
                     android:inputType="textWebPassword"
                     android:tag="login_password"
+                    android:textColor="@color/Maastricht_Blue"
                     android:textColorHint="@color/Gray_Hint"
                     tools:ignore="TextContrastCheck" />
             </LinearLayout>
@@ -270,7 +277,8 @@
                 android:layout_alignEnd="@id/ll_franchisee_auth_password"
                 android:layout_marginTop="5dp"
                 android:fontFamily="@font/roboto"
-                android:text="@string/forgot_password" />
+                android:text="@string/forgot_password"
+                android:textColor="@color/Dim_Gray" />
 
             <!--Login button-->
             <androidx.appcompat.widget.AppCompatButton

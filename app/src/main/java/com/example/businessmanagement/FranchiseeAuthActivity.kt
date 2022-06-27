@@ -335,7 +335,7 @@ class FranchiseeAuthActivity : AppCompatActivity() {
 
     fun loginPage(){
         if (!switch){
-            
+
             switch = true
 
             // making signup switch secondary

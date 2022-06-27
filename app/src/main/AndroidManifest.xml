@@ -14,7 +14,7 @@
         android:theme="@style/Theme.BusinessManagement"
         tools:targetApi="31">
         <activity
-            android:name=".FranchisorAuthActivity"
+            android:name=".FranchiserAuthActivity"
             android:exported="false" />
         <activity
             android:name=".FranchiseeAuthActivity"
