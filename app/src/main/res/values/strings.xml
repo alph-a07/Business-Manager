@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Business Management</string>
     <string name="login">LOGIN</string>
-    <string name="signup">SIGNUP</string>
+    <string name="signup">SignUp</string>
     <string name="phone_logo">phone logo</string>
     <string name="enter_mobile_number">Enter mobile number</string>
     <string name="password_logo">password_logo</string>

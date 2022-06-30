@@ -27,7 +27,7 @@ class FirstPageActivity : AppCompatActivity() {
             card_acc_type_franchisee.outlineAmbientShadowColor = getColor(R.color.Maastricht_Blue)
             card_acc_type_franchisee.outlineSpotShadowColor = getColor(R.color.Maastricht_Blue)
 
-            card_acc_type_franchiser.cardElevation = 20F
+            card_acc_type_franchiser.cardElevation = 15F
             card_acc_type_franchiser.outlineAmbientShadowColor = getColor(R.color.Dim_Gray)
             card_acc_type_franchiser.outlineSpotShadowColor = getColor(R.color.Dim_Gray)
 
@@ -37,7 +37,7 @@ class FirstPageActivity : AppCompatActivity() {
 
             franchiseeSwitch = -1
 
-            card_acc_type_franchisee.cardElevation = 20F
+            card_acc_type_franchisee.cardElevation = 15F
             card_acc_type_franchisee.outlineAmbientShadowColor = getColor(R.color.Dim_Gray)
             card_acc_type_franchisee.outlineSpotShadowColor = getColor(R.color.Dim_Gray)
 
@@ -49,7 +49,7 @@ class FirstPageActivity : AppCompatActivity() {
 
         btn_fp_getStarted.setOnClickListener {
             if (franchiseeSwitch >= 0)
-                startActivity(Intent(this, FranchiseeAuthActivity::class.java))
+                startActivity(Intent(this, FranchiseeAuth1Activity::class.java))
             else
                 startActivity(Intent(this, FranchiserAuthActivity::class.java))
         }

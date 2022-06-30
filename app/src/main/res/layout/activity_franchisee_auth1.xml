@@ -5,12 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".FranchiseeAuthActivity"
+    tools:context=".FranchiseeAuth1Activity"
     android:animateLayoutChanges="true">
 
     <!--Card Container-->
     <androidx.cardview.widget.CardView
-        android:id="@+id/card_acc_type_franchisee"
+        android:id="@+id/card_acc_type_franchisee1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
@@ -32,10 +32,10 @@
 
             <!--Login switch-->
             <TextView
-                android:id="@+id/tvBtn_franchisee_auth_login"
+                android:id="@+id/tvBtn_franchisee1_auth_login"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
-                android:layout_toStartOf="@+id/view"
+                android:layout_toStartOf="@id/view1"
                 android:background="@drawable/primary_partition_bg"
                 android:fontFamily="@font/roboto_bold"
                 android:gravity="center"
@@ -46,17 +46,17 @@
 
             <!--Hidden view-->
             <View
-                android:id="@+id/view"
+                android:id="@+id/view1"
                 android:layout_width="0dp"
                 android:layout_height="56dp"
                 android:layout_centerHorizontal="true" />
 
             <!--Signup switch-->
             <TextView
-                android:id="@+id/tvBtn_franchisee_auth_signup"
+                android:id="@+id/tvBtn_franchisee1_auth_signup"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
-                android:layout_toEndOf="@id/view"
+                android:layout_toEndOf="@id/view1"
                 android:background="@drawable/secondary_partition_bg"
                 android:fontFamily="@font/roboto_bold"
                 android:gravity="center"
@@ -69,8 +69,8 @@
                 android:id="@+id/ccp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignTop="@id/ll_franchisee_auth_phone"
-                android:layout_alignBottom="@id/ll_franchisee_auth_phone"
+                android:layout_alignTop="@id/ll_franchisee1_auth_phone"
+                android:layout_alignBottom="@id/ll_franchisee1_auth_phone"
                 android:layout_marginStart="15dp"
                 android:background="@drawable/edt_bg"
                 android:gravity="center"
@@ -83,10 +83,10 @@
 
             <!--Phone layout-->
             <LinearLayout
-                android:id="@+id/ll_franchisee_auth_phone"
+                android:id="@+id/ll_franchisee1_auth_phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/tvBtn_franchisee_auth_login"
+                android:layout_below="@id/tvBtn_franchisee1_auth_login"
                 android:layout_marginHorizontal="15dp"
                 android:layout_marginTop="50dp"
                 android:layout_toEndOf="@id/ccp"
@@ -95,7 +95,7 @@
                 android:padding="2dp">
 
                 <ImageView
-                    android:id="@+id/iv_franchisee_auth_phone_logo"
+                    android:id="@+id/iv_franchisee1_auth_phone_logo"
                     android:layout_width="56dp"
                     android:layout_height="48dp"
                     android:contentDescription="@string/phone_logo"
@@ -103,7 +103,7 @@
                     app:srcCompat="@drawable/phone_logo" />
 
                 <EditText
-                    android:id="@+id/edt_franchisee_auth_phone"
+                    android:id="@+id/edt_franchisee1_auth_phone"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:layout_marginEnd="5dp"
@@ -118,123 +118,12 @@
                     tools:ignore="TextContrastCheck" />
             </LinearLayout>
 
-            <!--OTP layout-->
-            <LinearLayout
-                android:id="@+id/ll_franchisee_auth_otp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/ll_franchisee_auth_phone"
-                android:layout_marginHorizontal="15dp"
-                android:layout_marginTop="30dp"
-                android:layout_toStartOf="@id/card_OTP_switch"
-                android:background="@drawable/edt_bg"
-                android:orientation="horizontal"
-                android:padding="2dp"
-                android:visibility="gone"
-                tools:visibility="gone">
-
-                <ImageView
-                    android:id="@+id/iv_franchisee_auth_otp_logo"
-                    android:layout_width="56dp"
-                    android:layout_height="48dp"
-                    android:contentDescription="@string/otp_logo"
-                    android:padding="13dp"
-                    app:srcCompat="@drawable/otp_logo"
-                    app:tint="#B7B7B7" />
-
-                <EditText
-                    android:id="@+id/edt_franchisee_auth_otp"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:layout_marginEnd="5dp"
-                    android:background="@color/white"
-                    android:ems="10"
-                    android:fontFamily="@font/roboto"
-                    android:hint="@string/enter_one_time_password"
-                    android:importantForAutofill="no"
-                    android:textColor="@color/Maastricht_Blue"
-
-                    android:textColorHint="@color/Gray_Hint"
-                    tools:ignore="TextContrastCheck" />
-            </LinearLayout>
-
-            <!--OTP switch-->
-            <androidx.cardview.widget.CardView
-                android:id="@+id/card_OTP_switch"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/ll_franchisee_auth_phone"
-                android:layout_alignTop="@id/ll_franchisee_auth_otp"
-                android:layout_alignBottom="@id/ll_franchisee_auth_otp"
-                android:layout_alignParentEnd="true"
-                android:layout_marginVertical="5dp"
-                android:layout_marginEnd="15dp"
-                android:elevation="@dimen/cardview_compat_inset_shadow"
-                android:visibility="gone"
-                app:cardBackgroundColor="@color/white"
-                app:cardCornerRadius="10dp"
-                tools:visibility="gone">
-
-                <TextView
-                    android:id="@+id/otp"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:background="@color/white"
-                    android:fontFamily="@font/roboto_bold"
-                    android:letterSpacing="0.01"
-                    android:text="@string/get_otp"
-                    android:textColor="@color/Dim_Gray" />
-            </androidx.cardview.widget.CardView>
-
-            <!--Name layout-->
-            <LinearLayout
-                android:id="@+id/ll_franchisee_auth_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/ll_franchisee_auth_otp"
-                android:layout_marginHorizontal="15dp"
-                android:layout_marginTop="30dp"
-                android:background="@drawable/edt_bg"
-                android:orientation="horizontal"
-                android:padding="2dp"
-                android:visibility="gone"
-                tools:visibility="gone">
-
-                <ImageView
-                    android:id="@+id/iv_franchisee_auth_name_logo"
-                    android:layout_width="56dp"
-                    android:layout_height="48dp"
-                    android:contentDescription="@string/user_logo"
-                    android:padding="13dp"
-                    app:srcCompat="@drawable/user_logo" />
-
-                <EditText
-                    android:id="@+id/edt_franchisee_auth_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:layout_marginEnd="5dp"
-                    android:autofillHints="name"
-                    android:background="@color/white"
-                    android:ems="10"
-                    android:fontFamily="@font/roboto"
-                    android:hint="@string/enter_your_name"
-                    android:textColor="@color/Maastricht_Blue"
-
-                    android:textColorHint="@color/Gray_Hint"
-                    tools:ignore="TextContrastCheck" />
-            </LinearLayout>
-
             <!--Password layout-->
             <LinearLayout
-                android:id="@+id/ll_franchisee_auth_password"
+                android:id="@+id/ll_franchisee1_auth_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/ll_franchisee_auth_name"
+                android:layout_below="@id/ll_franchisee1_auth_phone"
                 android:layout_marginHorizontal="15dp"
                 android:layout_marginTop="30dp"
                 android:background="@drawable/edt_bg"
@@ -244,7 +133,7 @@
                 tools:visibility="visible">
 
                 <ImageView
-                    android:id="@+id/iv_franchisee_auth_password_logo"
+                    android:id="@+id/iv_franchisee1_auth_password_logo"
                     android:layout_width="56dp"
                     android:layout_height="48dp"
                     android:contentDescription="@string/password_logo"
@@ -252,7 +141,7 @@
                     app:srcCompat="@drawable/password_logo" />
 
                 <EditText
-                    android:id="@+id/edt_franchisee_auth_password"
+                    android:id="@+id/edt_franchisee1_auth_password"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:layout_marginEnd="5dp"
@@ -270,11 +159,11 @@
 
             <!--Forgot password option-->
             <TextView
-                android:id="@+id/tvBtn_franchisee_auth_forgot_password"
+                android:id="@+id/tvBtn_franchisee1_auth_forgot_password"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/ll_franchisee_auth_password"
-                android:layout_alignEnd="@id/ll_franchisee_auth_password"
+                android:layout_below="@id/ll_franchisee1_auth_password"
+                android:layout_alignEnd="@id/ll_franchisee1_auth_password"
                 android:layout_marginTop="5dp"
                 android:fontFamily="@font/roboto"
                 android:text="@string/forgot_password"
@@ -282,10 +171,10 @@
 
             <!--Login button-->
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_franchisee_auth_login_button"
+                android:id="@+id/btn_franchisee1_auth_login_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/tvBtn_franchisee_auth_forgot_password"
+                android:layout_below="@id/tvBtn_franchisee1_auth_forgot_password"
                 android:layout_marginHorizontal="110dp"
                 android:layout_marginTop="30dp"
                 android:background="@drawable/primary_button_bg"
@@ -303,14 +192,14 @@
                 android:id="@+id/cv_google"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/btn_franchisee_auth_login_button"
+                android:layout_below="@id/btn_franchisee1_auth_login_button"
                 android:layout_centerHorizontal="true"
                 android:layout_marginVertical="30dp"
                 android:elevation="10dp"
                 app:cardCornerRadius="10dp">
 
                 <LinearLayout
-                    android:id="@+id/ll_franchisee_google"
+                    android:id="@+id/ll_franchisee1_google"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/Tart_Orange"
