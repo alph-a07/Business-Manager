@@ -14,13 +14,17 @@
         android:theme="@style/Theme.BusinessManagement"
         tools:targetApi="31">
         <activity
+            android:name=".FranchiseeDashboardActivity"
+            android:exported="false" />
+        <activity
             android:name=".FranchiserAuthActivity"
             android:exported="false" />
         <activity
             android:name=".FranchiseeAuth1Activity"
-            android:exported="true"/>
-        <activity android:name=".FranchiseeAuth2Activity"
-            android:exported="false"/>
+            android:exported="true" />
+        <activity
+            android:name=".FranchiseeAuth2Activity"
+            android:exported="false" />
         <activity
             android:name=".FirstPageActivity"
             android:exported="true">

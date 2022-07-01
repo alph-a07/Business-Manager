@@ -13,7 +13,9 @@ import com.example.businessmanagement.model.User
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
-import com.google.firebase.auth.*
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.auth.PhoneAuthProvider
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
@@ -128,6 +130,7 @@ class FranchiseeAuth1Activity : AppCompatActivity() {
 
         tvBtn_franchisee1_auth_signup.setOnClickListener {
             startActivity(Intent(this,FranchiseeAuth2Activity::class.java))
+            overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left)
         }
     }
 

@@ -65,6 +65,16 @@
                 android:textSize="18sp" />
 
             <!--country code picker-->
+            <ProgressBar
+                android:id="@+id/progress_enter2"
+                style="@style/ProgressBarStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvBtn_franchisee2_auth_login"
+                android:visibility="gone"
+                tools:visibility="gone"
+                />
+
             <com.hbb20.CountryCodePicker
                 android:id="@+id/ccp2"
                 android:layout_width="wrap_content"
@@ -86,7 +96,7 @@
                 android:id="@+id/ll_franchisee2_auth_phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/tvBtn_franchisee2_auth_login"
+                android:layout_below="@id/progress_enter2"
                 android:layout_marginHorizontal="15dp"
                 android:layout_marginTop="50dp"
                 android:layout_toEndOf="@id/ccp2"
@@ -152,8 +162,8 @@
                     android:fontFamily="@font/roboto"
                     android:hint="@string/enter_one_time_password"
                     android:importantForAutofill="no"
-                    android:textColor="@color/Maastricht_Blue"
                     android:inputType="number"
+                    android:textColor="@color/Maastricht_Blue"
                     android:textColorHint="@color/Gray_Hint"
                     tools:ignore="TextContrastCheck" />
             </LinearLayout>
@@ -176,7 +186,7 @@
                 tools:visibility="visible">
 
                 <!--stage1 = send otp
-                    stage2 = verify otp-->
+                    stage2 = sent otp-->
                 <TextView
                     android:id="@+id/otp2"
                     android:layout_width="match_parent"
@@ -331,20 +341,7 @@
                         android:textColor="@color/white"
                         android:textSize="16sp" />
                 </LinearLayout>
-
-
             </androidx.cardview.widget.CardView>
-
-            <ProgressBar
-                android:id="@+id/progress_enter2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/cv_google"
-                android:layout_centerHorizontal="true"
-                android:layout_margin="10dp"
-                android:visibility="gone">
-
-            </ProgressBar>
 
         </RelativeLayout>
     </androidx.cardview.widget.CardView>

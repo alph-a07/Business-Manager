@@ -2,14 +2,11 @@ package com.example.businessmanagement
 
 import android.content.ContentValues
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.EditText
 import android.widget.Toast
-import androidx.cardview.widget.CardView
-import androidx.core.content.ContextCompat
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import com.example.businessmanagement.model.User
@@ -23,7 +20,6 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
-import com.hbb20.CountryCodePicker
 import kotlinx.android.synthetic.main.activity_franchisee_auth2.*
 import java.util.concurrent.TimeUnit
 
@@ -49,9 +45,6 @@ class FranchiseeAuth2Activity : AppCompatActivity() {
                 .requestEmail()
                 .build()
 
-        val edtOTP = findViewById<EditText>(R.id.edt_franchisee2_auth_otp)
-        val name = findViewById<EditText>(R.id.edt_franchisee2_auth_name)
-        val psswd = findViewById<EditText>(R.id.edt_franchisee1_auth_password)
         ccp2.registerCarrierNumberEditText(edt_franchisee2_auth_phone)
 
         val callbacks =
@@ -106,144 +99,164 @@ class FranchiseeAuth2Activity : AppCompatActivity() {
                     storedVerificationId = verificationId
                     resendToken = token
                     otp2.text = "Code sent"
+                    otp2.tag = "stage2"
                     card_OTP_switch2.isEnabled = false
+                    card_OTP_switch2.isClickable = false
 
                     progress_enter2.isVisible = false
                 }
             }
 
-        // OTP switch pressed
+        // region MOBILE VERIFICATION
         card_OTP_switch2.setOnClickListener {
 
-            // check number
-            if (edt_franchisee2_auth_phone.text.isEmpty() || !ccp2.isValidFullNumber) {
-                edt_franchisee2_auth_phone.error = "Please enter valid number"
-                edt_franchisee2_auth_phone.requestFocus()
-            }
+            when (otp2.tag) {
 
-            // verify number and send otp
-            else {
-                Toast.makeText(this, "else", Toast.LENGTH_SHORT).show()
-                progress_enter2.isVisible = true
+                // receive OTP
+                "stage1" -> {
+                    // check number
+                    if (edt_franchisee2_auth_phone.text.isEmpty() || !ccp2.isValidFullNumber) {
+                        edt_franchisee2_auth_phone.error = "Please enter valid number"
+                        edt_franchisee2_auth_phone.requestFocus()
+                    }
 
-                // Check if phone number is already logged in before
-                db.getReference("PhoneUsers").orderByChild("phone")
-                    .equalTo(ccp2.fullNumberWithPlus)
-                    .addListenerForSingleValueEvent(object : ValueEventListener {
-                        override fun onDataChange(snapshot: DataSnapshot) {
+                    // verify number and send otp
+                    else {
+                        progress_enter2.isVisible = true
 
-                            // number already exists
-                            if (snapshot.exists()) {
-                                Toast.makeText(
-                                    baseContext,
-                                    "Number already exists, Verifying..Please wait.",
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                                val options = PhoneAuthOptions.newBuilder(auth)
-                                    .setPhoneNumber(ccp2.fullNumberWithPlus)       // Phone number to verify
-                                    .setTimeout(60L, TimeUnit.SECONDS) // Timeout and unit
-                                    .setActivity(this@FranchiseeAuth2Activity)                 // Activity (for callback binding)
-                                    .setCallbacks(callbacks)          // OnVerificationStateChangedCallbacks
-                                    .build()
-                                PhoneAuthProvider.verifyPhoneNumber(options)
-                                for (snap in snapshot.children) {
-                                    val model = snap.getValue(User::class.java)
-                                    if (model?.phone == ccp2.fullNumberWithPlus) {
-                                        name.setText(model?.userName)
-                                        otp2.text = "Login"
+                        // Check if phone number is already logged in before
+                        db.getReference("PhoneUsers").orderByChild("phone")
+                            .equalTo(ccp2.fullNumberWithPlus)
+                            .addListenerForSingleValueEvent(object : ValueEventListener {
+                                override fun onDataChange(snapshot: DataSnapshot) {
+
+                                    // number already exists
+                                    if (snapshot.exists()) {
+                                        Toast.makeText(
+                                            baseContext,
+                                            "Number already exists, please login",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+
+                                        val intent = Intent(
+                                            this@FranchiseeAuth2Activity,
+                                            FranchiseeAuth1Activity::class.java
+                                        )
+                                        intent.putExtra(ccp2.fullNumberWithPlus, String())
+                                        startActivity(intent)
+                                    }
+
+                                    // new number login
+                                    else {
+                                        if (ccp2.isValidFullNumber) {
+                                            val options = PhoneAuthOptions.newBuilder(auth)
+                                                .setPhoneNumber(ccp2.fullNumberWithPlus)       // Phone number to verify
+                                                .setTimeout(
+                                                    60L,
+                                                    TimeUnit.SECONDS
+                                                ) // Timeout and unit
+                                                .setActivity(this@FranchiseeAuth2Activity)                 // Activity (for callback binding)
+                                                .setCallbacks(callbacks)          // OnVerificationStateChangedCallbacks
+                                                .build()
+                                            PhoneAuthProvider.verifyPhoneNumber(options)
+                                        } else {
+                                            Snackbar.make(
+                                                it,
+                                                "Enter a valid Phone Number!",
+                                                Snackbar.LENGTH_SHORT
+                                            ).show()
+                                        }
                                     }
                                 }
-                            }
 
-                            // new number login
-                            else {
-                                if (ccp2.isValidFullNumber) {
-                                    val options = PhoneAuthOptions.newBuilder(auth)
-                                        .setPhoneNumber(ccp2.fullNumberWithPlus)       // Phone number to verify
-                                        .setTimeout(60L, TimeUnit.SECONDS) // Timeout and unit
-                                        .setActivity(this@FranchiseeAuth2Activity)                 // Activity (for callback binding)
-                                        .setCallbacks(callbacks)          // OnVerificationStateChangedCallbacks
-                                        .build()
-                                    PhoneAuthProvider.verifyPhoneNumber(options)
-                                } else {
-                                    Snackbar.make(
-                                        it,
-                                        "Enter a valid Phone Number!",
-                                        Snackbar.LENGTH_SHORT
-                                    ).show()
+                                override fun onCancelled(error: DatabaseError) {
+                                    TODO("Not yet implemented")
                                 }
-                            }
-                        }
+                            })
+                    }
+                }
 
-                        override fun onCancelled(error: DatabaseError) {
-                            TODO("Not yet implemented")
+                // verify OTP
+                "stage2" -> {
+                    progress_enter2.isVisible = true
+                    val credential: PhoneAuthCredential = PhoneAuthProvider.getCredential(
+                        storedVerificationId,
+                        edt_franchisee2_auth_otp.text.trim().toString()
+                    )
+
+                    auth.signInWithCredential(credential).addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            otp2.text = "Verified ✅"
+                            otp2.tag = "stage3"
+                            card_OTP_switch2.isEnabled = false
+                            card_OTP_switch2.isClickable = false
+                            progress_enter2.isVisible = false
+                            edt_franchisee2_auth_otp.isEnabled = false
+                            edt_franchisee2_auth_phone.isEnabled = false
+                            isPhoneNumberVerified = true
+                        } else {
+                            Toast.makeText(this, "Incorrect OTP", Toast.LENGTH_SHORT).show()
                         }
-                    })
+                    }
+                }
             }
         }
 
-            // sign up btn pressed -- verify otp
-            btn_franchisee2_auth_login_button.setOnClickListener {
+        // OTP TextWatcher
+        edt_franchisee2_auth_otp.addTextChangedListener {
+            if (edt_franchisee2_auth_otp.text.length == 6) {
+                otp2.text = "Verify"
+                card_OTP_switch2.isEnabled = true
+                card_OTP_switch2.isClickable = true
+            }
+        }
+
+        // endregion
+
+        // region SIGN UP
+        btn_franchisee2_auth_login_button.setOnClickListener {
+            if (isPhoneNumberVerified) {
 
                 progress_enter2.visibility = View.VISIBLE
-                val otp = edtOTP.text.trim().toString()
 
-                if (name.text.toString().isEmpty()) {
-                    name.error = "Please enter your name"
-                    name.requestFocus()
+                if (edt_franchisee2_auth_name?.text.toString().isEmpty()) {
+                    edt_franchisee2_auth_name.error = "Enter your name"
+                    edt_franchisee2_auth_name.requestFocus()
                     return@setOnClickListener
-                }
-                if (psswd.text.toString().isEmpty()) {
-                    psswd.error = "Please create password"
-                    psswd.requestFocus()
+                } else if (edt_franchisee2_auth_password?.text.toString().isEmpty()) {
+                    edt_franchisee2_auth_password.error = "Enter a strong password"
+                    edt_franchisee2_auth_password.requestFocus()
                     return@setOnClickListener
-                }
-
-                if (otp.isNotEmpty()) {
-                    val credential: PhoneAuthCredential =
-                        PhoneAuthProvider.getCredential(storedVerificationId, otp)
-                    auth.signInWithCredential(credential)
-                        .addOnCompleteListener(this) { task ->
-                            progress_enter2.visibility = View.GONE
-                            if (task.isSuccessful) {
-                                // Sign in success, update UI with the signed-in user's information
-                                Log.d(ContentValues.TAG, "signInWithCredential:success")
-                                val model = User()
-                                model.phone = ccp2.fullNumberWithPlus
-                                model.userName = name.text.toString()
-                                model.password = psswd.text.toString()
-                                model.uid =
-                                    FirebaseAuth.getInstance().currentUser?.uid.toString()
-
-                                // uploading in database
-                                db.getReference("PhoneUsers").child(auth.uid.toString())
-                                    .setValue(model)
-                            } else {
-                                // Sign in failed, display a message and update the UI
-                                Log.w(
-                                    ContentValues.TAG,
-                                    "signInWithCredential:failure",
-                                    task.exception
-                                )
-                                if (task.exception is FirebaseAuthInvalidCredentialsException) {
-                                    Toast.makeText(
-                                        this,
-                                        task.exception.toString(),
-                                        Toast.LENGTH_SHORT
-                                    ).show()
-                                }
-                                Toast.makeText(this, "Invalid OTP!", Toast.LENGTH_SHORT).show()
-                            }
-                        }
                 } else {
-                    Toast.makeText(this, "Invalid OTP!", Toast.LENGTH_SHORT).show()
-                    progress_enter2.visibility = View.GONE
-                }
-            }
+                    val model = User()
+                    model.phone = ccp2.fullNumberWithPlus
+                    model.userName = edt_franchisee2_auth_name.text.toString()
+                    model.password = edt_franchisee2_auth_password.text.toString()
+                    model.uid =
+                        FirebaseAuth.getInstance().currentUser?.uid.toString()
 
-            tvBtn_franchisee2_auth_login.setOnClickListener {
-                startActivity(Intent(this, FranchiseeAuth1Activity::class.java))
+                    // uploading in database
+                    db.getReference("PhoneUsers").child(auth.uid.toString())
+                        .setValue(model)
+
+                    val intent = Intent(
+                        this@FranchiseeAuth2Activity,
+                        FranchiseeDashboardActivity::class.java
+                    )
+                    intent.putExtra(model.userName, String())
+                    startActivity(intent)
+                }
+            } else {
+                edt_franchisee2_auth_phone.error = "Verify mobile number first."
+                edt_franchisee2_auth_phone.requestFocus()
+                return@setOnClickListener
             }
         }
-    }
+        // endregion
 
+        tvBtn_franchisee2_auth_login.setOnClickListener {
+            startActivity(Intent(this, FranchiseeAuth1Activity::class.java))
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+        }
+    }
+}
