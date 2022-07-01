@@ -18,7 +18,9 @@
             android:exported="false" />
         <activity
             android:name=".FranchiseeAuth1Activity"
-            android:exported="true"></activity>
+            android:exported="true"/>
+        <activity android:name=".FranchiseeAuth2Activity"
+            android:exported="false"/>
         <activity
             android:name=".FirstPageActivity"
             android:exported="true">

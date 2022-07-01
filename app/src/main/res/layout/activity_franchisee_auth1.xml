@@ -66,7 +66,7 @@
 
             <!--country code picker-->
             <com.hbb20.CountryCodePicker
-                android:id="@+id/ccp"
+                android:id="@+id/ccp1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@id/ll_franchisee1_auth_phone"
@@ -89,7 +89,7 @@
                 android:layout_below="@id/tvBtn_franchisee1_auth_login"
                 android:layout_marginHorizontal="15dp"
                 android:layout_marginTop="50dp"
-                android:layout_toEndOf="@id/ccp"
+                android:layout_toEndOf="@id/ccp1"
                 android:background="@drawable/edt_bg"
                 android:orientation="horizontal"
                 android:padding="2dp">

@@ -8,24 +8,18 @@ import android.view.View
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import com.example.businessmanagement.model.User
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
-import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.FirebaseException
-import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.*
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
-import com.hbb20.CountryCodePicker
 import kotlinx.android.synthetic.main.activity_franchisee_auth1.*
-import java.util.concurrent.TimeUnit
 
 class FranchiseeAuth1Activity : AppCompatActivity() {
 
@@ -66,11 +60,11 @@ class FranchiseeAuth1Activity : AppCompatActivity() {
 
                 progress_enter.isVisible = true
 
-                ccp.registerCarrierNumberEditText(edtPhone) // register number with country code picker
+                ccp1.registerCarrierNumberEditText(edtPhone) // register number with country code picker
 
                 // Check if phone number is already logged in before
                 db.getReference("PhoneUsers").orderByChild("phone")
-                    .equalTo(ccp.fullNumberWithPlus)
+                    .equalTo(ccp1.fullNumberWithPlus)
                     .addListenerForSingleValueEvent(object : ValueEventListener {
                         override fun onDataChange(snapshot: DataSnapshot) {
 
@@ -81,7 +75,7 @@ class FranchiseeAuth1Activity : AppCompatActivity() {
                                 //verify password
                                 for (snap in snapshot.children) {
                                     val model = snap.getValue(User::class.java)
-                                    if (model?.phone == ccp.fullNumberWithPlus) {
+                                    if (model?.phone == ccp1.fullNumberWithPlus) {
                                         if (psswd.text.toString() == model?.password) {
                                             Toast.makeText(
                                                 this@FranchiseeAuth1Activity,

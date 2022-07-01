@@ -4,31 +4,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
     android:background="@color/white"
-    tools:context=".FranchiserAuthActivity"
-    android:animateLayoutChanges="true">
+    tools:context=".FranchiserAuthActivity">
 
     <!--Card Container-->
     <androidx.cardview.widget.CardView
         android:id="@+id/card_acc_type_franchisee2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
         android:layout_marginHorizontal="10dp"
+        android:animateLayoutChanges="true"
+        android:background="@color/white"
         app:cardCornerRadius="10dp"
         app:cardElevation="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:animateLayoutChanges="true">
+        app:layout_constraintTop_toTopOf="parent">
 
         <!--Card Container layout-->
         <RelativeLayout
-            android:background="@color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:animateLayoutChanges="true">
+            android:animateLayoutChanges="true"
+            android:background="@color/white">
 
             <!--Login switch-->
             <TextView
@@ -60,13 +60,13 @@
                 android:fontFamily="@font/roboto_bold"
                 android:gravity="center"
                 android:text="@string/signup"
+                android:textAllCaps="true"
                 android:textColor="@color/Maastricht_Blue"
-                android:textSize="18sp"
-                android:textAllCaps="true"/>
+                android:textSize="18sp" />
 
             <!--country code picker-->
             <com.hbb20.CountryCodePicker
-                android:id="@+id/ccp"
+                android:id="@+id/ccp2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@id/ll_franchisee2_auth_phone"
@@ -89,7 +89,7 @@
                 android:layout_below="@id/tvBtn_franchisee2_auth_login"
                 android:layout_marginHorizontal="15dp"
                 android:layout_marginTop="50dp"
-                android:layout_toEndOf="@id/ccp"
+                android:layout_toEndOf="@id/ccp2"
                 android:background="@drawable/edt_bg"
                 android:orientation="horizontal"
                 android:padding="2dp">
@@ -153,7 +153,7 @@
                     android:hint="@string/enter_one_time_password"
                     android:importantForAutofill="no"
                     android:textColor="@color/Maastricht_Blue"
-
+                    android:inputType="number"
                     android:textColorHint="@color/Gray_Hint"
                     tools:ignore="TextContrastCheck" />
             </LinearLayout>
@@ -175,8 +175,10 @@
                 app:cardCornerRadius="10dp"
                 tools:visibility="visible">
 
+                <!--stage1 = send otp
+                    stage2 = verify otp-->
                 <TextView
-                    android:id="@+id/otp"
+                    android:id="@+id/otp2"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
@@ -186,7 +188,9 @@
                     android:layout_marginBottom="10dp"
                     android:background="@color/white"
                     android:fontFamily="@font/roboto_bold"
+                    android:gravity="center"
                     android:letterSpacing="0.01"
+                    android:tag="stage1"
                     android:text="@string/get_otp"
                     android:textColor="@color/Dim_Gray" />
             </androidx.cardview.widget.CardView>
@@ -332,13 +336,13 @@
             </androidx.cardview.widget.CardView>
 
             <ProgressBar
-                android:id="@+id/progress_enter"
+                android:id="@+id/progress_enter2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_below="@id/cv_google"
                 android:layout_centerHorizontal="true"
                 android:layout_margin="10dp"
-                android:visibility="gone"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:visibility="gone">
 
             </ProgressBar>
 
