@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FranchiserDashboardActivity"
+    android:background="@color/white">
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/roboto_bold"
+        android:letterSpacing="0.025"
+        android:text="Hi Franchiser 👋"
+        android:textColor="@color/black"
+        android:textSize="26sp" />
+
+    <ImageView
+        android:id="@+id/iv_franchisee_dashboard_account"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="10dp"
+        app:srcCompat="@drawable/account_logo" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_franchiser_dashboard_profit_trends"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/card_franchiser_dashboard_franchise_requests"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="20dp"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="10dp"
+        android:background="@color/white">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="15dp">
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:fontFamily="@font/roboto_bold"
+                android:letterSpacing="0.01"
+                android:text="Profit trends"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tv_franchiser_dashboard_profit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textView7"
+                android:layout_marginVertical="5dp"
+                android:fontFamily="@font/roboto_black"
+                android:text="INR 500 Cr."
+                android:textColor="@color/Cyber_Yellow"
+                android:textSize="34sp" />
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_franchiser_dashboard_registered_businesses"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginHorizontal="20dp"
+        android:layout_below="@id/iv_franchisee_dashboard_account"
+        android:layout_marginTop="30dp"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="10dp"
+        android:background="@color/white">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="20dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="5dp"
+            android:background="@color/white"
+            >
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:fontFamily="@font/roboto_bold"
+                android:letterSpacing="0.01"
+                android:text="Registered Businesses"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tv_franchiser_dashboard_num_of_registered_businesses"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textView1"
+                android:layout_marginVertical="5dp"
+                android:fontFamily="@font/roboto_black"
+                android:text="120"
+                android:textColor="@color/Cyber_Yellow"
+                android:textSize="48sp" />
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/tv_franchiser_dashboard_num_of_registered_businesses"
+                android:layout_marginStart="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_toEndOf="@id/tv_franchiser_dashboard_num_of_registered_businesses"
+                android:fontFamily="@font/roboto_medium"
+                android:text="companies"
+                android:textColor="@color/Dark_Gray_X11"
+                android:textSize="18sp" />
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_franchiser_dashboard_franchise_requests"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginHorizontal="20dp"
+        android:layout_below="@id/card_franchiser_dashboard_registered_businesses"
+        android:layout_marginTop="30dp"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="10dp"
+        android:background="@color/white">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="20dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="5dp"
+            android:background="@color/white"
+            >
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:fontFamily="@font/roboto_bold"
+                android:letterSpacing="0.01"
+                android:text="Franchisees requests"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tv_franchiser_dashboard_franchise_requests"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textView"
+                android:layout_marginVertical="5dp"
+                android:fontFamily="@font/roboto_black"
+                android:text="500"
+                android:textColor="@color/Cyber_Yellow"
+                android:textSize="48sp" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/tv_franchiser_dashboard_franchise_requests"
+                android:layout_marginStart="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_toEndOf="@id/tv_franchiser_dashboard_franchise_requests"
+                android:fontFamily="@font/roboto_medium"
+                android:text="new requests"
+                android:textColor="@color/Dark_Gray_X11"
+                android:textSize="18sp" />
+
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:clickable="true"
+        app:backgroundTint="@color/black"
+        app:srcCompat="@drawable/plus"
+        app:tint="@null"
+        tools:ignore="SpeakableTextPresentCheck" />
+</RelativeLayout>
