@@ -2,6 +2,7 @@ package com.example.businessmanagement
 
 import android.app.Activity
 import android.content.ContentValues.TAG
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -63,8 +64,8 @@ class FranchiseeAuth1Activity : AppCompatActivity() {
                 return@setOnClickListener
             }
             else { //verify number and password
-                hideKeyboard(this)
                 progress_enter.isVisible = true
+                hideKeyboard()
 
                 ccp1.registerCarrierNumberEditText(edtPhone) // register number with country code picker
 
@@ -243,15 +244,11 @@ class FranchiseeAuth1Activity : AppCompatActivity() {
             updateUI()
         }
     }
-    fun hideKeyboard(activity: Activity) {
-        val imm: InputMethodManager =
-            activity.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
-        //Find the currently focused view, so we can grab the correct window token from it.
-        var view = activity.currentFocus
-        //If no view currently has focus, create a new one, just so we can grab a window token from it
-        if (view == null) {
-            view = View(activity)
+    fun hideKeyboard() {
+        // Only runs if there is a view that is currently focused
+        this.currentFocus?.let { view ->
+            val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+            imm?.hideSoftInputFromWindow(view.windowToken, 0)
         }
-        imm.hideSoftInputFromWindow(view.windowToken, 0)
     }
 }

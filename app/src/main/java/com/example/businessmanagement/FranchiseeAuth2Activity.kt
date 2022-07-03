@@ -3,6 +3,7 @@ package com.example.businessmanagement
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.ContentValues
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -222,7 +223,7 @@ class FranchiseeAuth2Activity : AppCompatActivity() {
 
         // OTP TextWatcher
         edt_franchisee2_auth_otp.addTextChangedListener {
-            hideKeyboard(this)
+
             if (edt_franchisee2_auth_otp.text.length == 6) {
                 otp2.text = "Verify"
                 card_OTP_switch2.isEnabled = true
@@ -329,15 +330,11 @@ class FranchiseeAuth2Activity : AppCompatActivity() {
     }
 
     fun hideKeyboard(activity: Activity) {
-        val imm: InputMethodManager =
-            activity.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
-        //Find the currently focused view, so we can grab the correct window token from it.
-        var view = activity.currentFocus
-        //If no view currently has focus, create a new one, just so we can grab a window token from it
-        if (view == null) {
-            view = View(activity)
+        // Only runs if there is a view that is currently focused
+        this.currentFocus?.let { view ->
+            val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+            imm?.hideSoftInputFromWindow(view.windowToken, 0)
         }
-        imm.hideSoftInputFromWindow(view.windowToken, 0)
     }
 
 }
