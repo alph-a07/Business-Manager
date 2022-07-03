@@ -1,13 +1,10 @@
 package com.example.businessmanagement
 
-import android.app.Activity
 import android.content.ContentValues.TAG
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -18,6 +15,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.auth.PhoneAuthProvider
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
@@ -25,13 +23,12 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_franchisee_auth1.*
 
-
 class FranchiseeAuth1Activity : AppCompatActivity() {
 
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
-    private val db = Firebase.database
-//    lateinit var storedVerificationId: String
-//    lateinit var resendToken: PhoneAuthProvider.ForceResendingToken
+    val db = Firebase.database
+    lateinit var storedVerificationId: String
+    lateinit var resendToken: PhoneAuthProvider.ForceResendingToken
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,7 +48,6 @@ class FranchiseeAuth1Activity : AppCompatActivity() {
         val psswd = findViewById<EditText>(R.id.edt_franchisee1_auth_password)
 
         btn_franchisee1_auth_login_button.setOnClickListener {
-
             //check number
             if (edtPhone.text.isEmpty()) {
                 edtPhone.error = "Please enter valid number"
@@ -62,10 +58,9 @@ class FranchiseeAuth1Activity : AppCompatActivity() {
                 psswd.error = "Please enter password"
                 psswd.requestFocus()
                 return@setOnClickListener
-            }
-            else { //verify number and password
+            } else { //verify number and password
+
                 progress_enter.isVisible = true
-                hideKeyboard()
 
                 ccp1.registerCarrierNumberEditText(edtPhone) // register number with country code picker
 
@@ -89,7 +84,6 @@ class FranchiseeAuth1Activity : AppCompatActivity() {
                                                 "Log in successful",
                                                 Toast.LENGTH_SHORT
                                             ).show()
-                                            updateUI()
                                         } else {
                                             Toast.makeText(
                                                 this@FranchiseeAuth1Activity,
@@ -110,10 +104,6 @@ class FranchiseeAuth1Activity : AppCompatActivity() {
                                     Toast.LENGTH_SHORT
                                 ).show()
                                 //move to sign up page
-                                startActivity(
-                                    Intent(this@FranchiseeAuth1Activity,
-                                        FranchiseeAuth2Activity::class.java)
-                                )
                             }
 
                         }
@@ -126,7 +116,7 @@ class FranchiseeAuth1Activity : AppCompatActivity() {
             }
         }
 
-        //log in with google
+        //sign in with google
         ll_franchisee1_google.setOnClickListener {
             //progress bar visible
             progress_enter.isVisible = true
@@ -176,64 +166,25 @@ class FranchiseeAuth1Activity : AppCompatActivity() {
                 // Google signIn successful
                 if (task.isSuccessful) {
                     val user = auth.currentUser
+                    val model = User()
+                    model.email = user?.email.toString()
+                    model.userName = user?.displayName.toString()
+                    model.uid = user?.uid.toString()
+                    db.getReference("GoogleUsers").child(auth.uid.toString())
+                        .setValue(model)
 
-                    // Check if email is already registered or not
-                    db.getReference("GoogleUsers").orderByChild("email")
-                        .equalTo(user?.email.toString())
-                        .addListenerForSingleValueEvent(object : ValueEventListener {
-                            override fun onDataChange(snapshot: DataSnapshot) {
-
-                                // number already exists
-                                if (snapshot.exists()) {
-                                    progress_enter.visibility=View.GONE
-                                    Toast.makeText(
-                                        this@FranchiseeAuth1Activity,
-                                        "Logged in successfully",
-                                        Toast.LENGTH_SHORT
-                                    ).show()
-
-                                    //move to dashboard activity
-                                    startActivity(
-                                        Intent(this@FranchiseeAuth1Activity
-                                                         ,FranchiseeDashboardActivity::class.java)
-                                    )
-
-                                }
-
-                                // number not registered then move user to signup page
-                                else {
-                                    progress_enter.visibility = View.GONE
-                                    Toast.makeText(
-                                        this@FranchiseeAuth1Activity,
-                                        "Email is not registered..!",
-                                        Toast.LENGTH_SHORT
-                                    ).show()
-                                    //move to sign up page
-                                    startActivity(
-                                        Intent(this@FranchiseeAuth1Activity,
-                                            FranchiseeAuth2Activity::class.java)
-                                )
-                                }
-
-                            }
-
-                            override fun onCancelled(error: DatabaseError) {
-                                Log.w(TAG, "Failed to read value.", error.toException())
-                            }
-                    })
                     updateUI()
                 }
                 // Google signIn failed
                 else {
-                    Toast.makeText(this, "Log in failed." +
-                            "Please try after some time..", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Sign in failed.", Toast.LENGTH_SHORT).show()
                 }
             }
     }
 
     private fun updateUI() {
-        Toast.makeText(this, "Log in successful", Toast.LENGTH_SHORT).show()
-        startActivity(Intent(this, FranchiseeDashboardActivity::class.java))
+        Toast.makeText(this, "Sign in successfully", Toast.LENGTH_SHORT).show()
+        //startActivity(Intent(this, MainActivity::class.java))
     }
 
     public override fun onStart() {
@@ -241,14 +192,8 @@ class FranchiseeAuth1Activity : AppCompatActivity() {
         // Check if user is signed in (non-null) and update UI accordingly.
         val currentUser = auth.currentUser
         if (currentUser != null) {
-            updateUI()
-        }
-    }
-    fun hideKeyboard() {
-        // Only runs if there is a view that is currently focused
-        this.currentFocus?.let { view ->
-            val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
-            imm?.hideSoftInputFromWindow(view.windowToken, 0)
+            //reload();
+            //startActivity(Intent(this, MainActivity::class.java))
         }
     }
 }

@@ -1,18 +1,142 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FranchiseeDashboardActivity">
+    tools:context=".FranchiseeDashboardActivity"
+    android:background="@color/white">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/roboto_bold"
+        android:letterSpacing="0.025"
+        android:text="Hi Franchisee 👋"
+        android:textColor="@color/black"
+        android:textSize="26sp" />
+
+    <ImageView
+        android:id="@+id/iv_franchisee_dashboard_account"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="10dp"
+        app:srcCompat="@drawable/account_logo" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_franchisee_dashboard_manage_franchises"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginHorizontal="20dp"
+        android:layout_below="@id/iv_franchisee_dashboard_account"
+        android:layout_marginTop="30dp"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="10dp"
+        android:background="@color/white">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="20dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="5dp"
+            android:background="@color/white"
+            >
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:fontFamily="@font/roboto_bold"
+                android:letterSpacing="0.01"
+                android:text="Manage your franchises"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tv_franchisee_dashboard_num_of_franchises"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textView"
+                android:fontFamily="@font/roboto_black"
+                android:text="120"
+                android:textColor="@color/Cyber_Yellow"
+                android:layout_marginVertical="5dp"
+                android:textSize="48sp" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/tv_franchisee_dashboard_num_of_franchises"
+                android:layout_marginStart="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_toEndOf="@id/tv_franchisee_dashboard_num_of_franchises"
+                android:fontFamily="@font/roboto_medium"
+                android:text="companies"
+                android:textColor="@color/Dark_Gray_X11"
+                android:textSize="18sp" />
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+    <RelativeLayout
+        android:id="@+id/relative_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/card_franchisee_dashboard_manage_franchises"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/edt_bg">
+
+        <ImageView
+            android:id="@+id/iv_franchisee_dashboard_search"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_alignParentStart="true"
+            android:padding="15dp"
+            android:src="@drawable/search_logo"
+            app:tint="@color/Gray_Hint" />
+
+        <EditText
+            android:id="@+id/editTextTextPersonName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/iv_franchisee_dashboard_search"
+            android:layout_alignBottom="@id/iv_franchisee_dashboard_search"
+            android:layout_toStartOf="@id/iv_franchisee_dashboard_filter"
+
+            android:layout_toEndOf="@id/iv_franchisee_dashboard_search"
+            android:backgroundTint="@color/white"
+            android:hint="Search a keyword"
+            android:inputType="textPersonName" />
+
+        <ImageView
+            android:id="@+id/iv_franchisee_dashboard_filter"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="right"
+            android:padding="15dp"
+            app:srcCompat="@drawable/filter_logo"
+            app:tint="@color/Dim_Gray" />
+    </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_franchisee_dashboard_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/relative_layout" />
+</RelativeLayout>

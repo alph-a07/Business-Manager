@@ -14,6 +14,9 @@
         android:theme="@style/Theme.BusinessManagement"
         tools:targetApi="31">
         <activity
+            android:name=".FranchiserDashboardActivity"
+            android:exported="false" />
+        <activity
             android:name=".FranchiseeDashboardActivity"
             android:exported="false" />
         <activity

@@ -1,22 +1,16 @@
 package com.example.businessmanagement
 
-import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.ContentValues
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import com.example.businessmanagement.model.User
-import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.common.api.ApiException
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseTooManyRequestsException
@@ -26,7 +20,6 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
-import kotlinx.android.synthetic.main.activity_franchisee_auth1.*
 import kotlinx.android.synthetic.main.activity_franchisee_auth2.*
 import java.util.concurrent.TimeUnit
 
@@ -38,7 +31,6 @@ class FranchiseeAuth2Activity : AppCompatActivity() {
     lateinit var resendToken: PhoneAuthProvider.ForceResendingToken
     private var isPhoneNumberVerified = false
 
-    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_franchisee_auth2)
@@ -52,17 +44,6 @@ class FranchiseeAuth2Activity : AppCompatActivity() {
                 .requestIdToken(getString(R.string.default_web_client_id)) // displays app's name and logo in popup
                 .requestEmail()
                 .build()
-
-        //google sign up
-        ll_franchisee2_google.setOnClickListener {
-            //progress bar visible
-            progress_enter2.isVisible = true
-
-            // Configure Google Sign In
-            val googleSignInClient = GoogleSignIn.getClient(this, gso)
-            googleSignInClient.signOut() // clears cookies about last login and provides all email options each time
-            startActivityForResult(googleSignInClient.signInIntent, 1)
-        }
 
         ccp2.registerCarrierNumberEditText(edt_franchisee2_auth_phone)
 
@@ -128,7 +109,7 @@ class FranchiseeAuth2Activity : AppCompatActivity() {
 
         // region MOBILE VERIFICATION
         card_OTP_switch2.setOnClickListener {
-            hideKeyboard(this)
+
             when (otp2.tag) {
 
                 // receive OTP
@@ -223,7 +204,6 @@ class FranchiseeAuth2Activity : AppCompatActivity() {
 
         // OTP TextWatcher
         edt_franchisee2_auth_otp.addTextChangedListener {
-
             if (edt_franchisee2_auth_otp.text.length == 6) {
                 otp2.text = "Verify"
                 card_OTP_switch2.isEnabled = true
@@ -235,7 +215,6 @@ class FranchiseeAuth2Activity : AppCompatActivity() {
 
         // region SIGN UP
         btn_franchisee2_auth_login_button.setOnClickListener {
-            hideKeyboard(this)
             if (isPhoneNumberVerified) {
 
                 progress_enter2.visibility = View.VISIBLE
@@ -260,7 +239,13 @@ class FranchiseeAuth2Activity : AppCompatActivity() {
                     db.getReference("PhoneUsers").child(auth.uid.toString())
                         .setValue(model)
 
-                    updateUI()
+                    val intent = Intent(
+                        this@FranchiseeAuth2Activity,
+                        FranchiseeAuth1Activity::class.java
+                    )
+                    intent.putExtra(model.phone, String())
+                    intent.putExtra(model.password, String())
+                    startActivity(intent)
                 }
             } else {
                 edt_franchisee2_auth_phone.error = "Verify mobile number first."
@@ -275,66 +260,4 @@ class FranchiseeAuth2Activity : AppCompatActivity() {
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
         }
     }
-
-    // must override to capture results from googleSignInClient
-    @Deprecated("Deprecated in Java")
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-
-        super.onActivityResult(requestCode, resultCode, data)
-
-        if (requestCode == 1) {
-            // task = account info
-            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
-            try {
-                val account = task.getResult(ApiException::class.java)!!
-
-                firebaseAuthWithGoogle(account.idToken!!)
-            } catch (e: ApiException) {
-                progress_enter2.isVisible = false
-                Toast.makeText(this, "SignUp failed,try again", Toast.LENGTH_SHORT).show()
-            }
-        }
-    }
-
-    private fun firebaseAuthWithGoogle(idToken: String) {
-
-        // user credentials
-        val credential = GoogleAuthProvider.getCredential(idToken, null)
-
-        auth.signInWithCredential(credential)
-            .addOnCompleteListener(this) { task ->
-                progress_enter2.isVisible = false
-
-                // Google signIn successful
-                if (task.isSuccessful) {
-                    val user = auth.currentUser
-                    val model = User()
-                    model.email = user?.email.toString()
-                    model.userName = user?.displayName.toString()
-                    model.uid = user?.uid.toString()
-                    db.getReference("GoogleUsers").child(auth.uid.toString())
-                        .setValue(model)
-
-                    updateUI()
-                }
-                // Google signIn failed
-                else {
-                    Toast.makeText(this, "Sign up failed.", Toast.LENGTH_SHORT).show()
-                }
-            }
-    }
-
-    private fun updateUI() {
-        Toast.makeText(this, "Sign in successfully...Please log in", Toast.LENGTH_SHORT).show()
-        startActivity(Intent(this, FranchiseeAuth1Activity::class.java))
-    }
-
-    fun hideKeyboard(activity: Activity) {
-        // Only runs if there is a view that is currently focused
-        this.currentFocus?.let { view ->
-            val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
-            imm?.hideSoftInputFromWindow(view.windowToken, 0)
-        }
-    }
-
 }
