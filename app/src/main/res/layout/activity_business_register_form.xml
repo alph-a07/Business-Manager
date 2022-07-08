@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="10dp"
+    android:layout_margin="10dp"
+    tools:context=".BusinessRegisterFormActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="20dp">
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="@font/roboto_bold"
+                android:text="Register new business"
+                android:textColor="@color/black"
+                android:textSize="24sp" />
+
+            <EditText
+                android:id="@+id/edt_form_business_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textView3"
+                android:layout_marginTop="30dp"
+                android:drawableStart="@drawable/ic_baseline_business_24"
+                android:fontFamily="@font/roboto"
+                android:hint="Business name"
+                android:drawablePadding="10dp"
+                android:minHeight="48dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/Gray_Hint" />
+
+            <EditText
+                android:id="@+id/edt_form_business_website"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/edt_form_business_name"
+                android:layout_marginTop="30dp"
+                android:drawableStart="@drawable/ic_baseline_web_24"
+                android:drawablePadding="10dp"
+                android:fontFamily="@font/roboto"
+                android:hint="Business website"
+                android:minHeight="48dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/Gray_Hint" />
+
+            <EditText
+                android:id="@+id/edt_form_business_location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/edt_form_business_website"
+                android:layout_marginTop="30dp"
+                android:drawableStart="@drawable/ic_baseline_location_24"
+                android:drawablePadding="10dp"
+                android:fontFamily="@font/roboto"
+                android:hint="Business address (Head-office)"
+                android:minHeight="48dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/Gray_Hint" />
+
+            <EditText
+                android:id="@+id/edt_form_pincode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/edt_form_business_location"
+                android:layout_marginTop="30dp"
+                android:drawableStart="@drawable/ic_baseline_person_pin_code_24"
+                android:drawablePadding="10dp"
+                android:fontFamily="@font/roboto"
+                android:hint="ZIP / Postal code"
+                android:minHeight="48dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/Gray_Hint" />
+
+            <EditText
+                android:id="@+id/edt_form_business_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/edt_form_pincode"
+                android:layout_marginTop="30dp"
+                android:drawableStart="@drawable/ic_baseline_email_24"
+                android:drawablePadding="10dp"
+                android:fontFamily="@font/roboto"
+                android:hint="Business e-mail"
+                android:minHeight="48dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/Gray_Hint" />
+
+            <EditText
+                android:id="@+id/edt_form_business_contact"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/edt_form_business_email"
+                android:layout_marginTop="30dp"
+                android:drawableStart="@drawable/ic_baseline_phone_24"
+                android:drawablePadding="10dp"
+                android:fontFamily="@font/roboto"
+                android:hint="Business contact no."
+                android:minHeight="48dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/Gray_Hint" />
+
+            <EditText
+                android:id="@+id/edt_form_gstin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/edt_form_business_contact"
+                android:layout_marginTop="30dp"
+                android:drawableStart="@drawable/ic_baseline_gstin_24"
+                android:drawablePadding="10dp"
+                android:fontFamily="@font/roboto"
+                android:hint="GSTIN no."
+                android:minHeight="48dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/Gray_Hint" />
+
+            <EditText
+                android:id="@+id/edt_form_business_photos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/edt_form_gstin"
+                android:layout_marginTop="30dp"
+                android:drawableStart="@drawable/ic_baseline_link_24"
+                android:drawablePadding="10dp"
+                android:fontFamily="@font/roboto"
+                android:hint="Business captures (Public link)"
+                android:minHeight="48dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/Gray_Hint" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_form_request_approval"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Request approval"
+                android:fontFamily="@font/roboto_bold"
+                android:letterSpacing="0.01"
+                android:textAllCaps="false"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginHorizontal="80dp"
+                android:elevation="10dp"
+                android:textSize="16sp"
+                android:layout_below="@id/edt_form_business_photos"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/primary_button_bg"/>
+        </RelativeLayout>
+    </ScrollView>
+</androidx.cardview.widget.CardView>

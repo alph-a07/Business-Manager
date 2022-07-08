@@ -6,5 +6,5 @@ class User() {
     var uid:String=""
     var phone:String=""
     var password:String=""
-
+    var accType:String=""
 }

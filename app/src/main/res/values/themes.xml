@@ -26,4 +26,5 @@
     <style name="ProgressBarStyle">
         <item name="colorAccent">@color/Maastricht_Blue</item>
     </style>
+
 </resources>

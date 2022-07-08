@@ -77,7 +77,7 @@
             android:layout_margin="20dp"
             android:layout_marginBottom="15dp"
             app:cardCornerRadius="10dp"
-            app:cardElevation="5dp"
+            app:cardElevation="2dp"
             android:outlineAmbientShadowColor="@color/Dim_Gray"
             android:outlineSpotShadowColor="@color/Dim_Gray"
             tools:targetApi="p">
@@ -123,7 +123,7 @@
             android:layout_marginBottom="15dp"
             android:layout_toEndOf="@id/card_acc_type_franchisee"
             app:cardCornerRadius="10dp"
-            app:cardElevation="5dp"
+            app:cardElevation="2dp"
             android:outlineSpotShadowColor="@color/Dim_Gray"
             android:outlineAmbientShadowColor="@color/Dim_Gray"
             tools:targetApi="p">

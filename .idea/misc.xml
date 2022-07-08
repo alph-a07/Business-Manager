@@ -11,9 +11,18 @@
         <entry key="..\:/Apps/BusinessManagement/app/src/main/res/drawable/primary_partition_bg.xml" value="0.2265" />
         <entry key="..\:/Apps/BusinessManagement/app/src/main/res/drawable/rounded_rectangle_shadow.xml" value="0.2265" />
         <entry key="..\:/Apps/BusinessManagement/app/src/main/res/drawable/secondary_partition_bg.xml" value="0.2265" />
+        <entry key="..\:/Apps/BusinessManagement/app/src/main/res/layout/activity_business_register_form.xml" value="0.27447916666666666" />
         <entry key="..\:/Apps/BusinessManagement/app/src/main/res/layout/activity_first_page.xml" value="0.27447916666666666" />
         <entry key="..\:/Apps/BusinessManagement/app/src/main/res/layout/activity_franchisee_auth.xml" value="0.27447916666666666" />
+        <entry key="..\:/Apps/BusinessManagement/app/src/main/res/layout/activity_franchisee_auth1.xml" value="0.27447916666666666" />
+        <entry key="..\:/Apps/BusinessManagement/app/src/main/res/layout/activity_franchisee_auth2.xml" value="0.27447916666666666" />
+        <entry key="..\:/Apps/BusinessManagement/app/src/main/res/layout/activity_franchiser_auth1.xml" value="0.27447916666666666" />
+        <entry key="..\:/Apps/BusinessManagement/app/src/main/res/layout/activity_franchiser_auth2.xml" value="0.27447916666666666" />
+        <entry key="..\:/Apps/BusinessManagement/app/src/main/res/layout/activity_franchiser_dashboard.xml" value="0.27447916666666666" />
         <entry key="..\:/Apps/BusinessManagement/app/src/main/res/layout/activity_franchisor_auth.xml" value="0.27447916666666666" />
+        <entry key="..\:/Apps/BusinessManagement/app/src/main/res/layout/activity_splash_screen.xml" value="0.27447916666666666" />
+        <entry key="..\:/Apps/BusinessManagement/app/src/main/res/xml-v31/theme.xml" value="0.27447916666666666" />
+        <entry key="..\:/Apps/BusinessManagement/app/src/main/res/xml/backup_rules.xml" value="0.1" />
         <entry key="..\:/Business-Manager/app/src/main/res/layout/activity_first_page.xml" value="0.27447916666666666" />
         <entry key="..\:/Business-Manager/app/src/main/res/layout/activity_franchisee_auth1.xml" value="0.27447916666666666" />
         <entry key="..\:/Business-Manager/app/src/main/res/layout/activity_franchisee_auth2.xml" value="0.27447916666666666" />

@@ -7,6 +7,23 @@
     tools:context=".FranchiserDashboardActivity"
     android:background="@color/white">
 
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/floatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="@color/black"
+        android:elevation="5dp"
+        android:fontFamily="@font/roboto"
+        android:text="Business"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        app:icon="@drawable/ic_baseline_add_24"
+        app:iconTint="@color/white" />
+
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
@@ -31,58 +48,22 @@
         android:layout_marginEnd="10dp"
         app:srcCompat="@drawable/account_logo" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/card_franchiser_dashboard_profit_trends"
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/iv_franchisee_dashboard_account">
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/card_franchiser_dashboard_franchise_requests"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="20dp"
-        app:cardCornerRadius="15dp"
-        app:cardElevation="10dp"
         android:background="@color/white">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingHorizontal="20dp"
-            android:paddingVertical="15dp">
-
-            <TextView
-                android:id="@+id/textView7"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:fontFamily="@font/roboto_bold"
-                android:letterSpacing="0.01"
-                android:text="Profit trends"
-                android:textColor="@color/black"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/tv_franchiser_dashboard_profit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/textView7"
-                android:layout_marginVertical="5dp"
-                android:fontFamily="@font/roboto_black"
-                android:text="INR 500 Cr."
-                android:textColor="@color/Cyber_Yellow"
-                android:textSize="34sp" />
-
-        </RelativeLayout>
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
+        <androidx.cardview.widget.CardView
         android:id="@+id/card_franchiser_dashboard_registered_businesses"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_marginHorizontal="20dp"
-        android:layout_below="@id/iv_franchisee_dashboard_account"
         android:layout_marginTop="30dp"
         app:cardCornerRadius="15dp"
         app:cardElevation="10dp"
@@ -94,8 +75,7 @@
             android:paddingHorizontal="20dp"
             android:paddingTop="15dp"
             android:paddingBottom="5dp"
-            android:background="@color/white"
-            >
+            android:background="@color/white">
 
             <TextView
                 android:id="@+id/textView1"
@@ -155,8 +135,7 @@
             android:paddingHorizontal="20dp"
             android:paddingTop="15dp"
             android:paddingBottom="5dp"
-            android:background="@color/white"
-            >
+            android:background="@color/white">
 
             <TextView
                 android:id="@+id/textView"
@@ -198,17 +177,57 @@
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp"
-        android:clickable="true"
-        app:backgroundTint="@color/black"
-        app:srcCompat="@drawable/plus"
-        app:tint="@null"
-        tools:ignore="SpeakableTextPresentCheck" />
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_franchiser_dashboard_profit_trends"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/card_franchiser_dashboard_franchise_requests"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="20dp"
+            android:background="@color/white"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="10dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="15dp">
+
+                <TextView
+                    android:id="@+id/textView7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:fontFamily="@font/roboto_bold"
+                    android:letterSpacing="0.01"
+                    android:text="Profit trends"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/tv_franchiser_dashboard_profit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/textView7"
+                    android:layout_marginVertical="5dp"
+                    android:fontFamily="@font/roboto_black"
+                    android:text="INR 500 Cr."
+                    android:textColor="@color/Cyber_Yellow"
+                    android:textSize="34sp" />
+
+                <ir.mahozad.android.PieChart
+                    android:id="@+id/pieChart"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_franchiser_dashboard_profit"
+                    android:layout_marginTop="5dp" />
+
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+    </RelativeLayout>
+    </ScrollView>
+
 </RelativeLayout>

@@ -11,23 +11,35 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.BusinessManagement"
+        android:theme="@style/Theme.AppSplash"
         tools:targetApi="31">
         <activity
-            android:name=".FranchiserDashboardActivity"
+            android:name=".BusinessRegisterFormActivity"
             android:exported="false" />
+        <activity
+            android:name=".FranchiserAuth2Activity"
+            android:exported="false"
+            android:theme="@style/Theme.BusinessManagement" />
+        <activity
+            android:name=".FranchiserDashboardActivity"
+            android:exported="false"
+            android:theme="@style/Theme.BusinessManagement" />
         <activity
             android:name=".FranchiseeDashboardActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.BusinessManagement" />
         <activity
-            android:name=".FranchiserAuthActivity"
-            android:exported="false" />
+            android:name=".FranchiserAuth1Activity"
+            android:exported="false"
+            android:theme="@style/Theme.BusinessManagement" />
         <activity
             android:name=".FranchiseeAuth1Activity"
-            android:exported="true" />
+            android:exported="false"
+            android:theme="@style/Theme.BusinessManagement" />
         <activity
             android:name=".FranchiseeAuth2Activity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.BusinessManagement" />
         <activity
             android:name=".FirstPageActivity"
             android:exported="true">
