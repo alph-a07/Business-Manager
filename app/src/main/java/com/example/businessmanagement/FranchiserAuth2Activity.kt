@@ -112,7 +112,7 @@ class FranchiserAuth2Activity : AppCompatActivity() {
                 .build()
 
         //google sign up
-        ll_franchiser2_google.setOnClickListener {
+        tv_google4.setOnClickListener {
             //progress bar visible
             progress_enter4.isVisible = true
 

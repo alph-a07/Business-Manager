@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@drawable/bg"
     app:cardCornerRadius="10dp"
     app:cardElevation="10dp"
-    android:layout_margin="10dp"
+    android:layout_margin="15dp"
     tools:context=".BusinessRegisterFormActivity">
 
     <ScrollView
@@ -37,9 +37,9 @@
                 android:layout_below="@id/textView3"
                 android:layout_marginTop="30dp"
                 android:drawableStart="@drawable/ic_baseline_business_24"
+                android:drawablePadding="10dp"
                 android:fontFamily="@font/roboto"
                 android:hint="Business name"
-                android:drawablePadding="10dp"
                 android:minHeight="48dp"
                 android:textColor="@color/black"
                 android:textColorHint="@color/Gray_Hint" />

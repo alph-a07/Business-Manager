@@ -47,14 +47,16 @@ class FranchiseeAuth1Activity : AppCompatActivity() {
         val edtPhone = findViewById<EditText>(R.id.edt_franchisee1_auth_phone)
         val psswd = findViewById<EditText>(R.id.edt_franchisee1_auth_password)
 
+        // region LOGIN
         btn_franchisee1_auth_login_button.setOnClickListener {
 
-            // check number
+            // empty number case
             if (edtPhone.text.isEmpty()) {
                 edtPhone.error = "Please enter valid number"
                 edtPhone.requestFocus()
                 return@setOnClickListener
             }
+            // empty password case
             if (psswd.text.toString().isEmpty()) {
                 psswd.error = "Please enter password"
                 psswd.requestFocus()
@@ -67,7 +69,7 @@ class FranchiseeAuth1Activity : AppCompatActivity() {
 
                 ccp1.registerCarrierNumberEditText(edtPhone) // register number with country code picker
 
-                // Check if phone number is already logged in before
+                // Check whether phone number is already logged in or not
                 db.getReference("PhoneUsers").orderByChild("phone")
                     .equalTo(ccp1.fullNumberWithPlus)
                     .addListenerForSingleValueEvent(object : ValueEventListener {
@@ -77,17 +79,17 @@ class FranchiseeAuth1Activity : AppCompatActivity() {
                             if (snapshot.exists()) {
                                 progress_enter.isVisible = false
 
-                                //verify password
+                                // verify password
                                 for (snap in snapshot.children) {
                                     val model = snap.getValue(User::class.java)
                                     if (model?.phone == ccp1.fullNumberWithPlus) {
                                         if (psswd.text.toString() == model?.password) {
                                             Toast.makeText(
                                                 this@FranchiseeAuth1Activity,
-                                                "Log in successful",
+                                                "Log in successful!",
                                                 Toast.LENGTH_SHORT
                                             ).show()
-                                            updateUI()
+                                            updateUI(model.userName)
                                         } else {
                                             Toast.makeText(
                                                 this@FranchiseeAuth1Activity,
@@ -98,13 +100,12 @@ class FranchiseeAuth1Activity : AppCompatActivity() {
                                     }
                                 }
                             }
-
                             // number not registered then move user to signup page
                             else {
                                 progress_enter.visibility = View.GONE
                                 Toast.makeText(
                                     this@FranchiseeAuth1Activity,
-                                    "Phone Number is not registered..!",
+                                    "Phone Number is not registered!",
                                     Toast.LENGTH_SHORT
                                 ).show()
                                 // move to sign up page
@@ -112,7 +113,10 @@ class FranchiseeAuth1Activity : AppCompatActivity() {
                                     this@FranchiseeAuth1Activity,
                                     FranchiseeAuth2Activity::class.java
                                 )
-                                intent.putExtra(edt_franchisee1_auth_phone.text.toString(), "phone")
+                                intent.putExtra(
+                                    edt_franchisee1_auth_phone.text.toString(),
+                                    "phone"
+                                ) // !
                                 startActivity(intent)
                             }
 
@@ -125,9 +129,10 @@ class FranchiseeAuth1Activity : AppCompatActivity() {
 
             }
         }
+        // endregion
 
-        // log in with google
-        ll_franchisee1_google.setOnClickListener {
+        // region GOOGLE LOGIN
+        tv_google.setOnClickListener {
             //progress bar visible
             progress_enter.isVisible = true
 
@@ -137,10 +142,12 @@ class FranchiseeAuth1Activity : AppCompatActivity() {
             startActivityForResult(googleSignInClient.signInIntent, 1)
 
         }
+        // endregion
 
+        // signUp switch
         tvBtn_franchisee1_auth_signup.setOnClickListener {
             startActivity(Intent(this, FranchiseeAuth2Activity::class.java))
-            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+            overridePendingTransition(R.anim.slide_in_right, 0)
         }
     }
 
@@ -218,36 +225,57 @@ class FranchiseeAuth1Activity : AppCompatActivity() {
                                         )
                                     )
                                 }
-
                             }
 
                             override fun onCancelled(error: DatabaseError) {
                                 Log.w(TAG, "Failed to read value.", error.toException())
                             }
                         })
-                    updateUI()
+                    updateUI(user?.displayName.toString())
                 }
                 // Google signIn failed
                 else {
-                    Toast.makeText(
-                        this, "Log in failed." +
-                                "Please try after some time..", Toast.LENGTH_SHORT
-                    ).show()
+                    Toast.makeText(this, "Log in failed.", Toast.LENGTH_SHORT).show()
                 }
             }
     }
 
-    private fun updateUI() {
+    private fun updateUI(name: String) {
         Toast.makeText(this, "Log in successful", Toast.LENGTH_SHORT).show()
-        startActivity(Intent(this, FranchiseeDashboardActivity::class.java))
+        val intent = Intent(this, FranchiseeDashboardActivity::class.java)
+        intent.putExtra(name, "name")
+        startActivity(intent)
     }
 
     public override fun onStart() {
         super.onStart()
         // Check if user is signed in (non-null) and update UI accordingly.
         val currentUser = auth.currentUser
+        var name = ""
         if (currentUser != null) {
-            updateUI()
+            Firebase.database.getReference("PhoneUsers").orderByChild("uid")
+                .equalTo(currentUser.uid).addListenerForSingleValueEvent(object :ValueEventListener{
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        if (snapshot.exists()){
+                            val temp = snapshot.getValue(User::class.java)
+                            name = temp!!.userName
+                        }
+                    }
+                    override fun onCancelled(error: DatabaseError) {}
+                })
+
+            Firebase.database.getReference("GoogleUsers").orderByChild("uid")
+                .equalTo(currentUser.uid).addListenerForSingleValueEvent(object :ValueEventListener{
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        if (snapshot.exists()){
+                            val temp = snapshot.getValue(User::class.java)
+                            name = temp!!.userName
+                        }
+                    }
+                    override fun onCancelled(error: DatabaseError) {}
+                })
+
+            updateUI(name)
         }
     }
 

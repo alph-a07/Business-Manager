@@ -38,21 +38,20 @@
         android:background="@drawable/primary_button_bg"
         android:fontFamily="@font/roboto_bold"
         android:letterSpacing="0.02"
-        android:paddingStart="100dp"
-        android:paddingEnd="100dp"
         android:text="Get Started"
+        android:layout_marginHorizontal="20dp"
         android:textAllCaps="false"
         android:textColor="@color/Maastricht_Blue"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/relativeLayout"
-        app:layout_constraintStart_toStartOf="@+id/relativeLayout" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <RelativeLayout
         android:id="@+id/relativeLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="30dp"
         android:padding="10dp"
         app:layout_constraintBottom_toTopOf="@+id/btn_fp_getStarted"
         app:layout_constraintEnd_toEndOf="parent"

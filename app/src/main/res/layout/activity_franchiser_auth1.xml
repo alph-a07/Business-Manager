@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@drawable/bg"
     tools:context=".FranchiserAuth1Activity"
     android:animateLayoutChanges="true">
 
@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        android:layout_marginHorizontal="10dp"
+        android:layout_marginHorizontal="15dp"
         app:cardCornerRadius="10dp"
         app:cardElevation="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -60,9 +60,10 @@
                 android:background="@drawable/secondary_partition_bg"
                 android:fontFamily="@font/roboto_bold"
                 android:gravity="center"
+                android:textAllCaps="true"
                 android:text="@string/signup"
-                android:textSize="18sp"
-                android:textColor="@color/Dim_Gray"/>
+                android:textColor="@color/Dim_Gray"
+                android:textSize="18sp" />
 
             <!--country code picker-->
             <com.hbb20.CountryCodePicker
@@ -115,6 +116,7 @@
                     android:inputType="phone"
                     android:textColor="@color/Maastricht_Blue"
                     android:textColorHint="@color/Gray_Hint"
+                    android:textSize="16sp"
                     tools:ignore="TextContrastCheck" />
             </LinearLayout>
 
@@ -154,6 +156,7 @@
                     android:tag="login_password"
                     android:textColor="@color/Maastricht_Blue"
                     android:textColorHint="@color/Gray_Hint"
+                    android:textSize="16sp"
                     tools:ignore="TextContrastCheck" />
             </LinearLayout>
 
@@ -166,6 +169,7 @@
                 android:layout_alignEnd="@id/ll_franchiser1_auth_password"
                 android:layout_marginTop="5dp"
                 android:fontFamily="@font/roboto"
+                android:textSize="12sp"
                 android:text="@string/forgot_password"
                 android:textColor="@color/Dim_Gray" />
 
@@ -176,7 +180,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tvBtn_franchiser1_auth_forgot_password"
                 android:layout_marginHorizontal="110dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginVertical="30dp"
                 android:background="@drawable/primary_button_bg"
                 android:elevation="5dp"
                 android:fontFamily="@font/roboto_bold"
@@ -188,60 +192,36 @@
                 android:textSize="18sp" />
 
             <!--Google switch-->
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cv_google"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/btn_franchiser1_auth_login_button"
-                android:layout_centerHorizontal="true"
-                android:layout_marginVertical="30dp"
-                android:elevation="10dp"
-                app:cardCornerRadius="10dp">
-
-                <LinearLayout
-                    android:id="@+id/ll_franchiser1_google"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/Tart_Orange"
-                    android:orientation="horizontal"
-                    android:paddingStart="5dp"
-                    android:paddingEnd="20dp">
-
-                    <ImageView
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:contentDescription="@string/google_logo"
-                        android:padding="15dp"
-                        android:src="@drawable/google_logo"
-                        app:tint="@color/white" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="5dp"
-                        android:fontFamily="@font/roboto_bold"
-                        android:letterSpacing="0.01"
-                        android:text="@string/continue_using_google"
-                        android:textColor="@color/white"
-                        android:textSize="16sp" />
-                </LinearLayout>
-
-
-            </androidx.cardview.widget.CardView>
 
             <ProgressBar
-                android:id="@+id/progress_enter"
-                android:layout_below="@id/cv_google"
-                android:layout_centerHorizontal="true"
-                android:layout_margin="10dp"
-                android:visibility="gone"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
+                android:id="@+id/progress_enter3"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvBtn_franchiser1_auth_login"
+                android:theme="@style/ProgressBarStyle"
+                android:visibility="gone">
             </ProgressBar>
 
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 
+    <TextView
+        android:id="@+id/tv_google3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:clickable="true"
+        android:drawablePadding="5dp"
+        android:focusable="true"
+        android:gravity="center"
+        android:fontFamily="@font/roboto"
+        android:minHeight="48dp"
+        android:text="Continue with google"
+        android:textColor="@color/Gray_Hint"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/card_acc_type_franchiser1"
+        app:drawableEndCompat="@drawable/arrow_logo" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,10 +10,13 @@
         <item name="colorSecondaryVariant">@color/teal_700</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" >@color/Maastricht_Blue</item>
+        <item name="android:statusBarColor" >@color/white</item>
         <!-- Customize your theme here. -->
     </style>
     <style name="ProgressBarStyle">
         <item name="colorAccent">@color/Maastricht_Blue</item>
+    </style>
+    <style name="fabStyle">
+        <item name="iconTint">@color/white</item>
     </style>
 </resources>

@@ -7,7 +7,7 @@
     tools:context=".FranchiserDashboardActivity"
     android:background="@color/white">
 
-    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -15,14 +15,10 @@
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
-        android:backgroundTint="@color/black"
         android:elevation="5dp"
-        android:fontFamily="@font/roboto"
-        android:text="Business"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        app:icon="@drawable/ic_baseline_add_24"
-        app:iconTint="@color/white" />
+        android:src="@drawable/ic_baseline_add_24"
+        app:tint="@color/white"
+        android:backgroundTint="@color/black"/>
 
     <TextView
         android:id="@+id/textView2"

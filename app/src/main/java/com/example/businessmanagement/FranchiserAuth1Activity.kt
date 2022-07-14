@@ -49,18 +49,18 @@ class FranchiserAuth1Activity : AppCompatActivity() {
 
             // check number
             if (edtPhone.text.isEmpty()) {
-                edtPhone.error = "Please enter valid number"
+                edtPhone.error = "Please enter3 valid number"
                 edtPhone.requestFocus()
                 return@setOnClickListener
             }
             if (psswd.text.toString().isEmpty()) {
-                psswd.error = "Please enter password"
+                psswd.error = "Please enter3 password"
                 psswd.requestFocus()
                 return@setOnClickListener
             }
             // verify number and password
             else {
-                progress_enter.isVisible = true
+                progress_enter3.isVisible = true
                 hideKeyboard()
 
                 ccp3.registerCarrierNumberEditText(edtPhone) // register number with country code picker
@@ -73,7 +73,7 @@ class FranchiserAuth1Activity : AppCompatActivity() {
 
                             // number already exists
                             if (snapshot.exists()) {
-                                progress_enter.isVisible = false
+                                progress_enter3.isVisible = false
 
                                 //verify password
                                 for (snap in snapshot.children) {
@@ -99,7 +99,7 @@ class FranchiserAuth1Activity : AppCompatActivity() {
 
                             // number not registered then move user to signup page
                             else {
-                                progress_enter.visibility = View.GONE
+                                progress_enter3.visibility = View.GONE
                                 Toast.makeText(
                                     this@FranchiserAuth1Activity,
                                     "Phone Number is not registered..!",
@@ -125,9 +125,9 @@ class FranchiserAuth1Activity : AppCompatActivity() {
         }
 
         // log in with google
-        ll_franchiser1_google.setOnClickListener {
+        tv_google3.setOnClickListener {
             //progress bar visible
-            progress_enter.isVisible = true
+            progress_enter3.isVisible = true
 
             // Configure Google Sign In
             val googleSignInClient = GoogleSignIn.getClient(this, gso)
@@ -170,7 +170,7 @@ class FranchiserAuth1Activity : AppCompatActivity() {
 
                 firebaseAuthWithGoogle(account.idToken!!)
             } catch (e: ApiException) {
-                progress_enter.isVisible = false
+                progress_enter3.isVisible = false
                 Toast.makeText(this, "SignIn failed,try again", Toast.LENGTH_SHORT).show()
             }
         }
@@ -183,7 +183,7 @@ class FranchiserAuth1Activity : AppCompatActivity() {
 
         auth.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
-                progress_enter.isVisible = false
+                progress_enter3.isVisible = false
 
                 // Google signIn successful
                 if (task.isSuccessful) {
@@ -197,7 +197,7 @@ class FranchiserAuth1Activity : AppCompatActivity() {
 
                                 // email already exists
                                 if (snapshot.exists()) {
-                                    progress_enter.visibility = View.GONE
+                                    progress_enter3.visibility = View.GONE
                                     Toast.makeText(
                                         this@FranchiserAuth1Activity,
                                         "Logged in successfully",
@@ -216,7 +216,7 @@ class FranchiserAuth1Activity : AppCompatActivity() {
 
                                 // email not registered then move user to signup page
                                 else {
-                                    progress_enter.visibility = View.GONE
+                                    progress_enter3.visibility = View.GONE
                                     Toast.makeText(
                                         this@FranchiserAuth1Activity,
                                         "Email is not registered..!",

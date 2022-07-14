@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
-    android:background="@color/white"
+    android:background="@drawable/bg"
     tools:context=".FranchiserAuth2Activity">
 
     <!--Card Container-->
@@ -13,7 +13,7 @@
         android:id="@+id/card_acc_type_franchiser2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="10dp"
+        android:layout_marginHorizontal="15dp"
         android:animateLayoutChanges="true"
         android:background="@color/white"
         app:cardCornerRadius="10dp"
@@ -98,7 +98,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/progress_enter4"
                 android:layout_marginHorizontal="15dp"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="30dp"
                 android:layout_toEndOf="@id/ccp4"
                 android:background="@drawable/edt_bg"
                 android:orientation="horizontal"
@@ -125,6 +125,7 @@
                     android:inputType="phone"
                     android:textColor="@color/Maastricht_Blue"
                     android:textColorHint="@color/Gray_Hint"
+                    android:textSize="16sp"
                     tools:ignore="TextContrastCheck" />
             </LinearLayout>
 
@@ -165,6 +166,7 @@
                     android:inputType="number"
                     android:textColor="@color/Maastricht_Blue"
                     android:textColorHint="@color/Gray_Hint"
+                    android:textSize="16sp"
                     tools:ignore="TextContrastCheck" />
             </LinearLayout>
 
@@ -240,6 +242,7 @@
                     android:textColor="@color/Maastricht_Blue"
 
                     android:textColorHint="@color/Gray_Hint"
+                    android:textSize="16sp"
                     tools:ignore="TextContrastCheck" />
             </LinearLayout>
 
@@ -279,6 +282,7 @@
                     android:textColor="@color/Maastricht_Blue"
 
                     android:textColorHint="@color/Gray_Hint"
+                    android:textSize="16sp"
                     tools:ignore="TextContrastCheck" />
             </LinearLayout>
 
@@ -318,6 +322,7 @@
                     android:tag="login_password"
                     android:textColor="@color/Maastricht_Blue"
                     android:textColorHint="@color/Gray_Hint"
+                    android:textSize="16sp"
                     tools:ignore="TextContrastCheck" />
             </LinearLayout>
 
@@ -330,7 +335,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/ll_franchiser2_auth_password"
                 android:layout_marginHorizontal="110dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginVertical="30dp"
                 android:background="@drawable/primary_button_bg"
                 android:elevation="5dp"
                 android:fontFamily="@font/roboto_bold"
@@ -341,48 +346,26 @@
                 android:textColor="@color/Maastricht_Blue"
                 android:textSize="18sp" />
 
-            <!--Google switch-->
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cv_google"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/btn_franchiser2_auth_login_button"
-                android:layout_centerHorizontal="true"
-                android:layout_marginVertical="30dp"
-                android:elevation="10dp"
-                app:cardCornerRadius="10dp">
-
-                <LinearLayout
-                    android:id="@+id/ll_franchiser2_google"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/Tart_Orange"
-                    android:orientation="horizontal"
-                    android:paddingStart="5dp"
-                    android:paddingEnd="20dp">
-
-                    <ImageView
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:contentDescription="@string/google_logo"
-                        android:padding="15dp"
-                        android:src="@drawable/google_logo"
-                        app:tint="@color/white" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="5dp"
-                        android:fontFamily="@font/roboto_bold"
-                        android:letterSpacing="0.01"
-                        android:text="@string/continue_using_google"
-                        android:textColor="@color/white"
-                        android:textSize="16sp" />
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/tv_google4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:clickable="true"
+        android:drawablePadding="5dp"
+        android:focusable="true"
+        android:gravity="center"
+        android:fontFamily="@font/roboto"
+        android:minHeight="48dp"
+        android:text="Continue with google"
+        android:textColor="@color/Gray_Hint"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/card_acc_type_franchiser2"
+        app:drawableEndCompat="@drawable/arrow_logo" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
