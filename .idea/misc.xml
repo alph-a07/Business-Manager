@@ -3,41 +3,26 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Apps/BusinessManagement/app/src/main/res/drawable/about.xml" value="0.2475" />
-        <entry key="..\:/Apps/BusinessManagement/app/src/main/res/drawable/arrow_logo.xml" value="0.2475" />
-        <entry key="..\:/Apps/BusinessManagement/app/src/main/res/drawable/bg.xml" value="0.2475" />
         <entry key="..\:/Apps/BusinessManagement/app/src/main/res/drawable/edt_bg.xml" value="0.2265" />
-        <entry key="..\:/Apps/BusinessManagement/app/src/main/res/drawable/franchisee_logo.xml" value="0.2055" />
         <entry key="..\:/Apps/BusinessManagement/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1955" />
-        <entry key="..\:/Apps/BusinessManagement/app/src/main/res/drawable/notifications.xml" value="0.279" />
         <entry key="..\:/Apps/BusinessManagement/app/src/main/res/drawable/otp_logo.xml" value="0.243" />
         <entry key="..\:/Apps/BusinessManagement/app/src/main/res/drawable/phone_logo.xml" value="0.2265" />
         <entry key="..\:/Apps/BusinessManagement/app/src/main/res/drawable/primary_button_bg.xml" value="0.2265" />
         <entry key="..\:/Apps/BusinessManagement/app/src/main/res/drawable/primary_partition_bg.xml" value="0.2265" />
-        <entry key="..\:/Apps/BusinessManagement/app/src/main/res/drawable/reset_password.xml" value="0.2475" />
         <entry key="..\:/Apps/BusinessManagement/app/src/main/res/drawable/rounded_rectangle_shadow.xml" value="0.2265" />
         <entry key="..\:/Apps/BusinessManagement/app/src/main/res/drawable/secondary_partition_bg.xml" value="0.2265" />
-        <entry key="..\:/Apps/BusinessManagement/app/src/main/res/drawable/signout.xml" value="0.2475" />
-        <entry key="..\:/Apps/BusinessManagement/app/src/main/res/layout/activity_account.xml" value="0.27447916666666666" />
-        <entry key="..\:/Apps/BusinessManagement/app/src/main/res/layout/activity_business_register_form.xml" value="0.28541666666666665" />
         <entry key="..\:/Apps/BusinessManagement/app/src/main/res/layout/activity_first_page.xml" value="0.27447916666666666" />
         <entry key="..\:/Apps/BusinessManagement/app/src/main/res/layout/activity_franchisee_auth.xml" value="0.27447916666666666" />
-        <entry key="..\:/Apps/BusinessManagement/app/src/main/res/layout/activity_franchisee_auth1.xml" value="0.27447916666666666" />
-        <entry key="..\:/Apps/BusinessManagement/app/src/main/res/layout/activity_franchisee_auth2.xml" value="0.27447916666666666" />
-        <entry key="..\:/Apps/BusinessManagement/app/src/main/res/layout/activity_franchisee_dashboard.xml" value="0.27447916666666666" />
-        <entry key="..\:/Apps/BusinessManagement/app/src/main/res/layout/activity_franchiser_auth1.xml" value="0.27447916666666666" />
-        <entry key="..\:/Apps/BusinessManagement/app/src/main/res/layout/activity_franchiser_auth2.xml" value="0.27447916666666666" />
-        <entry key="..\:/Apps/BusinessManagement/app/src/main/res/layout/activity_franchiser_dashboard.xml" value="0.27447916666666666" />
         <entry key="..\:/Apps/BusinessManagement/app/src/main/res/layout/activity_franchisor_auth.xml" value="0.27447916666666666" />
-        <entry key="..\:/Apps/BusinessManagement/app/src/main/res/layout/activity_splash_screen.xml" value="0.27447916666666666" />
-        <entry key="..\:/Apps/BusinessManagement/app/src/main/res/layout/sample_business_card.xml" value="0.27447916666666666" />
-        <entry key="..\:/Apps/BusinessManagement/app/src/main/res/xml-v31/theme.xml" value="0.27447916666666666" />
-        <entry key="..\:/Apps/BusinessManagement/app/src/main/res/xml/backup_rules.xml" value="0.1" />
+        <entry key="..\:/Business-Manager/app/src/main/res/layout/activity_account.xml" value="0.27447916666666666" />
         <entry key="..\:/Business-Manager/app/src/main/res/layout/activity_first_page.xml" value="0.27447916666666666" />
         <entry key="..\:/Business-Manager/app/src/main/res/layout/activity_franchisee_auth1.xml" value="0.27447916666666666" />
-        <entry key="..\:/Business-Manager/app/src/main/res/layout/activity_franchisee_auth2.xml" value="0.27447916666666666" />
+        <entry key="..\:/Business-Manager/app/src/main/res/layout/activity_franchisee_auth2.xml" value="0.2" />
         <entry key="..\:/Business-Manager/app/src/main/res/layout/activity_franchisee_dashboard.xml" value="0.27447916666666666" />
         <entry key="..\:/Business-Manager/app/src/main/res/layout/activity_franchiser_auth.xml" value="0.27447916666666666" />
+        <entry key="..\:/Business-Manager/app/src/main/res/layout/activity_franchiser_auth2.xml" value="0.27447916666666666" />
+        <entry key="..\:/Business-Manager/app/src/main/res/layout/activity_franchiser_dashboard.xml" value="0.27447916666666666" />
+        <entry key="..\:/Business-Manager/app/src/main/res/layout/sample_business_card.xml" value="0.27447916666666666" />
       </map>
     </option>
   </component>
