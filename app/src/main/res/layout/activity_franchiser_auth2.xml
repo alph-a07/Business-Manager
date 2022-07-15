@@ -1,12 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:animateLayoutChanges="true"
-    android:background="@drawable/bg"
-    tools:context=".FranchiserAuth2Activity">
+    tools:context=".FranchiseeAuth2Activity"
+    android:background="@drawable/bg">
+
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_centerInParent="true">
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:animateLayoutChanges="true">
 
     <!--Card Container-->
     <androidx.cardview.widget.CardView
@@ -67,9 +77,11 @@
             <!--country code picker-->
             <ProgressBar
                 android:id="@+id/progress_enter4"
-                style="@style/ProgressBarStyle"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:theme="@style/ProgressBarStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:indeterminate="true"
                 android:layout_below="@id/tvBtn_franchiser2_auth_login"
                 android:visibility="gone"
                 tools:visibility="gone"
@@ -361,7 +373,8 @@
         android:fontFamily="@font/roboto"
         android:minHeight="48dp"
         android:text="Continue with google"
-        android:textColor="@color/Gray_Hint"
+        android:textColor="#5C8F6A"
+        app:drawableTint="#5C8F6A"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -369,3 +382,5 @@
         app:drawableEndCompat="@drawable/arrow_logo" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
+</RelativeLayout>

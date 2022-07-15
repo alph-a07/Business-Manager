@@ -196,10 +196,11 @@
             <ProgressBar
                 android:id="@+id/progress_enter3"
                 style="?android:attr/progressBarStyleHorizontal"
+                android:theme="@style/ProgressBarStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:indeterminate="true"
                 android:layout_below="@id/tvBtn_franchiser1_auth_login"
-                android:theme="@style/ProgressBarStyle"
                 android:visibility="gone">
             </ProgressBar>
 
@@ -218,7 +219,8 @@
         android:fontFamily="@font/roboto"
         android:minHeight="48dp"
         android:text="Continue with google"
-        android:textColor="@color/Gray_Hint"
+        android:textColor="#5C8F6A"
+        app:drawableTint="#5C8F6A"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

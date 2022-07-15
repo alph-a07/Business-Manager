@@ -269,7 +269,6 @@ class FranchiserAuth2Activity : AppCompatActivity() {
 
         tvBtn_franchiser2_auth_login.setOnClickListener {
             startActivity(Intent(this, FranchiserAuth1Activity::class.java))
-            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
         }
     }
 

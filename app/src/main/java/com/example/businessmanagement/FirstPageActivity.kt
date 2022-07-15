@@ -7,7 +7,6 @@ import androidx.cardview.widget.CardView
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.example.businessmanagement.model.User
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
@@ -71,7 +70,30 @@ class FirstPageActivity : AppCompatActivity() {
         val currentUser = auth.currentUser
 
         if (currentUser != null) {
-            updateUI("Users",currentUser)
+            db.getReference("Users").orderByChild("uid").equalTo(currentUser?.uid)
+                .addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        if (snapshot.exists()) {
+                            val model = snapshot.getValue(User::class.java)
+                            if (model?.accType == "1")
+                                startActivity(
+                                    Intent(
+                                        this@FirstPageActivity,
+                                        FranchiseeDashboardActivity::class.java
+                                    )
+                                )
+                            else if (model?.accType == "2")
+                                startActivity(
+                                    Intent(
+                                        this@FirstPageActivity,
+                                        FranchiserDashboardActivity::class.java
+                                    )
+                                )
+                        }
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {}
+                })
         }
     }
 
@@ -84,33 +106,5 @@ class FirstPageActivity : AppCompatActivity() {
     override fun onBackPressed() {
         super.onBackPressed()
         finish()
-    }
-
-    // reusable
-    private fun updateUI(accType: String,currentUser:FirebaseUser?) {
-        db.getReference(accType).orderByChild("uid").equalTo(currentUser?.uid)
-            .addListenerForSingleValueEvent(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    if (snapshot.exists()) {
-                        val model = snapshot.getValue(User::class.java)
-                        if (model?.accType == "1")
-                            startActivity(
-                                Intent(
-                                    this@FirstPageActivity,
-                                    FranchiseeDashboardActivity::class.java
-                                )
-                            )
-                        else if (model?.accType == "2")
-                            startActivity(
-                                Intent(
-                                    this@FirstPageActivity,
-                                    FranchiserDashboardActivity::class.java
-                                )
-                            )
-                    }
-                }
-
-                override fun onCancelled(error: DatabaseError) {}
-            })
     }
 }
