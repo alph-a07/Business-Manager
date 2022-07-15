@@ -71,8 +71,7 @@ class FirstPageActivity : AppCompatActivity() {
         val currentUser = auth.currentUser
 
         if (currentUser != null) {
-            updateUI("PhoneUsers",currentUser)
-            updateUI("GoogleUsers",currentUser)
+            updateUI("Users",currentUser)
         }
     }
 
@@ -80,6 +79,11 @@ class FirstPageActivity : AppCompatActivity() {
         super.onRestart()
         dimCard(card_acc_type_franchisee)
         dimCard(card_acc_type_franchiser)
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
     }
 
     // reusable

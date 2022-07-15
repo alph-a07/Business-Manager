@@ -7,4 +7,5 @@ class User() {
     var phone:String=""
     var password:String=""
     var accType:String=""
+    var list: ArrayList<BusinessForm>? = ArrayList()
 }

@@ -9,7 +9,10 @@ class FranchiseeDashboardActivity : AppCompatActivity() {
         setContentView(R.layout.activity_franchisee_dashboard)
 
         supportActionBar?.hide()
+    }
 
-
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
     }
 }

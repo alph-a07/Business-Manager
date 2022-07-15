@@ -66,7 +66,7 @@ class FranchiserAuth1Activity : AppCompatActivity() {
                 ccp3.registerCarrierNumberEditText(edtPhone) // register number with country code picker
 
                 // Check if phone number is already logged in before
-                db.getReference("PhoneUsers").orderByChild("phone")
+                db.getReference("Users").orderByChild("phone")
                     .equalTo(ccp3.fullNumberWithPlus)
                     .addListenerForSingleValueEvent(object : ValueEventListener {
                         override fun onDataChange(snapshot: DataSnapshot) {
@@ -146,7 +146,18 @@ class FranchiserAuth1Activity : AppCompatActivity() {
         super.onStart()
         // Check if user is signed in (non-null) and update UI accordingly.
         val currentUser = auth.currentUser
+        var name = ""
         if (currentUser != null) {
+            Firebase.database.getReference("Users").orderByChild("uid")
+                .equalTo(currentUser.uid).addListenerForSingleValueEvent(object :ValueEventListener{
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        if (snapshot.exists()){
+                            val temp = snapshot.getValue(User::class.java)
+                            name = temp!!.userName
+                        }
+                    }
+                    override fun onCancelled(error: DatabaseError) {}
+                })
             updateUI()
         }
     }
@@ -154,6 +165,11 @@ class FranchiserAuth1Activity : AppCompatActivity() {
     private fun updateUI() {
         Toast.makeText(this, "Log in successful", Toast.LENGTH_SHORT).show()
         startActivity(Intent(this, FranchiserDashboardActivity::class.java))
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        startActivity(Intent(this,FirstPageActivity::class.java))
     }
 
     // must override to capture results from googleSignInClient
@@ -190,7 +206,7 @@ class FranchiserAuth1Activity : AppCompatActivity() {
                     val user = auth.currentUser
 
                     // Check if email is already registered or not
-                    db.getReference("GoogleUsers").orderByChild("email")
+                    db.getReference("Users").orderByChild("email")
                         .equalTo(user?.email.toString())
                         .addListenerForSingleValueEvent(object : ValueEventListener {
                             override fun onDataChange(snapshot: DataSnapshot) {

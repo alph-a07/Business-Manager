@@ -70,7 +70,7 @@ class FranchiseeAuth1Activity : AppCompatActivity() {
                 ccp1.registerCarrierNumberEditText(edtPhone) // register number with country code picker
 
                 // Check whether phone number is already logged in or not
-                db.getReference("PhoneUsers").orderByChild("phone")
+                db.getReference("Users").orderByChild("phone")
                     .equalTo(ccp1.fullNumberWithPlus)
                     .addListenerForSingleValueEvent(object : ValueEventListener {
                         override fun onDataChange(snapshot: DataSnapshot) {
@@ -185,7 +185,7 @@ class FranchiseeAuth1Activity : AppCompatActivity() {
                     val user = auth.currentUser
 
                     // Check if email is already registered or not
-                    db.getReference("GoogleUsers").orderByChild("email")
+                    db.getReference("Users").orderByChild("email")
                         .equalTo(user?.email.toString())
                         .addListenerForSingleValueEvent(object : ValueEventListener {
                             override fun onDataChange(snapshot: DataSnapshot) {
@@ -253,7 +253,7 @@ class FranchiseeAuth1Activity : AppCompatActivity() {
         val currentUser = auth.currentUser
         var name = ""
         if (currentUser != null) {
-            Firebase.database.getReference("PhoneUsers").orderByChild("uid")
+            Firebase.database.getReference("Users").orderByChild("uid")
                 .equalTo(currentUser.uid).addListenerForSingleValueEvent(object :ValueEventListener{
                     override fun onDataChange(snapshot: DataSnapshot) {
                         if (snapshot.exists()){
@@ -263,20 +263,13 @@ class FranchiseeAuth1Activity : AppCompatActivity() {
                     }
                     override fun onCancelled(error: DatabaseError) {}
                 })
-
-            Firebase.database.getReference("GoogleUsers").orderByChild("uid")
-                .equalTo(currentUser.uid).addListenerForSingleValueEvent(object :ValueEventListener{
-                    override fun onDataChange(snapshot: DataSnapshot) {
-                        if (snapshot.exists()){
-                            val temp = snapshot.getValue(User::class.java)
-                            name = temp!!.userName
-                        }
-                    }
-                    override fun onCancelled(error: DatabaseError) {}
-                })
-
             updateUI(name)
         }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        startActivity(Intent(this,FirstPageActivity::class.java))
     }
 
     private fun hideKeyboard() {

@@ -140,7 +140,7 @@ class FranchiserAuth2Activity : AppCompatActivity() {
                         progress_enter4.isVisible = true
 
                         // Check if phone number is already logged in before
-                        db.getReference("PhoneUsers").orderByChild("phone")
+                        db.getReference("Users").orderByChild("phone")
                             .equalTo(ccp4.fullNumberWithPlus)
                             .addListenerForSingleValueEvent(object : ValueEventListener {
                                 override fun onDataChange(snapshot: DataSnapshot) {
@@ -254,7 +254,7 @@ class FranchiserAuth2Activity : AppCompatActivity() {
                         FirebaseAuth.getInstance().currentUser?.uid.toString()
 
                     // uploading in database
-                    db.getReference("PhoneUsers").child(auth.uid.toString())
+                    db.getReference("Users").child(auth.uid.toString())
                         .setValue(model)
 
                     updateUI(model.phone, model.password)
@@ -293,6 +293,11 @@ class FranchiserAuth2Activity : AppCompatActivity() {
         }
     }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+        startActivity(Intent(this,FranchiserAuth1Activity::class.java))
+    }
+
     private fun firebaseAuthWithGoogle(idToken: String) {
 
         // user credentials
@@ -310,7 +315,7 @@ class FranchiserAuth2Activity : AppCompatActivity() {
                     model.userName = user?.displayName.toString()
                     model.uid = user?.uid.toString()
                     model.accType = "2"
-                    db.getReference("GoogleUsers").child(auth.uid.toString())
+                    db.getReference("Users").child(auth.uid.toString())
                         .setValue(model)
 
                     startActivity(

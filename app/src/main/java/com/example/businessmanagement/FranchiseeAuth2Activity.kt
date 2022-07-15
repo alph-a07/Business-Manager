@@ -143,7 +143,7 @@ class FranchiseeAuth2Activity : AppCompatActivity() {
                         progress_enter2.isVisible = true
 
                         // Check if phone number is already logged in before
-                        db.getReference("PhoneUsers").orderByChild("phone")
+                        db.getReference("Users").orderByChild("phone")
                             .equalTo(ccp2.fullNumberWithPlus)
                             .addListenerForSingleValueEvent(object : ValueEventListener {
                                 override fun onDataChange(snapshot: DataSnapshot) {
@@ -257,7 +257,7 @@ class FranchiseeAuth2Activity : AppCompatActivity() {
                         FirebaseAuth.getInstance().currentUser?.uid.toString()
 
                     // uploading in database
-                    db.getReference("PhoneUsers").child(auth.uid.toString())
+                    db.getReference("Users").child(auth.uid.toString())
                         .setValue(model)
 
                     updateUI(model.phone, model.password)
@@ -313,7 +313,7 @@ class FranchiseeAuth2Activity : AppCompatActivity() {
                     model.userName = user?.displayName.toString()
                     model.uid = user?.uid.toString()
                     model.accType = "1"
-                    db.getReference("GoogleUsers").child(auth.uid.toString())
+                    db.getReference("Users").child(auth.uid.toString())
                         .setValue(model)
 
                     startActivity(
@@ -336,6 +336,11 @@ class FranchiseeAuth2Activity : AppCompatActivity() {
         intent.putExtra(phone, "phone")
         intent.putExtra(password, "password")
         startActivity(intent)
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        startActivity(Intent(this,FranchiseeAuth1Activity::class.java))
     }
 
     private fun hideKeyboard(activity: Activity) {

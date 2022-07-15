@@ -20,4 +20,9 @@ class FranchiserDashboardActivity : AppCompatActivity() {
             PieChart.Slice(0.1f, Color.CYAN)
         )
     }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
+    }
 }

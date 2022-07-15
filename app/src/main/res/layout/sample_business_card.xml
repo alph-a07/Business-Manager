@@ -61,6 +61,7 @@
                 android:text="00.00 sqft"
                 android:textColor="@color/Dim_Gray" />
         </LinearLayout>
+
         <ImageView
             android:id="@+id/imageView2"
             android:layout_width="48dp"
