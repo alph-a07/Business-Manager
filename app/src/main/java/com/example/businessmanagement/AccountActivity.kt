@@ -3,12 +3,15 @@ package com.example.businessmanagement
 import android.app.Activity
 import android.content.ContentValues
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import com.example.businessmanagement.model.User
 import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseTooManyRequestsException
@@ -23,10 +26,10 @@ import java.util.concurrent.TimeUnit
 
 class AccountActivity : AppCompatActivity() {
 
-    private val ref=Firebase.database.reference
-    private val currUser=FirebaseAuth.getInstance().currentUser
-    var phoneNum=""
-    var email=""
+
+    var phoneNum = ""
+    var email = ""
+    var name = ""
     lateinit var resendToken: PhoneAuthProvider.ForceResendingToken
     lateinit var storedVerificationId: String
 
@@ -39,7 +42,7 @@ class AccountActivity : AppCompatActivity() {
         card_acc_reset.setOnClickListener {
 
             //make otp edit text and verify button visible
-            reset_ll.visibility=View.VISIBLE
+            reset_ll.visibility = View.VISIBLE
 
             //send otp to registered number
             val callbacks =
@@ -94,39 +97,23 @@ class AccountActivity : AppCompatActivity() {
                         storedVerificationId = verificationId
                         resendToken = token
                         Toast.makeText(this@AccountActivity, "Otp sent", Toast.LENGTH_SHORT).show()
-
                     }
                 }
 
-            ref.child("Users").orderByChild("phone")
-                .equalTo(phoneNum)
-                .addListenerForSingleValueEvent(object : ValueEventListener {
-                    override fun onDataChange(snapshot: DataSnapshot) {
-
-                        val options = PhoneAuthOptions.newBuilder(
-                            FirebaseAuth.getInstance())
-                            .setPhoneNumber(phoneNum)       // Phone number to verify
-                            .setTimeout(
-                                60L,
-                                TimeUnit.SECONDS
-                            ) // Timeout and unit
-                            .setActivity(this@AccountActivity)          // Activity (for callback binding)
-                            .setCallbacks(callbacks)          // OnVerificationStateChangedCallbacks
-                            .build()
-                        PhoneAuthProvider.verifyPhoneNumber(options)
-
-
-                    }
-
-                    override fun onCancelled(error: DatabaseError) {
-                        TODO("Not yet implemented")
-                    }
-                })
-
-
+            val options = PhoneAuthOptions.newBuilder(
+                FirebaseAuth.getInstance()
+            )
+                .setPhoneNumber(phoneNum)       // Phone number to verify
+                .setTimeout(
+                    60L,
+                    TimeUnit.SECONDS
+                ) // Timeout and unit
+                .setActivity(this@AccountActivity)          // Activity (for callback binding)
+                .setCallbacks(callbacks)          // OnVerificationStateChangedCallbacks
+                .build()
+            PhoneAuthProvider.verifyPhoneNumber(options)
         }
 
-        // region MOBILE VERIFICATION
         verify_otp.setOnClickListener {
             hideKeyboard(this)
 
@@ -139,27 +126,79 @@ class AccountActivity : AppCompatActivity() {
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         //reset password
-                        
+
+                        edt_new_pass1.visibility = View.VISIBLE
+                        edt_new_pass2.visibility = View.VISIBLE
+                        button.visibility = View.VISIBLE
+
                     } else {
                         Toast.makeText(this, "Incorrect OTP", Toast.LENGTH_SHORT).show()
                     }
                 }
         }
+
+        button.setOnClickListener {
+            val psw1=edt_new_pass1.text.toString()
+            val psw2=edt_new_pass2.text.toString()
+
+            if(psw1==psw2){
+                //upload in firebase
+                val map=HashMap<String,Any>()
+                map["password"] = psw1
+                Firebase.database.getReference("Users").child(FirebaseAuth.getInstance().currentUser?.uid.toString()).updateChildren(map)
+                Toast.makeText(this, "Password updated", Toast.LENGTH_SHORT).show()
+                reset_ll.visibility=View.GONE
+                edt_new_pass1.isVisible=false
+                edt_new_pass2.isVisible=false
+                button.isVisible=false
+            }
+            else{
+                edtError(edt_new_pass1)
+                edtError(edt_new_pass2)
+            }
+        }
+
+        card_acc_signout.setOnClickListener {
+            FirebaseAuth.getInstance().signOut()
+            startActivity(Intent(this, FirstPageActivity::class.java))
+        }
     }
 
     override fun onStart() {
         super.onStart()
+
+         val ref = Firebase.database
+         val currUser = FirebaseAuth.getInstance().currentUser
+
         //to get phone number of current user
-        ref.child("Users").orderByChild(currUser?.uid.toString()).addListenerForSingleValueEvent(
-            object : ValueEventListener{
+        ref.getReference("Users").orderByChild("uid").equalTo(FirebaseAuth.getInstance().currentUser?.uid).addListenerForSingleValueEvent(
+            object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    val model=snapshot.getValue(User::class.java)
-                    phoneNum= model?.phone.toString()
-                    email=model?.email.toString()
+                    if(snapshot.exists()){
+                        Toast.makeText(this@AccountActivity, "exists", Toast.LENGTH_SHORT).show()
+                        for(snap in snapshot.children){
+                            val model = snap.getValue(User::class.java)
+                            if(model?.uid==currUser?.uid) {
+                                phoneNum = model?.phone.toString()
+                                email = model?.email.toString()
+                                name = model?.userName.toString()
+
+                                textView5.text = name
+
+                                if (phoneNum.isEmpty()) {
+                                    textView6.text = email
+                                    card_acc_reset.isVisible = false
+                                } else
+                                    textView6.text = phoneNum
+                            }
+                        }
+                    }
+                    else{
+                        Toast.makeText(this@AccountActivity, "not exists", Toast.LENGTH_SHORT).show()
+                    }
                 }
 
                 override fun onCancelled(error: DatabaseError) {
-                    TODO("Not yet implemented")
                 }
 
             }
@@ -172,6 +211,12 @@ class AccountActivity : AppCompatActivity() {
             val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
             imm?.hideSoftInputFromWindow(view.windowToken, 0)
         }
+    }
+
+    private fun edtError(edt: EditText){
+
+            edt.error = "Password does not match"
+            edt.requestFocus()
     }
 
 }

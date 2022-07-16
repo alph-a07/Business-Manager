@@ -120,14 +120,15 @@
                     tools:ignore="TextContrastCheck" />
             </LinearLayout>
 
-            <!--Password layout-->
+            <!--OTP layout-->
             <LinearLayout
-                android:id="@+id/ll_franchiser1_auth_password"
+                android:id="@+id/ll_franchisee1_auth_otp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/ll_franchiser1_auth_phone"
                 android:layout_marginHorizontal="15dp"
                 android:layout_marginTop="30dp"
+                android:layout_toStartOf="@id/card_OTP_switch3"
                 android:background="@drawable/edt_bg"
                 android:orientation="horizontal"
                 android:padding="2dp"
@@ -135,50 +136,74 @@
                 tools:visibility="visible">
 
                 <ImageView
-                    android:id="@+id/iv_franchiser1_auth_password_logo"
+                    android:id="@+id/iv_franchisee1_auth_otp_logo"
                     android:layout_width="56dp"
                     android:layout_height="48dp"
-                    android:contentDescription="@string/password_logo"
-                    android:padding="15dp"
-                    app:srcCompat="@drawable/password_logo" />
+                    android:contentDescription="@string/otp_logo"
+                    android:padding="13dp"
+                    app:srcCompat="@drawable/otp_logo"
+                    app:tint="#B7B7B7" />
 
                 <EditText
-                    android:id="@+id/edt_franchiser1_auth_password"
+                    android:id="@+id/edt_franchiser1_auth_otp"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:layout_marginEnd="5dp"
-                    android:autofillHints="password"
                     android:background="@color/white"
                     android:ems="10"
                     android:fontFamily="@font/roboto"
-                    android:hint="@string/enter_password"
-                    android:inputType="textWebPassword"
-                    android:tag="login_password"
+                    android:hint="@string/enter_one_time_password"
+                    android:importantForAutofill="no"
+                    android:inputType="number"
                     android:textColor="@color/Maastricht_Blue"
                     android:textColorHint="@color/Gray_Hint"
                     android:textSize="16sp"
                     tools:ignore="TextContrastCheck" />
             </LinearLayout>
 
-            <!--Forgot password option-->
-            <TextView
-                android:id="@+id/tvBtn_franchiser1_auth_forgot_password"
+            <!--OTP switch-->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_OTP_switch3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/ll_franchiser1_auth_password"
-                android:layout_alignEnd="@id/ll_franchiser1_auth_password"
-                android:layout_marginTop="5dp"
-                android:fontFamily="@font/roboto"
-                android:textSize="12sp"
-                android:text="@string/forgot_password"
-                android:textColor="@color/Dim_Gray" />
+                android:layout_below="@id/ll_franchiser1_auth_phone"
+                android:layout_alignTop="@id/ll_franchisee1_auth_otp"
+                android:layout_alignBottom="@id/ll_franchisee1_auth_otp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginVertical="5dp"
+                android:layout_marginEnd="15dp"
+                android:elevation="@dimen/cardview_compat_inset_shadow"
+                android:visibility="visible"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="10dp"
+                tools:visibility="visible">
+
+                <!--stage1 = send otp
+                stage2 = sent otp-->
+                <TextView
+                    android:id="@+id/otp2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@color/white"
+                    android:fontFamily="@font/roboto_bold"
+                    android:gravity="center"
+                    android:letterSpacing="0.01"
+                    android:tag="stage1"
+                    android:text="@string/get_otp"
+                    android:textColor="@color/Dim_Gray" />
+            </androidx.cardview.widget.CardView>
 
             <!--Login button-->
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_franchiser1_auth_login_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/tvBtn_franchiser1_auth_forgot_password"
+                android:layout_below="@id/card_OTP_switch3"
                 android:layout_marginHorizontal="110dp"
                 android:layout_marginVertical="30dp"
                 android:background="@drawable/primary_button_bg"

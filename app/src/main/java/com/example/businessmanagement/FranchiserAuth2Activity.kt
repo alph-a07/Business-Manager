@@ -1,13 +1,10 @@
 package com.example.businessmanagement
 
-import android.app.Activity
 import android.content.ContentValues
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
@@ -124,7 +121,7 @@ class FranchiserAuth2Activity : AppCompatActivity() {
 
         // region MOBILE VERIFICATION
         card_OTP_switch3.setOnClickListener {
-            hideKeyboard(this)
+            FranchiseeAuth2Activity().hideKeyboard()
             when (otp3.tag) {
 
                 // receive OTP
@@ -230,8 +227,8 @@ class FranchiserAuth2Activity : AppCompatActivity() {
         // endregion
 
         // region SIGN UP
-        btn_franchiser2_auth_login_button.setOnClickListener {
-            hideKeyboard(this)
+        btn_franchiser2_auth_signup_button.setOnClickListener {
+            FranchiseeAuth2Activity().hideKeyboard()
             if (isPhoneNumberVerified) {
 
                 progress_enter4.visibility = View.VISIBLE
@@ -240,15 +237,10 @@ class FranchiserAuth2Activity : AppCompatActivity() {
                     edt_franchiser2_auth_name.error = "Enter your name"
                     edt_franchiser2_auth_name.requestFocus()
                     return@setOnClickListener
-                } else if (edt_franchiser2_auth_password?.text.toString().isEmpty()) {
-                    edt_franchiser2_auth_password.error = "Enter a strong password"
-                    edt_franchiser2_auth_password.requestFocus()
-                    return@setOnClickListener
                 } else {
                     val model = User()
                     model.phone = ccp4.fullNumberWithPlus
                     model.userName = edt_franchiser2_auth_name.text.toString()
-                    model.password = edt_franchiser2_auth_password.text.toString()
                     model.accType = "2"
                     model.uid =
                         FirebaseAuth.getInstance().currentUser?.uid.toString()
@@ -257,7 +249,7 @@ class FranchiserAuth2Activity : AppCompatActivity() {
                     db.getReference("Users").child(auth.uid.toString())
                         .setValue(model)
 
-                    updateUI(model.phone, model.password)
+                    updateUI()
                 }
             } else {
                 edt_franchiser2_auth_phone.error = "Verify mobile number first."
@@ -284,7 +276,7 @@ class FranchiserAuth2Activity : AppCompatActivity() {
             try {
                 val account = task.getResult(ApiException::class.java)!!
 
-                firebaseAuthWithGoogle(account.idToken!!)
+                FranchiseeAuth2Activity().firebaseAuthWithGoogle(account.idToken!!)
             } catch (e: ApiException) {
                 progress_enter4.isVisible = false
                 Toast.makeText(this, "SignUp failed,try again", Toast.LENGTH_SHORT).show()
@@ -297,53 +289,9 @@ class FranchiserAuth2Activity : AppCompatActivity() {
         startActivity(Intent(this,FranchiserAuth1Activity::class.java))
     }
 
-    private fun firebaseAuthWithGoogle(idToken: String) {
-
-        // user credentials
-        val credential = GoogleAuthProvider.getCredential(idToken, null)
-
-        auth.signInWithCredential(credential)
-            .addOnCompleteListener(this) { task ->
-                progress_enter4.isVisible = false
-
-                // Google signIn successful
-                if (task.isSuccessful) {
-                    val user = auth.currentUser
-                    val model = User()
-                    model.email = user?.email.toString()
-                    model.userName = user?.displayName.toString()
-                    model.uid = user?.uid.toString()
-                    model.accType = "2"
-                    db.getReference("Users").child(auth.uid.toString())
-                        .setValue(model)
-
-                    startActivity(
-                        Intent(
-                            this@FranchiserAuth2Activity,
-                            FranchiserDashboardActivity::class.java
-                        )
-                    )
-                }
-                // Google signIn failed
-                else {
-                    Toast.makeText(this, "Sign up failed.", Toast.LENGTH_SHORT).show()
-                }
-            }
-    }
-
-    private fun updateUI(phone: String, password: String) {
+    private fun updateUI() {
         Toast.makeText(this, "Account created successfully", Toast.LENGTH_SHORT).show()
         val intent = Intent(this, FranchiserAuth1Activity::class.java)
-        intent.putExtra(phone,"phone")
-        intent.putExtra(password,"password")
         startActivity(intent)
-    }
-
-    private fun hideKeyboard(activity: Activity) {
-        // Only runs if there is a view that is currently focused
-        this.currentFocus?.let { view ->
-            val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
-            imm?.hideSoftInputFromWindow(view.windowToken, 0)
-        }
     }
 }

@@ -36,8 +36,8 @@
         android:layout_below="@id/textView6"
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="40dp"
-        app:cardElevation="2dp"
-        app:cardCornerRadius="10dp">
+        app:cardCornerRadius="10dp"
+        app:cardElevation="2dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -71,8 +71,8 @@
         android:layout_below="@id/card_acc_noti"
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="30dp"
-        app:cardElevation="2dp"
-        app:cardCornerRadius="10dp">
+        app:cardCornerRadius="10dp"
+        app:cardElevation="2dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -101,36 +101,119 @@
 
     <LinearLayout
         android:id="@+id/reset_ll"
-        android:layout_below="@id/card_acc_reset"
-
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_below="@id/card_acc_reset"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal"
+        android:visibility="gone">
 
         <EditText
             android:id="@+id/edt_otp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="number" />
+            android:background="@drawable/edt_bg"
+            android:fontFamily="@font/roboto"
+            android:hint="Enter code"
+            android:inputType="number"
+            android:minHeight="48dp"
+            android:minEms="6"
+            android:paddingStart="5dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/Gray_Hint"
+            android:textSize="16sp" />
 
-        <Button
+        <androidx.cardview.widget.CardView
             android:id="@+id/verify_otp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Button" />
+            android:layout_gravity="center"
+            android:layout_marginVertical="5dp"
+            android:layout_marginStart="10dp"
+            android:elevation="@dimen/cardview_compat_inset_shadow"
+            android:visibility="visible"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="10dp"
+            tools:visibility="visible">
+
+            <TextView
+                android:id="@+id/otp2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@color/white"
+                android:fontFamily="@font/roboto_bold"
+                android:gravity="center"
+                android:letterSpacing="0.01"
+                android:tag="stage1"
+                android:text="Verify"
+                android:textColor="@color/Dim_Gray" />
+        </androidx.cardview.widget.CardView>
 
     </LinearLayout>
+
+    <EditText
+        android:id="@+id/edt_new_pass1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/reset_ll"
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/edt_bg"
+        android:fontFamily="@font/roboto"
+        android:hint="Enter new password"
+        android:inputType="textPassword"
+        android:minHeight="48dp"
+        android:paddingStart="10dp"
+        android:textColorHint="@color/Gray_Hint"
+        android:textSize="16sp"
+        android:visibility="gone" />
+
+    <EditText
+        android:id="@+id/edt_new_pass2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edt_new_pass1"
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/edt_bg"
+        android:fontFamily="@font/roboto"
+        android:hint="Re-enter new password"
+        android:inputType="textPassword"
+        android:minHeight="48dp"
+        android:paddingStart="10dp"
+        android:textColorHint="@color/Gray_Hint"
+        android:textSize="16sp"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edt_new_pass2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/primary_button_bg"
+        android:paddingHorizontal="20dp"
+        android:text="Update password"
+        android:textAllCaps="false"
+        android:textSize="16sp"
+        android:visibility="gone" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_acc_signout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/reset_ll"
+        android:layout_below="@id/button"
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="30dp"
-        app:cardElevation="2dp"
-        app:cardCornerRadius="10dp">
+        app:cardCornerRadius="10dp"
+        app:cardElevation="2dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -165,8 +248,8 @@
         android:layout_below="@id/card_acc_signout"
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="30dp"
-        app:cardElevation="2dp"
-        app:cardCornerRadius="10dp">
+        app:cardCornerRadius="10dp"
+        app:cardElevation="2dp">
 
         <RelativeLayout
             android:layout_width="match_parent"

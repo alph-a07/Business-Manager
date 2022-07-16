@@ -1,34 +1,37 @@
 package com.example.businessmanagement
 
-import android.content.ContentValues.TAG
-import android.content.Context
+import android.content.ContentValues
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
-import com.example.businessmanagement.model.User
+import androidx.core.widget.addTextChangedListener
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.GoogleAuthProvider
+import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.FirebaseException
+import com.google.firebase.FirebaseTooManyRequestsException
+import com.google.firebase.auth.*
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_franchisee_auth1.*
-
+import java.util.concurrent.TimeUnit
 
 class FranchiseeAuth1Activity : AppCompatActivity() {
 
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
     private val db = Firebase.database
+    lateinit var storedVerificationId: String
+    lateinit var resendToken: PhoneAuthProvider.ForceResendingToken
+    private var isPhoneNumberVerified = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,88 +48,169 @@ class FranchiseeAuth1Activity : AppCompatActivity() {
                 .build()
 
         val edtPhone = findViewById<EditText>(R.id.edt_franchisee1_auth_phone)
-        val psswd = findViewById<EditText>(R.id.edt_franchisee1_auth_password)
+        ccp1.registerCarrierNumberEditText(edtPhone) // register number with country code picker
+
+        val callbacks =
+            object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+
+                override fun onVerificationCompleted(credential: PhoneAuthCredential) {
+                    // This callback will be invoked in two situations:
+                    // 1 - Instant verification. In some cases the phone number can be instantly
+                    //     verified without needing to send or enter a verification code.
+                    // 2 - Auto-retrieval. On some devices Google Play services can automatically
+                    //     detect the incoming verification SMS and perform verification without
+                    //     user action.
+                    Log.d(ContentValues.TAG, "onVerificationCompleted:$credential")
+                }
+
+                override fun onVerificationFailed(e: FirebaseException) {
+                    // This callback is invoked in an invalid request for verification is made,
+                    // for instance if the the phone number format is not valid.
+                    Log.w(ContentValues.TAG, "onVerificationFailed", e)
+
+                    when (e) {
+                        is FirebaseAuthInvalidCredentialsException -> {
+                            Toast.makeText(
+                                baseContext,
+                                "Invalid request",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                        is FirebaseTooManyRequestsException -> {
+                            Toast.makeText(
+                                baseContext,
+                                "Too many attempts for this number.",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                        else -> {
+                            Toast.makeText(baseContext, e.toString(), Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                    progress_enter.visibility = View.GONE
+                }
+
+                override fun onCodeSent(
+                    verificationId: String,
+                    token: PhoneAuthProvider.ForceResendingToken
+                ) {
+                    // The SMS verification code has been sent to the provided phone number, we
+                    // now need to ask the user to enter the code and then construct a credential
+                    // by combining the code with a verification ID.
+
+                    // Save verification ID and resending token so we can use them later
+                    storedVerificationId = verificationId
+                    resendToken = token
+                    otp1.text = "Code sent"
+                    otp1.tag = "stage2"
+                    card_OTP_switch1.isEnabled = false
+                    card_OTP_switch1.isClickable = false
+
+                    progress_enter.isVisible = false
+                }
+            }
+
+        // region MOBILE VERIFICATION
+        card_OTP_switch1.setOnClickListener {
+            FranchiseeAuth2Activity().hideKeyboard()
+            when (otp1.tag) {
+
+                // receive OTP
+                "stage1" -> {
+                    // check number
+                    if (edt_franchisee1_auth_phone.text.isEmpty() || !ccp1.isValidFullNumber) {
+                        edt_franchisee1_auth_phone.error = "Please enter valid number"
+                        edt_franchisee1_auth_phone.requestFocus()
+                    }
+
+                    // verify number and send otp
+                    else {
+                        progress_enter.isVisible = true
+
+                        // Check if phone number is already logged in before
+                        db.getReference("Users").orderByChild("phone")
+                            .equalTo(ccp1.fullNumberWithPlus)
+                            .addListenerForSingleValueEvent(object : ValueEventListener {
+                                override fun onDataChange(snapshot: DataSnapshot) {
+
+                                    if (snapshot.exists()) {
+                                        if (ccp1.isValidFullNumber) {
+                                            val options = PhoneAuthOptions.newBuilder(auth)
+                                                .setPhoneNumber(ccp1.fullNumberWithPlus)       // Phone number to verify
+                                                .setTimeout(
+                                                    60L,
+                                                    TimeUnit.SECONDS
+                                                ) // Timeout and unit
+                                                .setActivity(this@FranchiseeAuth1Activity)                 // Activity (for callback binding)
+                                                .setCallbacks(callbacks)          // OnVerificationStateChangedCallbacks
+                                                .build()
+                                            PhoneAuthProvider.verifyPhoneNumber(options)
+                                        } else {
+                                            Snackbar.make(
+                                                it,
+                                                "Enter a valid Phone Number!",
+                                                Snackbar.LENGTH_SHORT
+                                            ).show()
+                                        }
+                                    } else {
+                                        Toast.makeText(
+                                            baseContext,
+                                            "Number not found, Please register.",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                    }
+                                }
+
+                                override fun onCancelled(error: DatabaseError) {}
+                            })
+                    }
+                }
+
+                // verify OTP
+                "stage2" -> {
+                    progress_enter.isVisible = true
+                    val credential: PhoneAuthCredential = PhoneAuthProvider.getCredential(
+                        storedVerificationId,
+                        edt_franchisee1_auth_otp.text.trim().toString()
+                    )
+                    auth.signInWithCredential(credential).addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            otp1.text = "Verified ✅"
+                            otp1.tag = "stage3"
+                            card_OTP_switch1.isEnabled = false
+                            card_OTP_switch1.isClickable = false
+                            progress_enter.isVisible = false
+                            edt_franchisee1_auth_otp.isEnabled = false
+                            edt_franchisee1_auth_phone.isEnabled = false
+                            isPhoneNumberVerified = true
+                        } else {
+                            Toast.makeText(this, "Incorrect OTP", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+            }
+        }
+
+        // OTP TextWatcher
+        edt_franchisee1_auth_otp.addTextChangedListener {
+
+            if (edt_franchisee1_auth_otp.text.length == 6) {
+                otp1.text = "Verify"
+                card_OTP_switch1.isEnabled = true
+                card_OTP_switch1.isClickable = true
+            }
+        }
+
+        // endregion
 
         // region LOGIN
         btn_franchisee1_auth_login_button.setOnClickListener {
 
-            // empty number case
-            if (edtPhone.text.isEmpty()) {
-                edtPhone.error = "Please enter valid number"
-                edtPhone.requestFocus()
-                return@setOnClickListener
+            if (isPhoneNumberVerified){
+                updateUI()
             }
-            // empty password case
-            if (psswd.text.toString().isEmpty()) {
-                psswd.error = "Please enter password"
-                psswd.requestFocus()
-                return@setOnClickListener
-            }
-            // verify number and password
-            else {
-                progress_enter.isVisible = true
-                hideKeyboard()
-
-                ccp1.registerCarrierNumberEditText(edtPhone) // register number with country code picker
-
-                // Check whether phone number is already logged in or not
-                db.getReference("Users").orderByChild("phone")
-                    .equalTo(ccp1.fullNumberWithPlus)
-                    .addListenerForSingleValueEvent(object : ValueEventListener {
-                        override fun onDataChange(snapshot: DataSnapshot) {
-
-                            // number already exists
-                            if (snapshot.exists()) {
-                                progress_enter.isVisible = false
-
-                                // verify password
-                                for (snap in snapshot.children) {
-                                    val model = snap.getValue(User::class.java)
-                                    if (model?.phone == ccp1.fullNumberWithPlus) {
-                                        if (psswd.text.toString() == model?.password) {
-                                            Toast.makeText(
-                                                this@FranchiseeAuth1Activity,
-                                                "Log in successful!",
-                                                Toast.LENGTH_SHORT
-                                            ).show()
-                                            updateUI(model.userName)
-                                        } else {
-                                            Toast.makeText(
-                                                this@FranchiseeAuth1Activity,
-                                                "Incorrect password",
-                                                Toast.LENGTH_SHORT
-                                            ).show()
-                                        }
-                                    }
-                                }
-                            }
-                            // number not registered then move user to signup page
-                            else {
-                                progress_enter.visibility = View.GONE
-                                Toast.makeText(
-                                    this@FranchiseeAuth1Activity,
-                                    "Phone Number is not registered!",
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                                // move to sign up page
-                                val intent = Intent(
-                                    this@FranchiseeAuth1Activity,
-                                    FranchiseeAuth2Activity::class.java
-                                )
-                                intent.putExtra(
-                                    edt_franchisee1_auth_phone.text.toString(),
-                                    "phone"
-                                ) // !
-                                startActivity(intent)
-                            }
-
-                        }
-
-                        override fun onCancelled(error: DatabaseError) {
-                            Log.w(TAG, "Failed to read value.", error.toException())
-                        }
-                    })
-
+            else{
+                edtPhone.error = "Verify mobile number first"
             }
         }
         // endregion
@@ -161,8 +245,7 @@ class FranchiseeAuth1Activity : AppCompatActivity() {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
             try {
                 val account = task.getResult(ApiException::class.java)!!
-
-                firebaseAuthWithGoogle(account.idToken!!)
+                FranchiseeAuth2Activity().firebaseAuthWithGoogle(account.idToken!!)
             } catch (e: ApiException) {
                 progress_enter.isVisible = false
                 Toast.makeText(this, "SignIn failed,try again", Toast.LENGTH_SHORT).show()
@@ -170,112 +253,15 @@ class FranchiseeAuth1Activity : AppCompatActivity() {
         }
     }
 
-    private fun firebaseAuthWithGoogle(idToken: String) {
-
-        // user credentials
-        val credential = GoogleAuthProvider.getCredential(idToken, null)
-
-        auth.signInWithCredential(credential)
-            .addOnCompleteListener(this) { task ->
-                progress_enter.isVisible = false
-
-                // Google signIn successful
-                if (task.isSuccessful) {
-                    val user = auth.currentUser
-
-                    // Check if email is already registered or not
-                    db.getReference("Users").orderByChild("email")
-                        .equalTo(user?.email.toString())
-                        .addListenerForSingleValueEvent(object : ValueEventListener {
-                            override fun onDataChange(snapshot: DataSnapshot) {
-
-                                // email already exists
-                                if (snapshot.exists()) {
-                                    progress_enter.visibility = View.GONE
-                                    Toast.makeText(
-                                        this@FranchiseeAuth1Activity,
-                                        "Logged in successfully",
-                                        Toast.LENGTH_SHORT
-                                    ).show()
-
-                                    // move to dashboard activity
-                                    startActivity(
-                                        Intent(
-                                            this@FranchiseeAuth1Activity,
-                                            FranchiseeDashboardActivity::class.java
-                                        )
-                                    )
-
-                                }
-
-                                // email not registered then move user to signup page
-                                else {
-                                    progress_enter.visibility = View.GONE
-                                    Toast.makeText(
-                                        this@FranchiseeAuth1Activity,
-                                        "Email is not registered..!",
-                                        Toast.LENGTH_SHORT
-                                    ).show()
-                                    //move to sign up page
-                                    startActivity(
-                                        Intent(
-                                            this@FranchiseeAuth1Activity,
-                                            FranchiseeAuth2Activity::class.java
-                                        )
-                                    )
-                                }
-                            }
-
-                            override fun onCancelled(error: DatabaseError) {
-                                Log.w(TAG, "Failed to read value.", error.toException())
-                            }
-                        })
-                    updateUI(user?.displayName.toString())
-                }
-                // Google signIn failed
-                else {
-                    Toast.makeText(this, "Log in failed.", Toast.LENGTH_SHORT).show()
-                }
-            }
-    }
-
-    private fun updateUI(name: String) {
+    private fun updateUI() {
         Toast.makeText(this, "Log in successful", Toast.LENGTH_SHORT).show()
         val intent = Intent(this, FranchiseeDashboardActivity::class.java)
-        intent.putExtra(name, "name")
         startActivity(intent)
-    }
-
-    public override fun onStart() {
-        super.onStart()
-        // Check if user is signed in (non-null) and update UI accordingly.
-        val currentUser = auth.currentUser
-        var name = ""
-        if (currentUser != null) {
-            Firebase.database.getReference("Users").orderByChild("uid")
-                .equalTo(currentUser.uid).addListenerForSingleValueEvent(object :ValueEventListener{
-                    override fun onDataChange(snapshot: DataSnapshot) {
-                        if (snapshot.exists()){
-                            val temp = snapshot.getValue(User::class.java)
-                            name = temp!!.userName
-                        }
-                    }
-                    override fun onCancelled(error: DatabaseError) {}
-                })
-            updateUI(name)
-        }
     }
 
     override fun onBackPressed() {
         super.onBackPressed()
-        startActivity(Intent(this,FirstPageActivity::class.java))
+        startActivity(Intent(this, FirstPageActivity::class.java))
     }
 
-    private fun hideKeyboard() {
-        // Only runs if there is a view that is currently focused
-        this.currentFocus?.let { view ->
-            val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
-            imm?.hideSoftInputFromWindow(view.windowToken, 0)
-        }
-    }
 }

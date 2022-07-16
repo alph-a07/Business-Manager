@@ -1,7 +1,5 @@
 package com.example.businessmanagement
 
-import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
@@ -29,15 +27,14 @@ import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_franchisee_auth2.*
 import java.util.concurrent.TimeUnit
 
-class FranchiseeAuth2Activity : AppCompatActivity() {
+class FranchiseeAuth2Activity() : AppCompatActivity() {
 
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
-    val db = Firebase.database
+    private val db = Firebase.database
     lateinit var storedVerificationId: String
     lateinit var resendToken: PhoneAuthProvider.ForceResendingToken
     private var isPhoneNumberVerified = false
 
-    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_franchisee_auth2)
@@ -127,7 +124,7 @@ class FranchiseeAuth2Activity : AppCompatActivity() {
 
         // region MOBILE VERIFICATION
         card_OTP_switch2.setOnClickListener {
-            hideKeyboard(this)
+            hideKeyboard()
             when (otp2.tag) {
 
                 // receive OTP
@@ -152,7 +149,7 @@ class FranchiseeAuth2Activity : AppCompatActivity() {
                                     if (snapshot.exists()) {
                                         Toast.makeText(
                                             baseContext,
-                                            "Number already exists, please login",
+                                            "Account already exists with this number, Please login.",
                                             Toast.LENGTH_SHORT
                                         ).show()
 
@@ -160,7 +157,8 @@ class FranchiseeAuth2Activity : AppCompatActivity() {
                                             this@FranchiseeAuth2Activity,
                                             FranchiseeAuth1Activity::class.java
                                         )
-                                        intent.putExtra(ccp2.fullNumberWithPlus, String())
+
+                                        intent.putExtra(ccp2.fullNumberWithPlus, String()) // ⭐
                                         startActivity(intent)
                                     }
 
@@ -233,8 +231,8 @@ class FranchiseeAuth2Activity : AppCompatActivity() {
         // endregion
 
         // region SIGN UP
-        btn_franchisee2_auth_login_button.setOnClickListener {
-            hideKeyboard(this)
+        btn_franchisee2_auth_signup_button.setOnClickListener {
+            hideKeyboard()
             if (isPhoneNumberVerified) {
 
                 progress_enter2.visibility = View.VISIBLE
@@ -243,15 +241,10 @@ class FranchiseeAuth2Activity : AppCompatActivity() {
                     edt_franchisee2_auth_name.error = "Enter your name"
                     edt_franchisee2_auth_name.requestFocus()
                     return@setOnClickListener
-                } else if (edt_franchisee2_auth_password?.text.toString().isEmpty()) {
-                    edt_franchisee2_auth_password.error = "Enter a strong password"
-                    edt_franchisee2_auth_password.requestFocus()
-                    return@setOnClickListener
                 } else {
                     val model = User()
                     model.phone = ccp2.fullNumberWithPlus
                     model.userName = edt_franchisee2_auth_name.text.toString()
-                    model.password = edt_franchisee2_auth_password.text.toString()
                     model.accType = "1"
                     model.uid =
                         FirebaseAuth.getInstance().currentUser?.uid.toString()
@@ -260,7 +253,7 @@ class FranchiseeAuth2Activity : AppCompatActivity() {
                     db.getReference("Users").child(auth.uid.toString())
                         .setValue(model)
 
-                    updateUI(model.phone, model.password)
+                    updateUI(model.phone)
                 }
             } else {
                 edt_franchisee2_auth_phone.error = "Verify mobile number first."
@@ -295,7 +288,7 @@ class FranchiseeAuth2Activity : AppCompatActivity() {
         }
     }
 
-    private fun firebaseAuthWithGoogle(idToken: String) {
+    fun firebaseAuthWithGoogle(idToken: String) {
 
         // user credentials
         val credential = GoogleAuthProvider.getCredential(idToken, null)
@@ -329,25 +322,22 @@ class FranchiseeAuth2Activity : AppCompatActivity() {
             }
     }
 
-    private fun updateUI(phone: String, password: String) {
+    private fun updateUI(phone: String) {
         Toast.makeText(this, "Account created successfully", Toast.LENGTH_SHORT).show()
-        val intent = Intent(this, FranchiseeAuth1Activity::class.java)
-        intent.putExtra(phone, "phone")
-        intent.putExtra(password, "password")
+        val intent = Intent(this, FranchiseeDashboardActivity::class.java)
         startActivity(intent)
     }
 
     override fun onBackPressed() {
         super.onBackPressed()
-        startActivity(Intent(this,FranchiseeAuth1Activity::class.java))
+        startActivity(Intent(this, FranchiseeAuth1Activity::class.java))
     }
 
-    private fun hideKeyboard(activity: Activity) {
+    fun hideKeyboard() {
         // Only runs if there is a view that is currently focused
         this.currentFocus?.let { view ->
             val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
             imm?.hideSoftInputFromWindow(view.windowToken, 0)
         }
     }
-
 }
