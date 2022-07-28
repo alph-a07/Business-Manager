@@ -46,7 +46,7 @@ class FranchiserAuth1Activity : AppCompatActivity() {
                 .requestEmail()
                 .build()
 
-        val edtPhone = findViewById<EditText>(R.id.edt_franchisee1_auth_phone)
+        val edtPhone = findViewById<EditText>(R.id.edt_franchiser1_auth_phone)
         ccp3.registerCarrierNumberEditText(edtPhone) // register number with country code picker
 
         val callbacks =

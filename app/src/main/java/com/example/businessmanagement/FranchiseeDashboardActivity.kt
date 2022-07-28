@@ -21,4 +21,9 @@ class FranchiseeDashboardActivity : AppCompatActivity() {
         super.onBackPressed()
         finish()
     }
+
+    override fun onStart() {
+        super.onStart()
+
+    }
 }

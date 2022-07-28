@@ -10,7 +10,7 @@
         <item name="colorSecondaryVariant">@color/teal_700</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" >@color/white</item>
+        <item name="android:statusBarColor" >#00000000</item>
         <!-- Customize your theme here. -->
     </style>
 
@@ -25,6 +25,11 @@
 
     <style name="ProgressBarStyle">
         <item name="colorAccent">@color/Maastricht_Blue</item>
+    </style>
+
+    <style name="DropDownStyle" parent="Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu">
+        <item name="colorPrimary">@color/Maastricht_Blue</item>
+        <item name="colorOnSurface">@color/Maastricht_Blue</item>
     </style>
 
 </resources>

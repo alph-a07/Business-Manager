@@ -103,10 +103,11 @@
 
         <ImageView
             android:id="@+id/iv_franchisee_dashboard_search"
-            android:layout_width="56dp"
-            android:layout_height="56dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_alignParentStart="true"
-            android:padding="15dp"
+            android:layout_centerVertical="true"
+            android:padding="10dp"
             android:src="@drawable/search_logo"
             app:tint="@color/Gray_Hint" />
 
@@ -114,29 +115,32 @@
             android:id="@+id/editTextTextPersonName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@id/iv_franchisee_dashboard_search"
-            android:layout_alignBottom="@id/iv_franchisee_dashboard_search"
+            android:layout_alignParentTop="true"
+            android:layout_centerVertical="true"
             android:layout_toStartOf="@id/iv_franchisee_dashboard_filter"
-
             android:layout_toEndOf="@id/iv_franchisee_dashboard_search"
             android:backgroundTint="@color/white"
             android:hint="Search a keyword"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:minHeight="48dp" />
 
         <ImageView
             android:id="@+id/iv_franchisee_dashboard_filter"
-            android:layout_width="56dp"
-            android:layout_height="56dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_alignParentEnd="true"
-            android:layout_gravity="right"
-            android:padding="15dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="10dp"
             app:srcCompat="@drawable/filter_logo"
-            app:tint="@color/Dim_Gray" />
+            app:tint="@color/Dim_Gray"
+            tools:ignore="SpeakableTextPresentCheck" />
     </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_franchisee_dashboard_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/relative_layout" />
+        android:layout_below="@id/relative_layout"
+        android:layout_marginTop="5dp" />
 </RelativeLayout>

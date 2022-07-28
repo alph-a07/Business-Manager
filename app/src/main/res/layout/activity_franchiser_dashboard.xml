@@ -51,7 +51,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white">
+        android:background="@drawable/bg">
 
         <androidx.cardview.widget.CardView
         android:id="@+id/card_franchiser_dashboard_registered_businesses"
@@ -178,9 +178,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/card_franchiser_dashboard_franchise_requests"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginVertical="30dp"
             android:background="@color/white"
             app:cardCornerRadius="15dp"
             app:cardElevation="10dp">
@@ -214,12 +213,13 @@
                     android:textColor="@color/Cyber_Yellow"
                     android:textSize="34sp" />
 
-                <ir.mahozad.android.PieChart
+                <com.github.mikephil.charting.charts.PieChart
                     android:id="@+id/pieChart"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/tv_franchiser_dashboard_profit"
-                    android:layout_marginTop="5dp" />
+                    android:foregroundGravity="center"
+                    android:minHeight="200dp" />
 
             </RelativeLayout>
         </androidx.cardview.widget.CardView>

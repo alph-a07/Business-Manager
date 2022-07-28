@@ -68,7 +68,6 @@
             android:layout_height="48dp"
             android:layout_alignParentEnd="true"
             android:padding="15dp"
-            app:srcCompat="@drawable/bookmark_logo"
-            app:tint="@color/Dim_Gray" />
+            android:src="@drawable/bookmarks" />
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

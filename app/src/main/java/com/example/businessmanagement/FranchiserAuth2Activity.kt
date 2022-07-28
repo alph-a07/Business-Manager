@@ -181,9 +181,7 @@ class FranchiserAuth2Activity : AppCompatActivity() {
                                     }
                                 }
 
-                                override fun onCancelled(error: DatabaseError) {
-                                    TODO("Not yet implemented")
-                                }
+                                override fun onCancelled(error: DatabaseError) {}
                             })
                     }
                 }
@@ -242,6 +240,7 @@ class FranchiserAuth2Activity : AppCompatActivity() {
                     model.phone = ccp4.fullNumberWithPlus
                     model.userName = edt_franchiser2_auth_name.text.toString()
                     model.accType = "2"
+                    model.gstin = edt_franchiser2_auth_gstin.text.toString()
                     model.uid =
                         FirebaseAuth.getInstance().currentUser?.uid.toString()
 
@@ -291,7 +290,7 @@ class FranchiserAuth2Activity : AppCompatActivity() {
 
     private fun updateUI() {
         Toast.makeText(this, "Account created successfully", Toast.LENGTH_SHORT).show()
-        val intent = Intent(this, FranchiserAuth1Activity::class.java)
+        val intent = Intent(this, FranchiserDashboardActivity::class.java)
         startActivity(intent)
     }
 }

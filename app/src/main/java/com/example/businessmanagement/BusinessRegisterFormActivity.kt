@@ -1,9 +1,11 @@
 package com.example.businessmanagement
 
 import android.os.Bundle
+import android.widget.ArrayAdapter
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import com.example.businessmanagement.model.BusinessForm
+import com.example.businessmanagement.model.NewBusinessesList
 import com.example.businessmanagement.model.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -37,8 +39,8 @@ class BusinessRegisterFormActivity : AppCompatActivity() {
                         object : ValueEventListener {
                             override fun onDataChange(snapshot: DataSnapshot) {
                                 val model = snapshot.getValue(User::class.java)
-                                val formModel = BusinessForm()
 
+                                val formModel = BusinessForm()
                                 formModel.name = edt_form_business_name.text.toString()
                                 formModel.email = edt_form_business_email.text.toString()
                                 formModel.website = edt_form_business_website.text.toString()
@@ -49,19 +51,42 @@ class BusinessRegisterFormActivity : AppCompatActivity() {
                                 formModel.contact = edt_form_business_contact.text.toString()
 
                                 model?.list?.add(formModel)
-
                                 ref.child("Users").child(currentUser?.uid.toString())
                                     .setValue(model)
-                                ref.child("New Businesses").child(currentUser?.uid.toString())
-                                    .setValue(model?.list)
+
+                                val businessModel = NewBusinessesList()
+                                businessModel.phone = model!!.phone
+                                businessModel.email = model.phone
+                                businessModel.info = formModel
+                                ref.child("New businesses").child(edt_form_gstin.text.toString())
+                                    .setValue(formModel)
                             }
 
                             override fun onCancelled(error: DatabaseError) {}
-
                         }
                     )
             }
         }
+
+        val items = listOf(
+            "Automotive",
+            "Business Support & Supplies",
+            "Computers & Electronics",
+            "Construction & Contractors",
+            "Education",
+            "Entertainment",
+            "Food & Dining",
+            "Health & Medicine",
+            "Home & Garden",
+            "Legal & Financial",
+            "Merchants (Wholesale)",
+            "Merchants (Retail)",
+            "Personal Care & Services",
+            "Real Estate",
+            "Travel & Transportation"
+        )
+        val adapter = ArrayAdapter(this, R.layout.list_item, items)
+        categoryMenuAutocomplete.setAdapter(adapter)
     }
 
     private fun edtError(edt: EditText): Boolean {
