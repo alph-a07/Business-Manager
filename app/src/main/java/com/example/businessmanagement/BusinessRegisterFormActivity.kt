@@ -2,6 +2,7 @@ package com.example.businessmanagement
 
 import android.os.Bundle
 import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import com.example.businessmanagement.model.BusinessForm
@@ -86,7 +87,7 @@ class BusinessRegisterFormActivity : AppCompatActivity() {
             "Travel & Transportation"
         )
         val adapter = ArrayAdapter(this, R.layout.list_item, items)
-        categoryMenuAutocomplete.setAdapter(adapter)
+        (textInputLayout.editText as? AutoCompleteTextView)?.setAdapter(adapter)
     }
 
     private fun edtError(edt: EditText): Boolean {

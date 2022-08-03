@@ -7,5 +7,7 @@
     android:maxLines="1"
     android:padding="16dp"
     android:textSize="16sp"
-    tools:text="List "
+    tools:text="List"
+    android:background="@color/white"
+    android:textColor="@color/black"
     android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"/>

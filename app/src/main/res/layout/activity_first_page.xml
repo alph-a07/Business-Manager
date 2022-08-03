@@ -6,6 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".FirstPageActivity">
 
     <ProgressBar
@@ -39,7 +40,7 @@
         android:fontFamily="@font/roboto_bold"
         android:text="Hercle, acipenser neuter!, palus!"
         android:textColor="@color/black"
-        android:textSize="20sp"
+        android:textSize="22sp"
         app:layout_constraintStart_toStartOf="@+id/iv_fp_logo"
         app:layout_constraintTop_toBottomOf="@+id/iv_fp_logo" />
 
@@ -75,19 +76,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="15dp"
             android:fontFamily="@font/roboto_black"
             android:text="Choose Account Type"
             android:textColor="@color/black"
-            android:textSize="18sp" />
+            android:textSize="20sp" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/card_acc_type_franchisee"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_choose_account_type"
-            android:layout_margin="20dp"
-            android:layout_marginBottom="15dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginVertical="20dp"
             app:cardCornerRadius="10dp"
             app:cardElevation="2dp"
             android:outlineAmbientShadowColor="@color/Dim_Gray"
@@ -129,16 +130,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_choose_account_type"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="15dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginVertical="20dp"
             android:layout_toEndOf="@id/card_acc_type_franchisee"
             app:cardCornerRadius="10dp"
             app:cardElevation="2dp"
             android:outlineSpotShadowColor="@color/Dim_Gray"
-            android:outlineAmbientShadowColor="@color/Dim_Gray"
-            tools:targetApi="p">
+            android:outlineAmbientShadowColor="@color/Dim_Gray">
 
             <LinearLayout
                 android:id="@+id/ll_acc_type_franchiser"

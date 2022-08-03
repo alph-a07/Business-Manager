@@ -19,4 +19,8 @@
     <style name="fabStyle">
         <item name="iconTint">@color/white</item>
     </style>
+    <style name="DropDownStyle" parent="Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu">
+        <item name="colorPrimary">@color/teal_200</item>
+        <item name="colorOnSurface">@color/Maastricht_Blue</item>
+    </style>
 </resources>
