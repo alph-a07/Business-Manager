@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="10dp"
-    android:background="@drawable/bg"
+    app:cardBackgroundColor="#A2FFCE"
     app:cardCornerRadius="10dp"
     app:cardElevation="10dp"
     tools:context=".BusinessRegisterFormActivity">
@@ -37,8 +37,8 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="20dp"
-                android:background="@color/white">
+                android:background="@color/white"
+                android:padding="20dp">
 
                 <EditText
                     android:id="@+id/edt_form_business_name"
@@ -48,10 +48,11 @@
                     android:background="@drawable/form_edt_bg"
                     android:drawableStart="@drawable/ic_baseline_business_24"
                     android:drawablePadding="10dp"
-                    android:paddingStart="10dp"
                     android:fontFamily="@font/roboto"
                     android:hint="Business name"
                     android:minHeight="48dp"
+                    android:paddingStart="10dp"
+                    android:singleLine="true"
                     android:textColor="@color/black"
                     android:textColorHint="@color/Gray_Hint"
                     android:textSize="16sp" />
@@ -69,6 +70,7 @@
                     android:hint="Business website"
                     android:minHeight="48dp"
                     android:paddingStart="10dp"
+                    android:singleLine="true"
                     android:textColor="@color/black"
                     android:textColorHint="@color/Gray_Hint"
                     android:textSize="16sp" />
@@ -86,6 +88,7 @@
                     android:hint="Business address (Head-office)"
                     android:minHeight="48dp"
                     android:paddingStart="10dp"
+                    android:singleLine="true"
                     android:textColor="@color/black"
                     android:textColorHint="@color/Gray_Hint"
                     android:textSize="16sp" />
@@ -103,6 +106,7 @@
                     android:hint="ZIP / Postal code"
                     android:minHeight="48dp"
                     android:paddingStart="10dp"
+                    android:singleLine="true"
                     android:textColor="@color/black"
                     android:textColorHint="@color/Gray_Hint"
                     android:textSize="16sp" />
@@ -120,6 +124,7 @@
                     android:hint="Business e-mail"
                     android:minHeight="48dp"
                     android:paddingStart="10dp"
+                    android:singleLine="true"
                     android:textColor="@color/black"
                     android:textColorHint="@color/Gray_Hint"
                     android:textSize="16sp" />
@@ -137,6 +142,7 @@
                     android:hint="Business contact no."
                     android:minHeight="48dp"
                     android:paddingStart="10dp"
+                    android:singleLine="true"
                     android:textColor="@color/black"
                     android:textColorHint="@color/Gray_Hint"
                     android:textSize="16sp" />
@@ -154,6 +160,7 @@
                     android:hint="GSTIN no."
                     android:minHeight="48dp"
                     android:paddingStart="10dp"
+                    android:singleLine="true"
                     android:textColor="@color/black"
                     android:textColorHint="@color/Gray_Hint"
                     android:textSize="16sp" />
@@ -168,11 +175,11 @@
                     android:hint="Select Category"
                     android:textColorHint="@color/Gray_Hint"
                     app:boxStrokeColor="@color/Gray_Hint"
-                    app:hintTextColor="@color/Maastricht_Blue"
+                    app:endIconTint="@color/Gray_Hint"
                     app:hintAnimationEnabled="true"
+                    app:hintTextColor="@color/Maastricht_Blue"
                     app:startIconDrawable="@drawable/ic_baseline_category_24"
-                    app:startIconTint="#B7B7B7"
-                    app:endIconTint="@color/Gray_Hint">
+                    app:startIconTint="#B7B7B7">
 
                     <AutoCompleteTextView
                         android:id="@+id/categoryMenuAutocomplete"
@@ -182,14 +189,43 @@
                         android:fontFamily="@font/roboto"
                         android:inputType="none"
                         android:minHeight="48dp"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/black"
+                        android:textSize="16sp"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayout1"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/textInputLayout"
+                    android:layout_marginTop="30dp"
+                    android:hint="Select Business Revenue"
+                    android:textColorHint="@color/Gray_Hint"
+                    app:boxStrokeColor="@color/Gray_Hint"
+                    app:endIconTint="@color/Gray_Hint"
+                    app:hintAnimationEnabled="true"
+                    app:hintTextColor="@color/Maastricht_Blue"
+                    app:startIconDrawable="@drawable/ic_baseline_attach_money_24"
+                    app:startIconTint="#B7B7B7">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/revenueMenuAutocomplete"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/white"
+                        android:fontFamily="@font/roboto"
+                        android:inputType="none"
+                        android:minHeight="48dp"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <EditText
                     android:id="@+id/edt_form_business_photos"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/textInputLayout"
+                    android:layout_below="@id/textInputLayout1"
                     android:layout_marginTop="30dp"
                     android:background="@drawable/form_edt_bg"
                     android:drawableStart="@drawable/ic_baseline_link_24"
@@ -198,15 +234,27 @@
                     android:hint="Business captures (Public link)"
                     android:minHeight="48dp"
                     android:paddingStart="10dp"
+                    android:singleLine="true"
                     android:textColor="@color/black"
                     android:textColorHint="@color/Gray_Hint"
                     android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/helper_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="logos, venue photos, presentations etc."
+                    android:textSize="12sp"
+                    android:textColor="#BABABA"
+                    android:fontFamily="@font/roboto"
+                    android:layout_below="@id/edt_form_business_photos"
+                    android:layout_marginStart="10dp"/>
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_form_request_approval"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/edt_form_business_photos"
+                    android:layout_below="@id/edt_form_add_info"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
                     android:layout_marginHorizontal="80dp"
@@ -214,13 +262,29 @@
                     android:layout_marginBottom="10dp"
                     android:background="@drawable/primary_button_bg"
                     android:elevation="10dp"
-                    android:textColor="@color/Maastricht_Blue"
                     android:fontFamily="@font/roboto_bold"
                     android:letterSpacing="0.01"
                     android:text="Request approval"
                     android:textAllCaps="false"
+                    android:textColor="@color/Maastricht_Blue"
                     android:textSize="16sp" />
-            </RelativeLayout>
+
+                <EditText
+                    android:id="@+id/edt_form_add_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/helper_text"
+                    android:layout_marginTop="40dp"
+                    android:background="@drawable/edt_bg"
+                    android:fontFamily="@font/roboto"
+                    android:gravity="top"
+                    android:hint="Business Description (optional)"
+                    android:inputType="textCapSentences"
+                    android:minHeight="100dp"
+                    android:paddingHorizontal="15dp"
+                    android:paddingVertical="10dp"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />          </RelativeLayout>
         </ScrollView>
     </RelativeLayout>
 </com.google.android.material.card.MaterialCardView>

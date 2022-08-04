@@ -88,6 +88,18 @@ class BusinessRegisterFormActivity : AppCompatActivity() {
         )
         val adapter = ArrayAdapter(this, R.layout.list_item, items)
         (textInputLayout.editText as? AutoCompleteTextView)?.setAdapter(adapter)
+
+        val items1 = listOf(
+            "less than 5 lacs",
+            "5 lacs - 10 lacs",
+            "10 lacs - 50 lacs",
+            "50 lacs - 1 crore",
+            "1 core - 5 crores",
+            "5 crores - 10 crores",
+            "more than 10 crores"
+        )
+        val adapter1 = ArrayAdapter(this, R.layout.list_item, items1)
+        (textInputLayout1.editText as? AutoCompleteTextView)?.setAdapter(adapter1)
     }
 
     private fun edtError(edt: EditText): Boolean {

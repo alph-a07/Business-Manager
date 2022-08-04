@@ -61,6 +61,8 @@ class FranchiserDashboardActivity : AppCompatActivity() {
                                 }
                                 tv_franchiser_dashboard_num_of_registered_businesses.text =
                                     approvedBusinesses.toString()
+
+                                textView2.text = "Hi, " + model.userName + " 👋"
                             }
                         }
                     }
@@ -73,7 +75,10 @@ class FranchiserDashboardActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         super.onBackPressed()
-        finish()
+        val a = Intent(Intent.ACTION_MAIN)
+        a.addCategory(Intent.CATEGORY_HOME)
+        a.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(a)
     }
 
     private fun showPieChart(pieChart: PieChart) {
