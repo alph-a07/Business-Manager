@@ -1,9 +1,11 @@
 package com.example.businessmanagement
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.businessmanagement.model.BusinessForm
 import com.example.businessmanagement.model.NewBusinessesList
@@ -35,40 +37,62 @@ class BusinessRegisterFormActivity : AppCompatActivity() {
                 edtError(edt_form_gstin) &&
                 edtError(edt_form_business_photos)
             ) {
-                ref.child("Users").orderByChild(currentUser?.uid.toString())
-                    .addListenerForSingleValueEvent(
-                        object : ValueEventListener {
-                            override fun onDataChange(snapshot: DataSnapshot) {
-                                val model = snapshot.getValue(User::class.java)
+                if (textInputLayout.editText!!.text.isNotEmpty() && textInputLayout1.editText!!.text.isNotEmpty()) {
+                    ref.child("Users").orderByChild("uid").equalTo(currentUser?.uid.toString())
+                        .addListenerForSingleValueEvent(
+                            object : ValueEventListener {
+                                override fun onDataChange(snapshot: DataSnapshot) {
+                                    for(snap in snapshot.children){
+                                        val model = snap.getValue(User::class.java)
 
-                                val formModel = BusinessForm()
-                                formModel.name = edt_form_business_name.text.toString()
-                                formModel.email = edt_form_business_email.text.toString()
-                                formModel.website = edt_form_business_website.text.toString()
-                                formModel.address = edt_form_business_location.text.toString()
-                                formModel.pincode = edt_form_pincode.text.toString()
-                                formModel.gstin = edt_form_gstin.text.toString()
-                                formModel.photoslink = edt_form_business_photos.text.toString()
-                                formModel.contact = edt_form_business_contact.text.toString()
+                                        val formModel = BusinessForm()
+                                        formModel.name = edt_form_business_name.text.toString()
+                                        formModel.email = edt_form_business_email.text.toString()
+                                        formModel.website = edt_form_business_website.text.toString()
+                                        formModel.address = edt_form_business_location.text.toString()
+                                        formModel.pincode = edt_form_pincode.text.toString()
+                                        formModel.gstin = edt_form_gstin.text.toString()
+                                        formModel.photoslink = edt_form_business_photos.text.toString()
+                                        formModel.contact = edt_form_business_contact.text.toString()
+                                        formModel.category = textInputLayout.editText!!.text.toString()
+                                        formModel.revenue = textInputLayout1.editText!!.text.toString()
+                                        formModel.description = edt_form_add_info.text.toString()
 
-                                model?.list?.add(formModel)
-                                ref.child("Users").child(currentUser?.uid.toString())
-                                    .setValue(model)
+                                        model!!.list?.add(formModel)
 
-                                val businessModel = NewBusinessesList()
-                                businessModel.phone = model!!.phone
-                                businessModel.email = model.phone
-                                businessModel.info = formModel
-                                ref.child("New businesses").child(edt_form_gstin.text.toString())
-                                    .setValue(formModel)
+                                        ref.child("Users").child(currentUser?.uid.toString())
+                                            .setValue(model)
+
+                                        val businessModel = NewBusinessesList()
+                                        businessModel.phone = model.phone
+                                        businessModel.email = model.phone
+                                        businessModel.info = formModel
+                                        ref.child("New businesses")
+                                            .child(edt_form_gstin.text.toString())
+                                            .setValue(formModel)
+
+                                        startActivity(
+                                            Intent(
+                                                this@BusinessRegisterFormActivity,
+                                                FranchiserDashboardActivity::class.java
+                                            )
+                                        )
+                                        Toast.makeText(
+                                            this@BusinessRegisterFormActivity,
+                                            "Application submitted.",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                    }
+                                }
+
+                                override fun onCancelled(error: DatabaseError) {}
                             }
-
-                            override fun onCancelled(error: DatabaseError) {}
-                        }
-                    )
+                        )
+                }
             }
         }
 
+        // categories drop-down
         val items = listOf(
             "Automotive",
             "Business Support & Supplies",
@@ -89,6 +113,7 @@ class BusinessRegisterFormActivity : AppCompatActivity() {
         val adapter = ArrayAdapter(this, R.layout.list_item, items)
         (textInputLayout.editText as? AutoCompleteTextView)?.setAdapter(adapter)
 
+        // revenue drop-down
         val items1 = listOf(
             "less than 5 lacs",
             "5 lacs - 10 lacs",

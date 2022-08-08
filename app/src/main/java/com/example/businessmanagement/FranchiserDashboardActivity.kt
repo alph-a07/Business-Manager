@@ -4,6 +4,9 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.businessmanagement.adapter.RegisteredBusinessesAdapter
+import com.example.businessmanagement.model.BusinessForm
 import com.example.businessmanagement.model.User
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.charts.PieChart
@@ -21,8 +24,9 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_franchiser_dashboard.*
 
-
 class FranchiserDashboardActivity : AppCompatActivity() {
+    val list = ArrayList<BusinessForm>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_franchiser_dashboard)
@@ -43,6 +47,7 @@ class FranchiserDashboardActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
 
+        floatingActionButton.bringToFront()
         val ref = Firebase.database
         val currUser = FirebaseAuth.getInstance().currentUser
 
@@ -53,14 +58,16 @@ class FranchiserDashboardActivity : AppCompatActivity() {
                         if (snapshot.exists()) {
                             for (snap in snapshot.children) {
                                 val model = snap.getValue(User::class.java)
-                                var approvedBusinesses = 0
 
-                                for (tmp in model!!.list!!) {
+                                for (tmp in model!!.list!!)
                                     if (tmp.isApproved)
-                                        approvedBusinesses++
-                                }
-                                tv_franchiser_dashboard_num_of_registered_businesses.text =
-                                    approvedBusinesses.toString()
+                                        list.add(tmp)
+
+                                tv_franchiser_dashboard_num_of_registered_businesses.text = list.size.toString()
+
+                                val adapter = RegisteredBusinessesAdapter(list,baseContext)
+                                recyclerView.layoutManager = LinearLayoutManager(this@FranchiserDashboardActivity)
+                                recyclerView.adapter = adapter
 
                                 textView2.text = "Hi, " + model.userName + " 👋"
                             }

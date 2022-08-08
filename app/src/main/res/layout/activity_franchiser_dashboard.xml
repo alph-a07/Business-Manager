@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".FranchiserDashboardActivity"
-    android:background="@color/white">
+    android:background="@drawable/bg">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButton"
@@ -15,10 +15,11 @@
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="20dp"
+        android:backgroundTint="@color/black"
         android:elevation="5dp"
         android:src="@drawable/ic_baseline_add_24"
         app:tint="@color/white"
-        android:backgroundTint="@color/black"/>
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <TextView
         android:id="@+id/textView2"
@@ -45,73 +46,13 @@
         app:srcCompat="@drawable/account_logo" />
 
     <ScrollView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/iv_franchisee_dashboard_account">
-    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg">
-
-        <androidx.cardview.widget.CardView
-        android:id="@+id/card_franchiser_dashboard_registered_businesses"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="30dp"
-        app:cardCornerRadius="15dp"
-        app:cardElevation="10dp"
-        android:background="@color/white">
-
+        android:layout_below="@id/textView2"
+        android:scrollbars="none">
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingHorizontal="20dp"
-            android:paddingTop="15dp"
-            android:paddingBottom="5dp"
-            android:background="@color/white">
-
-            <TextView
-                android:id="@+id/textView1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:fontFamily="@font/roboto_bold"
-                android:letterSpacing="0.01"
-                android:text="Registered Businesses"
-                android:textColor="@color/black"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/tv_franchiser_dashboard_num_of_registered_businesses"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/textView1"
-                android:layout_marginVertical="5dp"
-                android:fontFamily="@font/roboto_black"
-                android:text="120"
-                android:textColor="@color/Cyber_Yellow"
-                android:textSize="48sp" />
-
-            <TextView
-                android:id="@+id/textView9"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@id/tv_franchiser_dashboard_num_of_registered_businesses"
-                android:layout_marginStart="10dp"
-                android:layout_marginBottom="10dp"
-                android:layout_toEndOf="@id/tv_franchiser_dashboard_num_of_registered_businesses"
-                android:fontFamily="@font/roboto_medium"
-                android:text="companies"
-                android:textColor="@color/Dark_Gray_X11"
-                android:textSize="18sp" />
-
-        </RelativeLayout>
-    </androidx.cardview.widget.CardView>
-
+            android:layout_height="wrap_content">
     <androidx.cardview.widget.CardView
         android:id="@+id/card_franchiser_dashboard_franchise_requests"
         android:layout_width="match_parent"
@@ -119,7 +60,6 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_marginHorizontal="20dp"
-        android:layout_below="@id/card_franchiser_dashboard_registered_businesses"
         android:layout_marginTop="30dp"
         app:cardCornerRadius="15dp"
         app:cardElevation="10dp"
@@ -173,7 +113,7 @@
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 
-        <androidx.cardview.widget.CardView
+    <androidx.cardview.widget.CardView
             android:id="@+id/card_franchiser_dashboard_profit_trends"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -224,7 +164,83 @@
 
             </RelativeLayout>
         </androidx.cardview.widget.CardView>
-    </RelativeLayout>
-    </ScrollView>
 
-</RelativeLayout>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_franchiser_dashboard_registered_businesses"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginBottom="20dp"
+        app:cardCornerRadius="15dp"
+        android:layout_below="@id/card_franchiser_dashboard_profit_trends"
+        app:cardElevation="10dp"
+        android:background="@color/white">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="20dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="5dp"
+            android:background="@color/white">
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:fontFamily="@font/roboto_bold"
+                android:letterSpacing="0.01"
+                android:text="Registered Businesses"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tv_franchiser_dashboard_num_of_registered_businesses"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textView1"
+                android:layout_marginVertical="5dp"
+                android:fontFamily="@font/roboto_black"
+                android:text="120"
+                android:textColor="@color/Cyber_Yellow"
+                android:textSize="48sp" />
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/tv_franchiser_dashboard_num_of_registered_businesses"
+                android:layout_marginStart="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_toEndOf="@id/tv_franchiser_dashboard_num_of_registered_businesses"
+                android:fontFamily="@font/roboto_medium"
+                android:text="companies"
+                android:textColor="@color/Dark_Gray_X11"
+                android:textSize="18sp" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textView9">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintHeight_max="300dp"
+                    android:scrollbars="vertical"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+        </RelativeLayout>
+    </ScrollView>
+    </RelativeLayout>

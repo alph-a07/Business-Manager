@@ -23,7 +23,7 @@
         <entry key="..\:/Apps/BusinessManagement/app/src/main/res/drawable/secondary_partition_bg.xml" value="0.2265" />
         <entry key="..\:/Apps/BusinessManagement/app/src/main/res/drawable/spinner_bg.xml" value="0.2055" />
         <entry key="..\:/Apps/BusinessManagement/app/src/main/res/layout/activity_account.xml" value="0.27447916666666666" />
-        <entry key="..\:/Apps/BusinessManagement/app/src/main/res/layout/activity_business_register_form.xml" value="0.25732421875" />
+        <entry key="..\:/Apps/BusinessManagement/app/src/main/res/layout/activity_business_register_form.xml" value="0.27447916666666666" />
         <entry key="..\:/Apps/BusinessManagement/app/src/main/res/layout/activity_first_page.xml" value="0.27447916666666666" />
         <entry key="..\:/Apps/BusinessManagement/app/src/main/res/layout/activity_franchisee_auth.xml" value="0.27447916666666666" />
         <entry key="..\:/Apps/BusinessManagement/app/src/main/res/layout/activity_franchisee_auth1.xml" value="0.27447916666666666" />
@@ -31,10 +31,11 @@
         <entry key="..\:/Apps/BusinessManagement/app/src/main/res/layout/activity_franchisee_dashboard.xml" value="0.27447916666666666" />
         <entry key="..\:/Apps/BusinessManagement/app/src/main/res/layout/activity_franchiser_auth1.xml" value="0.27447916666666666" />
         <entry key="..\:/Apps/BusinessManagement/app/src/main/res/layout/activity_franchiser_auth2.xml" value="0.27447916666666666" />
-        <entry key="..\:/Apps/BusinessManagement/app/src/main/res/layout/activity_franchiser_dashboard.xml" value="0.27447916666666666" />
+        <entry key="..\:/Apps/BusinessManagement/app/src/main/res/layout/activity_franchiser_dashboard.xml" value="0.26323676323676326" />
         <entry key="..\:/Apps/BusinessManagement/app/src/main/res/layout/activity_franchisor_auth.xml" value="0.27447916666666666" />
         <entry key="..\:/Apps/BusinessManagement/app/src/main/res/layout/list_item.xml" value="0.27447916666666666" />
         <entry key="..\:/Apps/BusinessManagement/app/src/main/res/layout/sample_business_card.xml" value="0.27447916666666666" />
+        <entry key="..\:/Apps/BusinessManagement/app/src/main/res/layout/sample_registered_businesses.xml" value="0.27447916666666666" />
         <entry key="..\:/Business-Manager/app/src/main/res/layout/activity_account.xml" value="0.27447916666666666" />
         <entry key="..\:/Business-Manager/app/src/main/res/layout/activity_first_page.xml" value="0.27447916666666666" />
         <entry key="..\:/Business-Manager/app/src/main/res/layout/activity_franchisee_auth1.xml" value="0.27447916666666666" />

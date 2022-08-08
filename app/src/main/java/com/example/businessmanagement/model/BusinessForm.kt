@@ -9,5 +9,8 @@ class BusinessForm() {
     var contact: String = ""
     var gstin: String = ""
     var photoslink: String = ""
-    var isApproved:Boolean = false
-}
+    var isApproved:Boolean = true
+    var category:String = ""
+    var revenue:String = ""
+    var description:String = ""
+ }

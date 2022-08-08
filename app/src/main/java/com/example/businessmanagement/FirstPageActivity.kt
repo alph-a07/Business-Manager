@@ -6,7 +6,6 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
-import androidx.core.content.ContextCompat
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.example.businessmanagement.model.User
 import com.google.firebase.auth.FirebaseAuth
@@ -74,9 +73,12 @@ class FirstPageActivity : AppCompatActivity() {
         val currentUser = auth.currentUser
         if (currentUser != null) {
             progressBar2.visibility = View.VISIBLE
-            cl_parent.setBackgroundColor(ContextCompat.getColor(baseContext,R.color.Bright_Gray))
-            ll_acc_type_franchisee.setBackgroundColor(ContextCompat.getColor(baseContext,R.color.Bright_Gray))
-            ll_acc_type_franchiser.setBackgroundColor(ContextCompat.getColor(baseContext,R.color.Bright_Gray))
+            textView10.visibility = View.VISIBLE
+            iv_fp_logo.visibility = View.GONE
+            tv_fp_tagline.visibility = View.GONE
+            relativeLayout.visibility = View.GONE
+            btn_fp_getStarted.visibility = View.GONE
+
             Firebase.database.getReference("Users").orderByChild("uid")
                 .equalTo(currentUser.uid).addListenerForSingleValueEvent(
                     object : ValueEventListener {
