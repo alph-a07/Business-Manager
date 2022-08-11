@@ -25,7 +25,6 @@ import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_franchiser_dashboard.*
 
 class FranchiserDashboardActivity : AppCompatActivity() {
-    val list = ArrayList<BusinessForm>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,7 +57,7 @@ class FranchiserDashboardActivity : AppCompatActivity() {
                         if (snapshot.exists()) {
                             for (snap in snapshot.children) {
                                 val model = snap.getValue(User::class.java)
-
+                                val list = ArrayList<BusinessForm>()
                                 for (tmp in model!!.list!!)
                                     if (tmp.isApproved)
                                         list.add(tmp)

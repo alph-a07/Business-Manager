@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    tools:context=".BusinessDetailsActivity">
+
+    <ImageView
+        android:id="@+id/iv_back_arrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:src="@drawable/ic_baseline_arrow_back_ios_new_24" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/iv_back_arrow"
+        android:layout_alignBottom="@id/iv_back_arrow"
+        android:layout_toEndOf="@id/iv_back_arrow"
+        android:fontFamily="@font/roboto_medium"
+        android:text="Registration details"
+        android:textColor="@color/black"
+        android:textSize="18sp" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/iv_logo"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:layout_below="@id/iv_back_arrow"
+        android:layout_alignStart="@id/iv_back_arrow"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Medium"
+        app:srcCompat="@color/teal_200" />
+
+    <TextView
+        android:id="@+id/tv_business_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/iv_logo"
+        android:layout_marginTop="5dp"
+        android:layout_toEndOf="@id/iv_logo"
+        android:fontFamily="@font/roboto"
+        android:text="TextView"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="@color/black"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/tv_business_category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_business_name"
+        android:layout_marginTop="5dp"
+        android:layout_alignStart="@id/tv_business_name"
+        android:fontFamily="@font/roboto"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="TextView"
+        android:textSize="16sp"
+        android:textColor="@color/Dim_Gray" />
+
+    <TextView
+        android:id="@+id/tv_business_revenue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_business_category"
+        android:layout_alignStart="@id/tv_business_category"
+        android:fontFamily="@font/roboto"
+        android:text="TextView"
+        android:layout_marginTop="5dp"
+        android:textColor="@color/Dim_Gray"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/tv_business_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/iv_logo"
+        android:layout_alignStart="@id/iv_logo"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
+        android:fontFamily="@font/roboto"
+        android:text="The mysterious dimension of emptiness is to avoid with intuition.Going to the body of result doesn’t illuminate man anymore than visualizing creates inward love."
+        android:textSize="16sp" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_business_info"
+        android:layout_alignStart="@id/tv_business_info"
+        android:layout_marginTop="30dp"
+        app:srcCompat="@drawable/ic_baseline_web_24"
+        app:tint="@color/Dim_Gray" />
+
+    <TextView
+        android:id="@+id/tv_website"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/imageView"
+        android:layout_alignBottom="@id/imageView"
+        android:layout_marginStart="20dp"
+        android:layout_toEndOf="@id/imageView"
+        android:fontFamily="@font/roboto"
+        android:gravity="center_vertical"
+        android:text="Ubi est fatalis elogium?"
+        android:textColor="@color/Dim_Gray"
+        android:textSize="14sp" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_website"
+        android:layout_alignStart="@id/tv_business_info"
+        android:layout_marginTop="20dp"
+        app:srcCompat="@drawable/ic_baseline_location_24"
+        app:tint="@color/Dim_Gray" />
+
+    <TextView
+        android:id="@+id/tv_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/imageView4"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="10dp"
+        android:layout_toEndOf="@id/imageView4"
+        android:fontFamily="@font/roboto"
+        android:text="Pins rise with desolation! Always oddly love the unbiased seeker.Cursus assimilants, tanquam rusticus scutum."
+        android:textColor="@color/Dim_Gray"
+        android:textSize="14sp" />
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_location"
+        android:layout_alignStart="@id/tv_business_info"
+        android:layout_marginTop="20dp"
+        app:srcCompat="@drawable/ic_baseline_email_24"
+        app:tint="@color/Dim_Gray" />
+
+    <TextView
+        android:id="@+id/tv_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/imageView6"
+        android:layout_alignBottom="@id/imageView6"
+        android:layout_marginStart="20dp"
+        android:layout_toEndOf="@id/imageView6"
+        android:fontFamily="@font/roboto"
+        android:gravity="center_vertical"
+        android:text="Messor ferox coordinatae est."
+        android:textColor="@color/Dim_Gray"
+        android:textSize="14sp" />
+
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_email"
+        android:layout_alignStart="@id/tv_business_info"
+        android:layout_marginTop="20dp"
+        app:srcCompat="@drawable/ic_baseline_phone_24"
+        app:tint="@color/Dim_Gray" />
+
+    <TextView
+        android:id="@+id/tv_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/imageView7"
+        android:layout_alignBottom="@id/imageView7"
+        android:layout_marginStart="20dp"
+        android:layout_toEndOf="@id/imageView7"
+        android:fontFamily="@font/roboto"
+        android:gravity="center_vertical"
+        android:text="+00 00000 00000"
+        android:textColor="@color/Dim_Gray"
+        android:textSize="14sp" />
+
+    <ImageView
+        android:id="@+id/imageView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_phone"
+        android:layout_alignStart="@id/tv_business_info"
+        android:layout_marginTop="20dp"
+        app:srcCompat="@drawable/ic_baseline_gstin_24"
+        app:tint="@color/Dim_Gray" />
+
+    <TextView
+        android:id="@+id/tv_gstin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/imageView8"
+        android:layout_alignBottom="@id/imageView8"
+        android:layout_marginStart="20dp"
+        android:layout_toEndOf="@id/imageView8"
+        android:fontFamily="@font/roboto"
+        android:gravity="center_vertical"
+        android:text="4D8D7ER45FVB125"
+        android:textColor="@color/Dim_Gray"
+        android:textSize="14sp" />
+
+    <RelativeLayout
+        android:id="@+id/btm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/iv_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignTop="@id/card"
+            android:layout_alignBottom="@id/card"
+            android:layout_marginEnd="20dp"
+            android:background="#BF7EECFF"
+            android:minWidth="60dp"
+            android:src="@drawable/ic_baseline_edit_24"
+            app:contentPadding="15dp"
+            app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Medium"
+            app:tint="#303030" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_toEndOf="@id/iv_edit"
+            app:cardBackgroundColor="#BFFF4848"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginVertical="15dp"
+                android:background="#00ffffff"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:background="#00ffffff"
+                    android:src="@drawable/ic_baseline_delete_24"
+                    app:tint="#252525" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="10dp"
+                    android:background="#00ffffff"
+                    android:fontFamily="@font/roboto"
+                    android:text="Retract your data"
+                    android:textColor="#252525"
+                    android:textSize="18sp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </RelativeLayout>
+</RelativeLayout>

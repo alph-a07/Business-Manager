@@ -1,6 +1,7 @@
 package com.example.businessmanagement.adapter
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.example.businessmanagement.BusinessDetailsActivity
 import com.example.businessmanagement.R
 import com.example.businessmanagement.model.BusinessForm
 
@@ -23,6 +25,11 @@ class RegisteredBusinessesAdapter(private val list:ArrayList<BusinessForm>,priva
         holder.name.text = model.name
         holder.category.text = model.category
         holder.logo.setImageDrawable(ContextCompat.getDrawable(context,R.drawable.bg))
+
+        holder.itemView.setOnClickListener {
+            val intent = Intent(it.context,BusinessDetailsActivity::class.java)
+            it.context.startActivity(intent)
+        }
     }
 
     override fun getItemCount():Int {

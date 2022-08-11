@@ -18,6 +18,7 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_business_register_form.*
 
+
 class BusinessRegisterFormActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -84,7 +85,6 @@ class BusinessRegisterFormActivity : AppCompatActivity() {
                                         ).show()
                                     }
                                 }
-
                                 override fun onCancelled(error: DatabaseError) {}
                             }
                         )
@@ -134,5 +134,8 @@ class BusinessRegisterFormActivity : AppCompatActivity() {
             return false
         }
         return true
+    }
+
+    private fun sendEmail(){
     }
 }

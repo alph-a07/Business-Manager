@@ -137,10 +137,29 @@
             tools:ignore="SpeakableTextPresentCheck" />
     </RelativeLayout>
 
+    <RelativeLayout
+        android:id="@+id/rl_filters"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/relative_layout">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView" />
+        </RelativeLayout>
+    </RelativeLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_franchisee_dashboard_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/relative_layout"
+        android:layout_below="@id/rl_filters"
         android:layout_marginTop="5dp" />
 </RelativeLayout>
