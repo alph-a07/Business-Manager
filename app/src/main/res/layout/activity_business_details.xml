@@ -25,6 +25,7 @@
         android:layout_alignBottom="@id/iv_back_arrow"
         android:layout_toEndOf="@id/iv_back_arrow"
         android:fontFamily="@font/roboto_medium"
+        android:gravity="center_vertical"
         android:text="Registration details"
         android:textColor="@color/black"
         android:textSize="18sp" />
@@ -36,11 +37,11 @@
         android:layout_below="@id/iv_back_arrow"
         android:layout_alignStart="@id/iv_back_arrow"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
         app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Medium"
-        app:srcCompat="@color/teal_200" />
+        app:srcCompat="@color/primary_blue" />
 
     <TextView
         android:id="@+id/tv_business_name"
@@ -49,10 +50,10 @@
         android:layout_alignTop="@id/iv_logo"
         android:layout_marginTop="5dp"
         android:layout_toEndOf="@id/iv_logo"
-        android:fontFamily="@font/roboto"
-        android:text="TextView"
         android:ellipsize="end"
+        android:fontFamily="@font/roboto"
         android:maxLines="1"
+        android:text="TextView"
         android:textColor="@color/black"
         android:textSize="20sp" />
 
@@ -227,13 +228,13 @@
             android:layout_height="match_parent"
             android:layout_alignTop="@id/card"
             android:layout_alignBottom="@id/card"
-            android:layout_marginEnd="20dp"
-            android:background="#BF7EECFF"
-            android:minWidth="60dp"
-            android:src="@drawable/ic_baseline_edit_24"
+            android:layout_marginEnd="10dp"
+            android:background="#80CACACA"
+            android:minWidth="50dp"
+            android:src="@drawable/ic_outline_edit_24"
             app:contentPadding="15dp"
             app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Medium"
-            app:tint="#303030" />
+            app:tint="#505050" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/card"
@@ -241,7 +242,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_toEndOf="@id/iv_edit"
-            app:cardBackgroundColor="#BFFF4848"
+            app:cardBackgroundColor="#80FF8B8B"
             app:cardCornerRadius="12dp"
             app:cardElevation="0dp">
 
@@ -258,18 +259,18 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:background="#00ffffff"
-                    android:src="@drawable/ic_baseline_delete_24"
-                    app:tint="#252525" />
+                    android:src="@drawable/ic_baseline_delete_outline_24"
+                    app:tint="#505050" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginStart="10dp"
+                    android:layout_marginStart="5dp"
                     android:background="#00ffffff"
                     android:fontFamily="@font/roboto"
                     android:text="Retract your data"
-                    android:textColor="#252525"
+                    android:textColor="#505050"
                     android:textSize="18sp" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>

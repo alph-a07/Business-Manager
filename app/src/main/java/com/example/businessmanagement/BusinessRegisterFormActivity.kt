@@ -18,7 +18,6 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_business_register_form.*
 
-
 class BusinessRegisterFormActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,27 +35,34 @@ class BusinessRegisterFormActivity : AppCompatActivity() {
                 edtError(edt_form_business_email) &&
                 edtError(edt_form_business_contact) &&
                 edtError(edt_form_gstin) &&
-                edtError(edt_form_business_photos)
+                edtError(edt_form_business_photos) &&
+                edtError(edt_form_add_info)
             ) {
                 if (textInputLayout.editText!!.text.isNotEmpty() && textInputLayout1.editText!!.text.isNotEmpty()) {
                     ref.child("Users").orderByChild("uid").equalTo(currentUser?.uid.toString())
                         .addListenerForSingleValueEvent(
                             object : ValueEventListener {
                                 override fun onDataChange(snapshot: DataSnapshot) {
-                                    for(snap in snapshot.children){
+                                    for (snap in snapshot.children) {
                                         val model = snap.getValue(User::class.java)
 
                                         val formModel = BusinessForm()
                                         formModel.name = edt_form_business_name.text.toString()
                                         formModel.email = edt_form_business_email.text.toString()
-                                        formModel.website = edt_form_business_website.text.toString()
-                                        formModel.address = edt_form_business_location.text.toString()
+                                        formModel.website =
+                                            edt_form_business_website.text.toString()
+                                        formModel.address =
+                                            edt_form_business_location.text.toString()
                                         formModel.pincode = edt_form_pincode.text.toString()
                                         formModel.gstin = edt_form_gstin.text.toString()
-                                        formModel.photoslink = edt_form_business_photos.text.toString()
-                                        formModel.contact = edt_form_business_contact.text.toString()
-                                        formModel.category = textInputLayout.editText!!.text.toString()
-                                        formModel.revenue = textInputLayout1.editText!!.text.toString()
+                                        formModel.photoslink =
+                                            edt_form_business_photos.text.toString()
+                                        formModel.contact =
+                                            edt_form_business_contact.text.toString()
+                                        formModel.category =
+                                            textInputLayout.editText!!.text.toString()
+                                        formModel.revenue =
+                                            textInputLayout1.editText!!.text.toString()
                                         formModel.description = edt_form_add_info.text.toString()
 
                                         model!!.list?.add(formModel)
@@ -85,9 +91,18 @@ class BusinessRegisterFormActivity : AppCompatActivity() {
                                         ).show()
                                     }
                                 }
+
                                 override fun onCancelled(error: DatabaseError) {}
                             }
                         )
+                } else if (textInputLayout.editText!!.text.isEmpty()) {
+                    textInputLayout.error = "Mandatory field"
+                    textInputLayout.requestFocus()
+                    return@setOnClickListener
+                } else if (textInputLayout1.editText!!.text.isEmpty()) {
+                    textInputLayout1.error = "Mandatory field"
+                    textInputLayout1.requestFocus()
+                    return@setOnClickListener
                 }
             }
         }
@@ -136,6 +151,6 @@ class BusinessRegisterFormActivity : AppCompatActivity() {
         return true
     }
 
-    private fun sendEmail(){
+    private fun sendEmail() {
     }
 }

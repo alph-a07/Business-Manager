@@ -28,6 +28,15 @@ class RegisteredBusinessesAdapter(private val list:ArrayList<BusinessForm>,priva
 
         holder.itemView.setOnClickListener {
             val intent = Intent(it.context,BusinessDetailsActivity::class.java)
+            intent.putExtra("name",model.name)
+            intent.putExtra("category",model.category)
+            intent.putExtra("revenue",model.revenue)
+            intent.putExtra("description",model.description)
+            intent.putExtra("website",model.website)
+            intent.putExtra("address",model.address + " - " + model.pincode)
+            intent.putExtra("mail",model.email)
+            intent.putExtra("phone",model.contact)
+            intent.putExtra("gstin",model.gstin)
             it.context.startActivity(intent)
         }
     }
