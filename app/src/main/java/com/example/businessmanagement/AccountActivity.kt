@@ -2,6 +2,7 @@ package com.example.businessmanagement
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Parcelable
 import androidx.appcompat.app.AppCompatActivity
 import com.example.businessmanagement.model.User
 import com.google.firebase.auth.FirebaseAuth
@@ -22,6 +23,15 @@ class AccountActivity : AppCompatActivity() {
         setContentView(R.layout.activity_account)
 
         supportActionBar?.hide()
+        //get list of bookmarks from intent (through dashboard)
+        val list=Intent().getParcelableArrayListExtra<Parcelable>("bookmarks")
+
+        card_acc_bookmarks.setOnClickListener {
+            //we will show bookmarks list in a new Activity
+            val i=Intent(this,BookmarksActivity::class.java)
+            i.putExtra("bookmarks",list)
+            startActivity(i)
+        }
 
         card_acc_signout.setOnClickListener {
             FirebaseAuth.getInstance().signOut()

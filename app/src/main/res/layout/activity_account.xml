@@ -14,7 +14,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="30dp"
         android:fontFamily="@font/roboto_bold"
-        android:text="Franchisee / Franchiser"
+        android:text="@string/franchisee_franchiser"
         android:textColor="@color/black"
         android:textSize="32sp" />
 

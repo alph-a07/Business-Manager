@@ -53,12 +53,12 @@
                 android:textColor="@color/Dim_Gray" />
 
             <TextView
-                android:id="@+id/tv_sample_business_area"
+                android:id="@+id/tv_sample_business_category"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:fontFamily="@font/roboto"
-                android:text="00.00 sqft"
+                android:text="xxxx yyyy"
                 android:textColor="@color/Dim_Gray" />
         </LinearLayout>
 

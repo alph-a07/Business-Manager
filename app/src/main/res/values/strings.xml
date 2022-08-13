@@ -15,4 +15,6 @@
     <string name="get_otp">Get OTP</string>
     <string name="user_logo">user logo</string>
     <string name="enter_your_name">Enter your name</string>
+    <string name="franchisee_franchiser">Franchisee / Franchiser</string>
+    <string name="search_a_keyword">Search a keyword</string>
 </resources>

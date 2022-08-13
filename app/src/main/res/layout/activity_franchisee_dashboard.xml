@@ -120,7 +120,7 @@
             android:layout_toStartOf="@id/iv_franchisee_dashboard_filter"
             android:layout_toEndOf="@id/iv_franchisee_dashboard_search"
             android:backgroundTint="@color/white"
-            android:hint="Search a keyword"
+            android:hint="@string/search_a_keyword"
             android:inputType="textPersonName"
             android:minHeight="48dp" />
 
@@ -143,17 +143,18 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/relative_layout">
 
-
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/textView11"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TextView" />
+
         </RelativeLayout>
+
     </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -162,4 +163,5 @@
         android:layout_height="match_parent"
         android:layout_below="@id/rl_filters"
         android:layout_marginTop="5dp" />
+
 </RelativeLayout>

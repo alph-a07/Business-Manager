@@ -18,9 +18,12 @@
         android:theme="@style/Theme.AppSplash"
         tools:targetApi="31">
         <activity
+            android:name=".BookmarksActivity"
+            android:exported="false" />
+        <activity
             android:name=".BusinessDetailsActivity"
             android:exported="false"
-            android:theme="@style/Theme.BusinessManagement"/>
+            android:theme="@style/Theme.BusinessManagement" />
         <activity
             android:name=".AccountActivity"
             android:exported="false"
