@@ -23,13 +23,10 @@ class AccountActivity : AppCompatActivity() {
         setContentView(R.layout.activity_account)
 
         supportActionBar?.hide()
-        //get list of bookmarks from intent (through dashboard)
-        val list=Intent().getParcelableArrayListExtra<Parcelable>("bookmarks")
 
         card_acc_bookmarks.setOnClickListener {
             //we will show bookmarks list in a new Activity
             val i=Intent(this,BookmarksActivity::class.java)
-            i.putExtra("bookmarks",list)
             startActivity(i)
         }
 
