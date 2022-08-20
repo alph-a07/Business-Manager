@@ -154,6 +154,7 @@
                     android:textColor="@color/primary_blue"
                     android:textSize="34sp" />
 
+
                 <com.github.mikephil.charting.charts.PieChart
                     android:id="@+id/pieChart"
                     android:layout_width="match_parent"

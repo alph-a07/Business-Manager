@@ -97,8 +97,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/card_franchisee_dashboard_manage_franchises"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/edt_bg">
 
         <ImageView
@@ -141,19 +141,107 @@
         android:id="@+id/rl_filters"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/relative_layout">
+        android:layout_below="@id/relative_layout"
+        android:paddingHorizontal="30dp"
+        android:visibility="gone"
+        tools:visibility="gone">
 
-        <RelativeLayout
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/roboto"
+            android:paddingVertical="5dp"
+            android:text="Category"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/categoryTextInputLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/textView11"
+            android:layout_alignBottom="@id/textView11"
+            android:layout_marginHorizontal="20dp"
+            android:layout_toEndOf="@id/textView11"
+            android:hint="Select Category"
+            android:textColorHint="@color/Gray_Hint"
+            app:boxStrokeColor="@color/Gray_Hint"
+            app:endIconTint="@color/Gray_Hint"
+            app:hintAnimationEnabled="true"
+            app:hintTextColor="@color/Maastricht_Blue">
 
-            <TextView
-                android:id="@+id/textView11"
-                android:layout_width="wrap_content"
+            <AutoCompleteTextView
+                android:id="@+id/categoryMenuAutocomplete"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:layout_gravity="center_vertical"
+                android:backgroundTint="@color/white"
+                android:fontFamily="@font/roboto"
+                android:inputType="none"
+                android:minHeight="48dp"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-        </RelativeLayout>
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textView11"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/roboto"
+            android:paddingVertical="5dp"
+            android:text="Worth"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/revenueTextInputLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@id/categoryTextInputLayout"
+            android:layout_alignTop="@id/textView12"
+            android:layout_alignBottom="@id/textView12"
+            android:layout_marginEnd="20dp"
+            android:hint="Choose Business Worth"
+            android:textColorHint="@color/Gray_Hint"
+            app:boxStrokeColor="@color/Gray_Hint"
+            app:endIconTint="@color/Gray_Hint"
+            app:hintAnimationEnabled="true"
+            app:hintTextColor="@color/Maastricht_Blue">
+
+            <AutoCompleteTextView
+                android:id="@+id/revenueMenuAutocomplete"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:backgroundTint="@color/white"
+                android:fontFamily="@font/roboto"
+                android:inputType="none"
+                android:minHeight="48dp"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/btn_apply_filters"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/revenueTextInputLayout"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/primary_button_bg"
+            android:fontFamily="@font/roboto"
+            android:paddingHorizontal="15dp"
+            android:paddingVertical="5dp"
+            android:text="Apply filters"
+            android:textAllCaps="false"
+            android:textColor="@color/Maastricht_Blue"
+            android:textSize="14sp" />
 
     </RelativeLayout>
 

@@ -1,9 +1,7 @@
 package com.example.businessmanagement
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Parcelable
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.businessmanagement.adapter.AllBusinessesAdapter
 import com.example.businessmanagement.model.BusinessForm
@@ -43,14 +41,10 @@ class BookmarksActivity : AppCompatActivity() {
                         }
                     }
                 }
-
-                override fun onCancelled(error: DatabaseError) {
-                    TODO("Not yet implemented")
-                }
-
+                override fun onCancelled(error: DatabaseError) {}
             })
 
-        val adapter=AllBusinessesAdapter(list,list,this)
+        val adapter=AllBusinessesAdapter(list,this)
         rv_bookmark.layoutManager=LinearLayoutManager(this)
         rv_bookmark.adapter=adapter
     }

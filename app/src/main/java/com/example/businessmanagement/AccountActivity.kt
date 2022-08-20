@@ -2,7 +2,7 @@ package com.example.businessmanagement
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Parcelable
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.businessmanagement.model.User
 import com.google.firebase.auth.FirebaseAuth
@@ -26,7 +26,7 @@ class AccountActivity : AppCompatActivity() {
 
         card_acc_bookmarks.setOnClickListener {
             //we will show bookmarks list in a new Activity
-            val i=Intent(this,BookmarksActivity::class.java)
+            val i = Intent(this, BookmarksActivity::class.java)
             startActivity(i)
         }
 
@@ -34,6 +34,8 @@ class AccountActivity : AppCompatActivity() {
             FirebaseAuth.getInstance().signOut()
             startActivity(Intent(this, FirstPageActivity::class.java))
         }
+
+        iv_acc_back.setOnClickListener { finish() }
     }
 
     override fun onStart() {
@@ -62,14 +64,18 @@ class AccountActivity : AppCompatActivity() {
                                     } else
                                         textView6.text = phoneNum
 
-                                    if (model?.accType == "1")
+                                    if (model?.accType == "1") {
                                         textView7.text = "Franchisee account"
-                                    else
+                                        card_acc_bookmarks.visibility = View.VISIBLE
+                                        divider2.visibility = View.VISIBLE
+                                    } else {
                                         textView7.text = "Franchiser account"
+                                    }
                                 }
                             }
                         }
                     }
+
                     override fun onCancelled(error: DatabaseError) {}
                 }
             )
