@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg"
+    android:animateLayoutChanges="true"
     tools:context=".BusinessDetailsActivity">
 
     <ImageView
@@ -29,6 +30,7 @@
         android:text="Registration details"
         android:textColor="@color/black"
         android:textSize="18sp" />
+
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/iv_logo"
@@ -62,14 +64,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_business_name"
-        android:layout_marginTop="5dp"
         android:layout_alignStart="@id/tv_business_name"
-        android:fontFamily="@font/roboto"
+        android:layout_marginTop="5dp"
         android:ellipsize="end"
+        android:fontFamily="@font/roboto"
         android:maxLines="1"
         android:text="TextView"
-        android:textSize="16sp"
-        android:textColor="@color/Dim_Gray" />
+        android:textColor="@color/Dim_Gray"
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/tv_business_revenue"
@@ -77,9 +79,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_business_category"
         android:layout_alignStart="@id/tv_business_category"
+        android:layout_marginTop="5dp"
         android:fontFamily="@font/roboto"
         android:text="TextView"
-        android:layout_marginTop="5dp"
         android:textColor="@color/Dim_Gray"
         android:textSize="14sp" />
 
@@ -214,65 +216,57 @@
         android:textColor="@color/Dim_Gray"
         android:textSize="14sp" />
 
-    <RelativeLayout
-        android:id="@+id/btm"
+    <LinearLayout
+        android:id="@+id/ll"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="20dp">
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:visibility="gone"
+        android:orientation="horizontal">
 
         <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/iv_edit"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignTop="@id/card"
-            android:layout_alignBottom="@id/card"
-            android:layout_marginEnd="10dp"
-            android:background="#80CACACA"
-            android:minWidth="50dp"
+            android:id="@+id/btn1"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="#0D000000"
             android:src="@drawable/ic_outline_edit_24"
-            app:contentPadding="15dp"
+            app:contentPadding="10dp"
             app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Medium"
-            app:tint="#505050" />
+            app:tint="@color/Dim_Gray" />
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/card"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_toEndOf="@id/iv_edit"
-            app:cardBackgroundColor="#80FF8B8B"
-            app:cardCornerRadius="12dp"
+            android:layout_marginStart="10dp"
+            app:cardBackgroundColor="#260024FF"
+            app:cardCornerRadius="10dp"
             app:cardElevation="0dp">
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
-                android:layout_marginVertical="15dp"
-                android:background="#00ffffff"
                 android:orientation="horizontal">
 
                 <ImageView
+                    android:id="@+id/iv"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:background="#00ffffff"
+                    android:layout_height="50dp"
                     android:src="@drawable/ic_baseline_delete_outline_24"
-                    app:tint="#505050" />
+                    app:tint="@color/Dim_Gray" />
 
                 <TextView
+                    android:id="@+id/btn2"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginStart="5dp"
-                    android:background="#00ffffff"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="10dp"
                     android:fontFamily="@font/roboto"
+                    android:gravity="center_vertical"
                     android:text="Retract your data"
-                    android:textColor="#505050"
-                    android:textSize="18sp" />
+                    android:textSize="16sp" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
-    </RelativeLayout>
+    </LinearLayout>
 </RelativeLayout>

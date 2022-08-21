@@ -71,7 +71,7 @@
             android:layout_height="48dp"
             android:layout_alignParentEnd="true"
             android:padding="15dp"
-            android:tag="0"
-            android:src="@drawable/bookmarks" />
+            android:src="@drawable/bookmarks"
+            android:tag="0" />
     </RelativeLayout>
 </androidx.cardview.widget.CardView>
