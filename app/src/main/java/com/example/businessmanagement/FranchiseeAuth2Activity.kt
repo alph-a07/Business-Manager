@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
+import com.example.businessmanagement.model.BusinessForm
 import com.example.businessmanagement.model.User
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -34,6 +35,7 @@ class FranchiseeAuth2Activity() : AppCompatActivity() {
     lateinit var storedVerificationId: String
     lateinit var resendToken: PhoneAuthProvider.ForceResendingToken
     private var isPhoneNumberVerified = false
+    private var allBusiness=ArrayList<BusinessForm>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +43,23 @@ class FranchiseeAuth2Activity() : AppCompatActivity() {
 
         // to hide default toolbar
         supportActionBar?.hide()
+
+        //getting all businesses in arraylist
+        db.getReference("New businesses").addValueEventListener(object :ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for(snap in snapshot.children){
+                    val model=snap.getValue(BusinessForm::class.java)
+                    allBusiness.add(model!!)
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
+
+        Log.d("all business list",allBusiness.toString())
 
         // helps open email access popup
         val gso =
@@ -248,6 +267,7 @@ class FranchiseeAuth2Activity() : AppCompatActivity() {
                     model.accType = "1"
                     model.uid =
                         FirebaseAuth.getInstance().currentUser?.uid.toString()
+                    model.listOfBusiness=allBusiness
 
                     // uploading in database
                     db.getReference("Users").child(auth.uid.toString())
@@ -305,6 +325,7 @@ class FranchiseeAuth2Activity() : AppCompatActivity() {
                     model.userName = user?.displayName.toString()
                     model.uid = user?.uid.toString()
                     model.accType = "1"
+                    model.listOfBusiness=allBusiness
                     db.getReference("Users").child(auth.uid.toString())
                         .setValue(model)
 

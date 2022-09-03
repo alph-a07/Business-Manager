@@ -1,10 +1,11 @@
 package com.example.businessmanagement
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
+import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.businessmanagement.adapter.AllBusinessesAdapter
 import com.example.businessmanagement.model.BusinessForm
@@ -16,8 +17,15 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_franchisee_dashboard.*
+import java.util.*
+import kotlin.collections.ArrayList
 
 class FranchiseeDashboardActivity : AppCompatActivity() {
+    private val db = Firebase.database
+    val list = ArrayList<BusinessForm>()
+    lateinit var userBusinesses : ArrayList<BusinessForm>
+    lateinit var adapter:AllBusinessesAdapter
+    private val currUser = FirebaseAuth.getInstance().currentUser
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,81 +38,50 @@ class FranchiseeDashboardActivity : AppCompatActivity() {
             startActivity(i)
         }
 
-        iv_franchisee_dashboard_filter.setOnClickListener {
-            if (rl_filters.isVisible) rl_filters.visibility = View.GONE
-            else rl_filters.visibility = View.VISIBLE
-        }
-
-        btn_apply_filters.setOnClickListener {
-            rl_filters.visibility = View.GONE
-            val category = categoryTextInputLayout.editText!!.text
-            val revenue = revenueTextInputLayout.editText!!.text
-
-            val filteredList = ArrayList<BusinessForm>()
-            Firebase.database.getReference("New businesses")
-                .addValueEventListener(object : ValueEventListener {
-                    override fun onDataChange(snapshot: DataSnapshot) {
-                        for (snap in snapshot.children) {
-                            val model = snap.getValue(BusinessForm::class.java)
-                            if (!category.equals("Select Category") && !revenue.equals("Choose Business Worth") && model!!.category.equals(
-                                    category
-                                ) && model.revenue.equals(revenue)
-                            )
-                                filteredList.add(model)
-                            else if (!category.equals("Select Category") && revenue.equals("Choose Business Worth") && model!!.category.equals(
-                                    category
-                                )
-                            )
-                                filteredList.add(model)
-                            else if (model!!.revenue.equals(revenue))
-                                filteredList.add(model)
-
-                            val adapter = AllBusinessesAdapter(filteredList, baseContext)
-                            rv_franchisee_dashboard_list.layoutManager =
-                                LinearLayoutManager(baseContext)
-                            rv_franchisee_dashboard_list.adapter = adapter
-                        }
+        iv_franchisee_dashboard_search.setOnClickListener {
+            val res=ArrayList<BusinessForm>()
+            if(editTextTextPersonName.text.isNotEmpty()){
+                val key=editTextTextPersonName.text.toString().toLowerCase(Locale.ROOT)
+                for(company in list) {
+                    if(company.name.toLowerCase(Locale.ROOT).contains(key)){
+                        res.add(company)
                     }
-
-                    override fun onCancelled(error: DatabaseError) {}
-                })
+                }
+                adapter = AllBusinessesAdapter(res,baseContext)
+                rv_franchisee_dashboard_list.layoutManager = LinearLayoutManager(baseContext)
+                rv_franchisee_dashboard_list.adapter = adapter
+            }
+            else{
+                Toast.makeText(this, "Not found", Toast.LENGTH_SHORT).show()
+            }
         }
     }
+
+
 
     override fun onBackPressed() {
         super.onBackPressed()
         finish()
     }
 
+    override fun onRestart() {
+        super.onRestart()
+
+        list.clear()
+       // adapter.clear()
+    }
     override fun onStart() {
         super.onStart()
-        val db = Firebase.database
-        val list = ArrayList<BusinessForm>()
-
-        db.getReference("New businesses").addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                for (snap in snapshot.children) {
-                    val model = snap.getValue(BusinessForm::class.java)
-                    list.add(model!!)
-
-                    val adapter = AllBusinessesAdapter(list, baseContext)
-                    rv_franchisee_dashboard_list.layoutManager = LinearLayoutManager(baseContext)
-                    rv_franchisee_dashboard_list.adapter = adapter
-                }
-            }
-
-            override fun onCancelled(error: DatabaseError) {}
-        })
-
-        val currUser = FirebaseAuth.getInstance().currentUser
 
         db.getReference("Users").orderByChild("uid").equalTo(currUser!!.uid)
             .addListenerForSingleValueEvent(
                 object : ValueEventListener {
+                    @SuppressLint("SetTextI18n")
                     override fun onDataChange(snapshot: DataSnapshot) {
                         if (snapshot.exists()) {
                             for (snap in snapshot.children) {
                                 val model = snap.getValue(User::class.java)
+                                //userBusinesses= ArrayList<BusinessForm>(model?.listOfBusiness!!)
                                 textView2.text = "Hi, " + model!!.userName + " 👋"
                             }
                         }
@@ -113,5 +90,22 @@ class FranchiseeDashboardActivity : AppCompatActivity() {
                     override fun onCancelled(error: DatabaseError) {}
                 }
             )
+
+        db.getReference("New businesses").addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for (snap in snapshot.children) {
+                    val model = snap.getValue(BusinessForm::class.java)
+                    list.add(model!!)
+
+                    adapter = AllBusinessesAdapter(list, baseContext)
+                    rv_franchisee_dashboard_list.layoutManager = LinearLayoutManager(baseContext)
+
+                    rv_franchisee_dashboard_list.adapter = adapter
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {}
+        })
+
     }
 }

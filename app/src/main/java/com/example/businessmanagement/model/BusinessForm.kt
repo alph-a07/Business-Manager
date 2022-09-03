@@ -13,4 +13,5 @@ class BusinessForm() {
     var category:String = ""
     var revenue:String = ""
     var description:String = ""
+    var isBookmarked:Boolean=false
  }

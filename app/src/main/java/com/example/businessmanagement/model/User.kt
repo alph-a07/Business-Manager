@@ -7,6 +7,6 @@ class User() {
     var phone:String=""
     var accType:String=""
     var list: ArrayList<BusinessForm>? = ArrayList()
-    var listOfBookmark: ArrayList<BusinessForm>? = ArrayList()
+    var listOfBusiness: ArrayList<BusinessForm>? = ArrayList()
     var gstin:String=""
 }

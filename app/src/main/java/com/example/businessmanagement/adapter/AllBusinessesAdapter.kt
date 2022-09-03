@@ -2,6 +2,7 @@ package com.example.businessmanagement.adapter
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,6 +30,12 @@ class AllBusinessesAdapter(
     private val db = Firebase.database
     val currUser = FirebaseAuth.getInstance().currentUser
 
+    fun clear(){
+        val size=list.size
+        list.clear()
+        notifyItemRangeRemoved(0,size)
+    }
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -50,6 +57,33 @@ class AllBusinessesAdapter(
         holder.category.text = model.category
         holder.logo.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.bg))
 
+        //to show already bookmarked businesses as bookmarked
+        db.getReference("Users").orderByChild("uid").equalTo(currUser?.uid)
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if (snapshot.exists()) {
+                        for (snap in snapshot.children) {
+                            val model1 = snap.getValue(User::class.java)
+
+                            for(x in model1!!.listOfBusiness!!){
+                                if(x.name==model.name && x.isBookmarked){
+                                    holder.bookmark.setImageDrawable(
+                                        ContextCompat.getDrawable(
+                                            context,
+                                            R.drawable.ic_baseline_bookmark_24
+                                        )
+                                    )
+                                    holder.bookmark.tag = "1"
+                                }
+                            }
+                        }
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {}
+            })
+
+
         holder.itemView.setOnClickListener {
             val intent = Intent(it.context, BusinessDetailsActivity::class.java)
             intent.putExtra("name", model.name)
@@ -65,6 +99,7 @@ class AllBusinessesAdapter(
         }
 
         holder.bookmark.setOnClickListener {
+            //add in bookmarks
             if (holder.bookmark.tag == "0") {
                 db.getReference("Users").orderByChild("uid").equalTo(currUser?.uid)
                     .addListenerForSingleValueEvent(object : ValueEventListener {
@@ -73,8 +108,12 @@ class AllBusinessesAdapter(
                                 for (snap in snapshot.children) {
                                     val model1 = snap.getValue(User::class.java)
 
-                                    if (!model1!!.listOfBookmark!!.contains(model))
-                                        model1.listOfBookmark!!.add(model)
+                                    for(x in model1!!.listOfBusiness!!){
+                                        if(x.name==model.name){
+                                            //Log.d("book",x.toString())
+                                            x.isBookmarked=true
+                                        }
+                                    }
 
                                     db.reference.child("Users").child(currUser?.uid.toString())
                                         .setValue(model1)
@@ -97,7 +136,9 @@ class AllBusinessesAdapter(
 
                         override fun onCancelled(error: DatabaseError) {}
                     })
-            } else {
+
+            }//remove from bookmarks
+            else {
                 db.getReference("Users").orderByChild("uid").equalTo(currUser?.uid)
                     .addListenerForSingleValueEvent(object : ValueEventListener {
                         override fun onDataChange(snapshot: DataSnapshot) {
@@ -105,8 +146,11 @@ class AllBusinessesAdapter(
                                 for (snap in snapshot.children) {
                                     val model1 = snap.getValue(User::class.java)
 
-                                    while (model1!!.listOfBookmark!!.contains(model))
-                                        model1.listOfBookmark!!.remove(model)
+                                    for(x in model1!!.listOfBusiness!!){
+                                        if(x.name==model.name){
+                                            x.isBookmarked=false
+                                        }
+                                    }
 
                                     db.reference.child("Users").child(currUser?.uid.toString())
                                         .setValue(model1)
